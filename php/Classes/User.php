@@ -2,16 +2,12 @@
 
 namespace Classes; 
 
-require_once('./php/DB/DBManager.php');
-use DB\DBManager;
-
-class User extends DBManager {
+class User {
 
     const TABLE_NAME = "user";
-   
     // methodes
     public function avalaibleEmail($email){
-        $bdd = $this->connection();
+        require_once('php/DB/DBManager.php');
         $requete = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE email = ? ");
         $requete->execute([$email]);
         return $requete->rowCount();
@@ -28,3 +24,4 @@ class User extends DBManager {
 
 
 }
+?>

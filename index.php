@@ -1,8 +1,6 @@
 <?php
 
-require_once("./php/Classes/User.php");
-use Classes\User;
+    require('php/DB/DBManager.php');
+    require('php/DB/DBTables.php');
 
-$user = new User();
-$user->avalaibleEmail("loi");
-
+?>
