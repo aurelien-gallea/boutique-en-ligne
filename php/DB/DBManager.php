@@ -1,12 +1,4 @@
 <?php
-
-namespace DB;
-use PDO;
-use PDOException;
-
-class DBManager {
-
-protected function connection () {
     try{
         $dsn = "mysql:host=localhost;dbname=e_commerce;charset=utf8";
         $username = "root";
@@ -17,11 +9,8 @@ protected function connection () {
         ];
 
         $bdd = new PDO($dsn, $username, $password, $options);
-
+        echo 'connexion réussi';
     }catch(PDOException $e) {
         echo "Erreur de connexion : " . $e->getMessage();
     }
-    return $bdd;
-}
-
-}
+?>
