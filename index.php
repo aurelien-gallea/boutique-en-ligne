@@ -1,8 +1,13 @@
 <?php
 
-require_once("./php/Classes/User.php");
-use Classes\User;
+require ('./php/DB/DBManager.php');
+
+
+require ('./php/Classes/User.php');
+
+use Classes\User; 
 
 $user = new User();
-$user->avalaibleEmail("loi");
 
+$requete = $user->CreateUser('test@gmail.com', 'bonjour', 'test', 'test');
+var_dump($requete);
