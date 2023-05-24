@@ -24,7 +24,7 @@ class Carriers {
     // methodes objet: getters et setters ------------------------------------
 
     // id
-    public function getId() : ?int {
+    public function getId() {
         return $this->_id;
     }
     public function setId($id) 
@@ -59,7 +59,7 @@ class Carriers {
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         return $request;
@@ -67,14 +67,14 @@ class Carriers {
     }
 
     public function getById($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
     }
 
     public function findIdWith($name, $valueName) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT id FROM ".$this::TABLE_NAME." WHERE ".$valueName." = ? ");
         $response = $request->execute([$name]);
         return $response;
@@ -83,7 +83,7 @@ class Carriers {
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($name, $description, $price) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, price) VALUES (?,?,?)");
         $request->execute([$this->setName($name), $this->setDescription($description), $this->setPrice($price)]);
         $lastId = $bdd->lastInsertId();
@@ -92,7 +92,7 @@ class Carriers {
     }
 
     public function deleteRow($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
@@ -100,7 +100,7 @@ class Carriers {
     }
 
     public function updateName($name,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ?  WHERE id = ? ");
         $request->execute([$this->setName($name),$id]);
         return $request;
@@ -108,7 +108,7 @@ class Carriers {
     }
 
     public function updateDescription($description, $id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET description = ?  WHERE id = ? ");
          $request->execute([$this->setDescription($description),$id]);
         return $request;
@@ -116,7 +116,7 @@ class Carriers {
     }
 
     public function updatePrice($price,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price = ?  WHERE id = ? ");
          $request->execute([$this->setPrice($price),$id]);
         return $request;

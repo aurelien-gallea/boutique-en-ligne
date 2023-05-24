@@ -34,7 +34,7 @@ class Delivery {
     // methodes objet: getters et setters ------------------------------------
 
     // id
-    public function getId() : ?int {
+    public function getId() {
         return $this->_id;
     }
     public function setId($id) 
@@ -117,7 +117,7 @@ class Delivery {
      // gettersSQL : SELECT ---------------------------------------------------
 
      public function getAll() {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         return $request;
@@ -125,14 +125,14 @@ class Delivery {
     }
 
     public function getById($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
          $request->execute([$id]);
         return $request;
     }
 
     public function findIdWith($name, $valueName) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT id FROM ".$this::TABLE_NAME." WHERE ".$valueName." = ? ");
         $response = $request->execute([$name]);
         return $response;
@@ -141,7 +141,7 @@ class Delivery {
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($name, $firstname, $lastname, $adress, $postalCode, $city, $country, $phone, $user_id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, firstname, lastname, adress, postalCode, city, country, phone, user_id) VALUES (?,?,?,?,?,?,?,?,?)");
         $request->execute([$this->setName($name), $this->setFirstName($firstname), $this->setLastName($lastname), $this->setAdress($adress), $this->setPostalCode($postalCode), $this->setCity($city), $this->setCountry($country), $this->setPhone($phone), $this->setUser_id($user_id)]);
         $lastId = $bdd->lastInsertId();
@@ -150,7 +150,7 @@ class Delivery {
     }
 
     public function deleteRow($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
@@ -159,7 +159,7 @@ class Delivery {
     
     // name
     public function updateName($name,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ?  WHERE id = ? ");
         $request->execute([$this->setName($name),$id]);
         return $request;
@@ -168,7 +168,7 @@ class Delivery {
 
     // firstname
     public function updateFirstName($firstName,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET firstname = ?  WHERE id = ? ");
         $request->execute([$this->setFirstName($firstName),$id]);
         return $request;
@@ -177,7 +177,7 @@ class Delivery {
 
     // lastname
     public function updateLastName($lastName,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET lastname = ?  WHERE id = ? ");
         $request->execute([$this->setLastName($lastName),$id]);
         return $request;
@@ -186,7 +186,7 @@ class Delivery {
 
     // adress
     public function updateAdress($adress,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET adress = ?  WHERE id = ? ");
         $request->execute([$this->setLastName($adress),$id]);
         return $request;
@@ -195,7 +195,7 @@ class Delivery {
 
     // postal code
     public function updatePostalCode($postalCode,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET postalCode = ?  WHERE id = ? ");
         $request->execute([$this->setPostalCode($postalCode),$id]);
         return $request;
@@ -204,7 +204,7 @@ class Delivery {
 
     // city
     public function updateCity($city,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET city = ?  WHERE id = ? ");
         $request->execute([$this->setCity($city),$id]);
         return $request;
@@ -213,7 +213,7 @@ class Delivery {
 
     // country
     public function updateCountry($country,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET country = ?  WHERE id = ? ");
         $request->execute([$this->setCountry($country),$id]);
         return $request;
@@ -222,7 +222,7 @@ class Delivery {
 
     // phone
     public function updatePhone($phone,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET phone = ?  WHERE id = ? ");
         $request->execute([$this->setPhone($phone),$id]);
         return $request;
@@ -231,7 +231,7 @@ class Delivery {
 
     // user_id
     public function updateUser_id($user_id, $id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET user_$user_id = ?  WHERE id = ? ");
         $request->execute([$this->setUser_id($user_id), $id]);
         return $request;

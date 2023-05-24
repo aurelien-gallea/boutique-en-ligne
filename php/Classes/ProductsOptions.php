@@ -84,7 +84,7 @@ class ProductsOptions {
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         return $request;
@@ -92,14 +92,14 @@ class ProductsOptions {
     }
 
     public function getById($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
          $request->execute([$id]);
         return $request;
     }
 
     public function findIdWith($name, $valueName) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT id FROM ".$this::TABLE_NAME." WHERE ".$valueName." = ? ");
         $response = $request->execute([$name]);
         return $response;
@@ -108,7 +108,7 @@ class ProductsOptions {
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew(string $name, string $value, ?float $price, ?int $quantity, int $product_id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, value, price, quantity, product_id) VALUES (?,?,?,?,?)");
         $request->execute([$this->setName($name), $this->setValue($value), $this->setPrice($price), $this->setQuantity($quantity), $this->setProduct_id($product_id)]);
         $lastId = $bdd->lastInsertId();
@@ -117,7 +117,7 @@ class ProductsOptions {
     }
 
     public function deleteRow($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
@@ -125,7 +125,7 @@ class ProductsOptions {
     }
 
     public function updateName($name,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ?  WHERE id = ? ");
         $request->execute([$this->setName($name),$id]);
         return $request;
@@ -133,7 +133,7 @@ class ProductsOptions {
     }
 
     public function updateValue($value, $id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET value = ?  WHERE id = ? ");
          $request->execute([$this->setValue($value),$id]);
         return $request;
@@ -141,7 +141,7 @@ class ProductsOptions {
     }
 
     public function updateQuantity($qty,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET quantity = ?  WHERE id = ? ");
           $request->execute([$this->setQuantity($qty),$id]);
         return $request;
@@ -149,7 +149,7 @@ class ProductsOptions {
     }
 
     public function updatePrice($price,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price = ?  WHERE id = ? ");
          $request->execute([$this->setPrice($price),$id]);
         return $request;
@@ -157,7 +157,7 @@ class ProductsOptions {
     }
 
     public function updateProduct_id($product_id,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET product_id = ?  WHERE id = ? ");
           $request->execute([$this->setProduct_id($product_id),$id]);
         return $request;
