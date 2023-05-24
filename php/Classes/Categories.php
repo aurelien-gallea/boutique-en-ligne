@@ -1,5 +1,7 @@
 <?php
 
+namespace Classes;
+
 class Categories {
 
     const TABLE_NAME = "categories";
@@ -16,7 +18,7 @@ class Categories {
     // methodes objet: getters et setters ------------------------------------
 
     // id
-    public function getId() : ?int {
+    public function getId() {
         return $this->_id;
     }
     public function setId($id) 
@@ -35,7 +37,7 @@ class Categories {
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         return $request;
@@ -43,14 +45,14 @@ class Categories {
     }
 
     public function getById($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
     }
 
     public function findIdWith($name, $valueName) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT id FROM ".$this::TABLE_NAME." WHERE ".$valueName." = ? ");
         $response = $request->execute([$name]);
         return $response;
@@ -59,7 +61,7 @@ class Categories {
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($name) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name) VALUES (?)");
         $request->execute([$this->setName($name)]);
         $lastId = $bdd->lastInsertId();
@@ -68,7 +70,7 @@ class Categories {
     }
 
     public function deleteRow($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
@@ -76,7 +78,7 @@ class Categories {
     }
 
     public function updateName($name,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ?  WHERE id = ? ");
         $request->execute([$this->setName($name),$id]);
         return $request;

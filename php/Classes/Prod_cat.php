@@ -4,7 +4,7 @@ namespace Classes;
 
 class Prod_cat {
 
-    const TABLE_NAME = "productsoptions";
+    const TABLE_NAME = "prod_cat";
 
     private $_id;
     private $_product_id; //FK
@@ -49,7 +49,7 @@ class Prod_cat {
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         return $request;
@@ -57,7 +57,7 @@ class Prod_cat {
     }
 
     public function getAllCategoriesByProduct_id($product_id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE product_id = ? ");
         $request->execute([$this->getCategory_id($product_id)]);
         return $request;
@@ -67,7 +67,7 @@ class Prod_cat {
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($product_id, $_category_id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (product_id, category_id) VALUES (?,?)");
         $request->execute([$this->setProduct_id($product_id), $this->setCategory_id($_category_id)]);
         $lastId = $bdd->lastInsertId();
@@ -76,7 +76,7 @@ class Prod_cat {
     }
 
     public function deleteProduct_id($product_id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE product_id = ? ");
         $request->execute([$product_id]);
         return $request;
@@ -84,7 +84,7 @@ class Prod_cat {
     }
 
     public function deleteCategory_id($category_id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE category_id = ? ");
         $request->execute([$category_id]);
         return $request;

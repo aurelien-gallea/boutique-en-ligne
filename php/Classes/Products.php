@@ -1,7 +1,7 @@
 <?php
 
 namespace Classes; 
-
+use PDO;
 class Products {
 
     const TABLE_NAME = "products";
@@ -62,14 +62,6 @@ class Products {
         return $this->_subDesc = $newSubDesc;
     }
 
-    // createAt
-    public function getCreateAt() {
-        return $this->_createAt;
-    }
-    public function setCreateAt($newDate)  {
-        return $this->_createAt = $newDate;
-    }
-
     // quantity
     public function getQuantity() : ?int {
         return $this->_quantity;
@@ -90,85 +82,78 @@ class Products {
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         return $request;
         
     }
 
-    public function getById($id) {
-        require('./php/DB/DBManager.php');
+    public function getAllById($id) {
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
-        return $request;
-    }
-
-    public function findIdWith($name, $valueName) {
-        require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("SELECT id FROM ".$this::TABLE_NAME." WHERE ".$valueName." = ? ");
-        $response = $request->execute([$name]);
-        return $response;
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return json_encode($response); 
     }
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name, $description, $subDesc, $createAt, $quantity, $price) {
-        require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, subDesc, createAt, quantity, price) VALUES (?,?,?,?,?,?)");
-        $request->execute([$this->setName($name), $this->setDescription($description), $this->setSubDesc($subDesc), $this->setCreateAt($createAt), $this->setPrice($price), $this->setQuantity($quantity)]);
+    public function addNew($name, $description, $subDesc, $quantity, $price) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, subDesc, quantity, price) VALUES (?,?,?,?,?)");
+        $request->execute([$this->setName($name), $this->setDescription($description), $this->setSubDesc($subDesc), $this->setPrice($price), $this->setQuantity($quantity)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
     }
 
     public function deleteRow($id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
 
     }
 
+    // name
     public function updateName($name,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ?  WHERE id = ? ");
         $request->execute([$this->setName($name),$id]);
         return $request;
 
     }
 
+    // description
     public function updateDescription($description, $id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET description = ?  WHERE id = ? ");
          $request->execute([$this->setDescription($description),$id]);
         return $request;
 
     }
 
+    // subDesc
     public function updateSubDesc($SubDesc, $id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET subDesc = ?  WHERE id = ? ");
         $request->execute([$this->setSubDesc($SubDesc),$id]);
         return $request;
     }
 
-    public function updateCreateAt($createAt, $id) {
-        require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET createAt = ? WHERE id= ? ");
-        $request->execute([$this->setSubDesc($createAt), $id]);
-    }
-
+    // quantity
     public function updateQuantity($qty,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET quantity = ?  WHERE id = ? ");
           $request->execute([$this->setQuantity($qty),$id]);
         return $request;
 
     }
 
+    // price
     public function updatePrice($price,$id) {
-        require('./php/DB/DBManager.php');
+        require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price = ?  WHERE id = ? ");
          $request->execute([$this->setPrice($price),$id]);
         return $request;
