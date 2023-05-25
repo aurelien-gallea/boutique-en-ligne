@@ -85,8 +85,8 @@ class Products {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        return $request;
-        
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return json_encode($response); 
     }
 
     public function getAllById($id) {
@@ -101,11 +101,11 @@ class Products {
 
     public function addNew($name, $description, $subDesc, $quantity, $price) {
         require('../DB/DBManager.php');
+        $formatPrice = number_format($price, 2, '.', '');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, subDesc, quantity, price) VALUES (?,?,?,?,?)");
-        $request->execute([$this->setName($name), $this->setDescription($description), $this->setSubDesc($subDesc), $this->setPrice($price), $this->setQuantity($quantity)]);
+        $request->execute([$this->setName($name), $this->setDescription($description), $this->setSubDesc($subDesc), $this->setQuantity($quantity), $this->setPrice($formatPrice)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
-        
     }
 
     public function deleteRow($id) {

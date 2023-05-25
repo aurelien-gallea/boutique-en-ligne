@@ -2,6 +2,8 @@
 
 namespace Classes;
 
+use PDO;
+
 class Categories {
 
     const TABLE_NAME = "categories";
@@ -40,8 +42,8 @@ class Categories {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        return $request;
-        
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return json_encode($response);
     }
 
     public function getById($id) {

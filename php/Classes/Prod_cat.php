@@ -2,9 +2,11 @@
 
 namespace Classes; 
 
+use PDO;
+
 class Prod_cat {
 
-    const TABLE_NAME = "prod_cat";
+    const TABLE_NAME = "products_categories";
 
     private $_id;
     private $_product_id; //FK
@@ -52,7 +54,8 @@ class Prod_cat {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        return $request;
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return json_encode($response);
         
     }
 
