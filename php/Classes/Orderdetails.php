@@ -1,6 +1,7 @@
 <?php
 
 namespace Classes;
+use PDO;
 
 class Orderdetails {
     
@@ -55,6 +56,33 @@ class Orderdetails {
 
     public function setDateCreation($newDateCreation) {
         return $this->_dateCreation = $newDateCreation;
+    }
+
+    // gettersSQL : SELECT ---------------------------------------------------
+
+    public function getAll() {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
+        $request->execute();
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return $response;  
+        
+    }
+
+    public function getById($id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
+        $request->execute([$id]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
+    public function getByCartId($cartId) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE cart_id = ? ");
+        $request->execute([$cartId]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
     }
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------

@@ -2,6 +2,7 @@
 
 namespace Classes; 
 use PDO;
+
 class Products {
 
     const TABLE_NAME = "products";
@@ -85,16 +86,16 @@ class Products {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        return $request;
-        
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response;        
     }
 
     public function getAllById($id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
-        $response = $request->fetchAll(PDO::FETCH_CLASS);
-        return json_encode($response); 
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
     }
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------

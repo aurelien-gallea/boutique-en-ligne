@@ -1,6 +1,7 @@
 <?php
 
 namespace Classes;
+use PDO;
 
 class OrderFinal {
     
@@ -44,6 +45,33 @@ class OrderFinal {
     public function setStatus($newStatus) 
     {
         return $this->_status = $newStatus;
+    }
+
+    // gettersSQL : SELECT ---------------------------------------------------
+
+    public function getAll() {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
+        $request->execute();
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return $response;  
+        
+    }
+
+    public function getById($id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
+        $request->execute([$id]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
+    public function getByOrderDetailsId($orderDetailsId) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE orderDetails_id = ? ");
+        $request->execute([$orderDetailsId]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
     }
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------

@@ -1,6 +1,7 @@
 <?php
 
 namespace Classes;
+use PDO;
 
 class Categories {
 
@@ -40,7 +41,8 @@ class Categories {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        return $request;
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
         
     }
 
@@ -48,14 +50,8 @@ class Categories {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
-        return $request;
-    }
-
-    public function findIdWith($name, $valueName) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT id FROM ".$this::TABLE_NAME." WHERE ".$valueName." = ? ");
-        $response = $request->execute([$name]);
-        return $response;
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
     }
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------

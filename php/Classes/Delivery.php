@@ -1,8 +1,11 @@
 <?php
 
 namespace Classes; 
+require_once("SearchByUser_id.php");
+use Classes\SearchByUser_id;
+use PDO;
 
-class Delivery {
+class Delivery extends SearchByUser_id {
 
     const TABLE_NAME = "delivery";
 
@@ -120,22 +123,17 @@ class Delivery {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        return $request;
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
         
     }
 
     public function getById($id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
-         $request->execute([$id]);
-        return $request;
-    }
-
-    public function findIdWith($name, $valueName) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT id FROM ".$this::TABLE_NAME." WHERE ".$valueName." = ? ");
-        $response = $request->execute([$name]);
-        return $response;
+        $request->execute([$id]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
     }
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------

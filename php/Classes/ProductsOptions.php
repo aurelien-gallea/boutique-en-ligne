@@ -1,8 +1,11 @@
 <?php
 
 namespace Classes; 
+require_once("SearchByProduct_id.php");
+use Classes\SearchByProduct_id;
+use PDO;
 
-class ProductsOptions {
+class ProductsOptions extends SearchByProduct_id {
 
     const TABLE_NAME = "productsoptions";
 
@@ -87,22 +90,17 @@ class ProductsOptions {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        return $request;
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response;  
         
     }
 
     public function getById($id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
-         $request->execute([$id]);
-        return $request;
-    }
-
-    public function findIdWith($name, $valueName) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT id FROM ".$this::TABLE_NAME." WHERE ".$valueName." = ? ");
-        $response = $request->execute([$name]);
-        return $response;
+        $request->execute([$id]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
     }
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
