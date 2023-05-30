@@ -9,13 +9,13 @@ class OrderFinal {
 
     private $_id;
     private $_orderDetails_id;
-    private $_status;
+    private $_status_id;
     
     public function __construct()
     {
         $this->_id;
         $this->_orderDetails_id;
-        $this->_status;
+        $this->_status_id;
     }
 
     // methodes objet: getters et setters ------------------------------------
@@ -40,11 +40,11 @@ class OrderFinal {
 
     // status
     public function getStatus() {
-        return $this->_status;
+        return $this->_status_id;
     }
-    public function setStatus($newStatus) 
+    public function setStatus($newStatus_id) 
     {
-        return $this->_status = $newStatus;
+        return $this->_status_id = $newStatus_id;
     }
 
     // gettersSQL : SELECT ---------------------------------------------------
@@ -52,6 +52,16 @@ class OrderFinal {
     public function getAll() {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
+        $request->execute();
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return $response;  
+        
+    }
+
+    // recuperer tout de façon décroissante
+    public function getLastOrders() {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME. " ORDER BY DESC");
         $request->execute();
         $response = $request->fetchAll(PDO::FETCH_CLASS);
         return $response;  
@@ -76,10 +86,10 @@ class OrderFinal {
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($orderDetails_id, $status) {
+    public function addNew($orderDetails_id, $status_id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (orderDetails, status) VALUES (?,?)");
-        $request->execute([$this->setOrderDetails_id($orderDetails_id), $this->setStatus($status)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (orderDetails, status_id) VALUES (?,?)");
+        $request->execute([$this->setOrderDetails_id($orderDetails_id), $this->setStatus($status_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
@@ -89,6 +99,15 @@ class OrderFinal {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
+        return $request;
+
+    }
+
+    // getByStatus 
+    public function getByStatus($currentStatus_id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE status_id = ? ");
+        $request->execute([$this->setStatus($currentStatus_id)]);
         return $request;
 
     }
@@ -105,9 +124,12 @@ class OrderFinal {
     // status
     public function updateStatus($newStatus,$id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET status = ?  WHERE id = ? ");
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET status_id = ?  WHERE id = ? ");
         $request->execute([$this->setStatus($newStatus),$id]);
         return $request;
 
     }
+
+    
+
 }

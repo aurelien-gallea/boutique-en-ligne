@@ -93,12 +93,30 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         return $response; 
     }
 
+    // alerte en cas de rupture
+    public function getAlertOutOfStock() {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE quantity = 0 ");
+        $request->execute();
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+    
+    // alerte en cas de stock limité
+    public function getAlertLimited($quantity) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE quantity < ? ");
+        $request->execute([$quantity]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($productId, $sizeId, $colorId, $quantity) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (product_id, size_id, color_id, quantity) VALUES (?,?,?,?)");
-        $request->execute([$this->setProduct_id($productId), $this->setSize_id($sizeId), $this->setColor_id($colorId), $this->setQuantity($quantity)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (product_id, size_id, color_id, price_id, quantity) VALUES (?,?,?,?,?)");
+        $request->execute([$this->setProduct_id($productId), $this->setSize_id($sizeId), $this->setColor_id($colorId), $this->setPrice_id($_price_id), $this->setQuantity($quantity)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         

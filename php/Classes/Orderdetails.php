@@ -49,15 +49,7 @@ class Orderdetails {
         return $this->_deliveryFullAddress = $newdeliveryFullAddress;
     }
 
-    // date creation
-    public function getDateCreation() {
-        return $this->_dateCreation;
-    }
-
-    public function setDateCreation($newDateCreation) {
-        return $this->_dateCreation = $newDateCreation;
-    }
-
+   
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
@@ -90,7 +82,7 @@ class Orderdetails {
     public function addNew($cart_id, $deliveryFullAddress) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (cart_id, deliveryFullAddress) VALUES (?,?)");
-        $request->execute([$this->setCart_id($cart_id), $this->setdeliveryFullAddress($deliveryFullAddress), $this->setDateCreation($dateCreation)]);
+        $request->execute([$this->setCart_id($cart_id), $this->setdeliveryFullAddress($deliveryFullAddress)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
