@@ -9,7 +9,6 @@ class Products {
     private $_id;
     private $_name;
     private $_description;
-    private $_subDesc;
     private $_createAt;
     private $_quantity;
     private $_price;
@@ -20,7 +19,6 @@ class Products {
         $this->_id = null;
         $this->_name = "";
         $this->_description; // ---------------
-        $this->_subDesc; // -------------------
         $this->_createAt; // ------------------
         $this->_quantity = null;
         $this->_price = null;
@@ -52,14 +50,6 @@ class Products {
     }
     public function setDescription(string $newDescription) : string {
         return $this->_description = $newDescription;
-    }
-
-    // subDesc
-    public function getSubDesc() : string {
-        return $this->_subDesc;
-    }
-    public function setSubDesc(string $newSubDesc) : string {
-        return $this->_subDesc = $newSubDesc;
     }
 
     // quantity
@@ -99,11 +89,11 @@ class Products {
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name, $description, $subDesc, $quantity, $price) {
+    public function addNew($name, $description, $quantity, $price) {
         require('../DB/DBManager.php');
         $formatPrice = number_format($price, 2, '.', '');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, subDesc, quantity, price) VALUES (?,?,?,?,?)");
-        $request->execute([$this->setName($name), $this->setDescription($description), $this->setSubDesc($subDesc), $this->setQuantity($quantity), $this->setPrice($formatPrice)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, quantity, price) VALUES (?,?,?,?,?)");
+        $request->execute([$this->setName($name), $this->setDescription($description), $this->setQuantity($quantity), $this->setPrice($formatPrice)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
     }
@@ -132,14 +122,6 @@ class Products {
          $request->execute([$this->setDescription($description),$id]);
         return $request;
 
-    }
-
-    // subDesc
-    public function updateSubDesc($SubDesc, $id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET subDesc = ?  WHERE id = ? ");
-        $request->execute([$this->setSubDesc($SubDesc),$id]);
-        return $request;
     }
 
     // quantity
