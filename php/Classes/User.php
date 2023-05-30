@@ -40,6 +40,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
         $this->email = $email;
     }
 
+
     // Getter et Setter de l'attribut $password
     public function getPassword() {
         return $this->password;
@@ -83,6 +84,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
      * @param string $email L'email à vérifier
      * @return int Le nombre de lignes correspondant à l'email dans la table user
      */
+
     public function avalaibleEmail($email) {
         require('../DB/DBManager.php');
         
@@ -166,5 +168,6 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
 
     }  
 }
+
 
 ?>
