@@ -1,7 +1,7 @@
 <?php
 
 namespace Classes; // Déclaration de l'espace de noms "Classes"
-
+use PDO;
 class User { // Déclaration de la classe User qui hérite de la classe DBManager
     
     private $id;
@@ -9,8 +9,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
     public $password;
     public $firstname; 
     public $lastname; 
-    // private $role;
-    // private $date_creation;
+    private $role;
     
     const TABLE_NAME = "user"; // Déclaration d'une constante de classe appelée TABLE_NAME avec la valeur "user"
     
@@ -20,8 +19,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
         $this->password;
         $this->firstname;
         $this->lastname;
-        // $this->role;
-        // $this->date_creation;
+        $this->role;
     }
 
     // Getter et Setter de l'attribut $id
@@ -41,6 +39,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
     public function setEmail($email) {
         $this->email = $email;
     }
+
 
     // Getter et Setter de l'attribut $password
     public function getPassword() {
@@ -70,79 +69,105 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
     }
 
     // Getter et Setter de l'attribut $role
-    // public function getRole() {
-    //     return $this->role;
-    // }
+    public function getRole() {
+        return $this->role;
+    }
 
-    // public function setRole($role) {
-    //     $this->role = $role;
-    // }
+    public function setRole($role) {
+        $this->role = $role;
+    }
 
-    // // Getter et Setter de l'attribut $date_creation
-    // public function getDateCreation() {
-    //     return $this->date_creation;
-    // }
-
-    // public function setDateCreation($date_creation) {
-    //     $this->date_creation = $date_creation;
-    // }
-
-    
-    
-
-
-
-
-
-    
-
-
-    // Méthodes
+    // Méthodes sql
 
     /**
      * Vérifie si l'email est disponible dans la table user
      * @param string $email L'email à vérifier
      * @return int Le nombre de lignes correspondant à l'email dans la table user
      */
-    public function AvalaibleEmail($email){
-        require('./php/DB/DBManager.php');
+
+    public function avalaibleEmail($email) {
+        require('../DB/DBManager.php');
         
-        $requete = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE email = ? "); // Préparation d'une requête SQL pour sélectionner toutes les colonnes de la table user où l'email correspond au paramètre fourni
-        $requete->execute([$email]); // Exécution de la requête préparée en remplaçant le paramètre "?" par la valeur de $email
-        return $requete->rowCount(); // Retourne le nombre de lignes affectées par la requête, indiquant ainsi le nombre de résultats correspondant à l'email
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE email = ? "); // Préparation d'une requête SQL pour sélectionner toutes les colonnes de la table user où l'email correspond au paramètre fourni
+        $request->execute([$email]); // Exécution de la requête préparée en remplaçant le paramètre "?" par la valeur de $email
+        return $request->rowCount(); // Retourne le nombre de lignes affectées par la requête, indiquant ainsi le nombre de résultats correspondant à l'email
     }
 
-
-    public function CreateUser($email, $password, $firstname, $lastname) {
-        require('./php/DB/DBManager.php');
-        $requete = $bdd->prepare("INSERT INTO " . $this::TABLE_NAME . " (email, password, firstname, lastname) VALUES (?, ?, ?, ?)");
-        $response = $requete->execute([$email, $password, $firstname, $lastname]);
-        return $response;
+    public function getAll() {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
+        $request->execute();
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+        
     }
 
-
-    public function UpdateUser($userId, $email, $password, $firstname, $lastname) {
-        require ('./php/DB/DBManager.php');
-        $requete = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET email = ?, password = ?, firstname = ?, lastname = ? WHERE id = ?");
-        $response= $requete->execute([$email, $password, $firstname, $lastname, $userId]);
-        return $response;
+    public function getById($id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
+        $request->execute([$id]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
     }
 
-
-    public function DeleteUser($userId) {
-        require ('./php/DB/DBManager.php');
-        $requete = $bdd->prepare("DELETE FROM " . $this::TABLE_NAME . " WHERE id = ?");
-        $response= $requete->execute([$userId]);
-        return $response;
+    public function addNew($email, $password, $firstname, $lastname, $role = "membre") {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("INSERT INTO " . $this::TABLE_NAME . " (email, password, firstname, lastname, role) VALUES (?, ?, ?, ?, ?)");
+        $request->execute([$email, $password, $firstname, $lastname, $role]);
+        $lastId = $bdd->lastInsertId();
+        return $this->setId($lastId);
     }
+
+    public function deleteUser($userId) {
+        require ('../DB/DBManager.php');
+        $request = $bdd->prepare("DELETE FROM " . $this::TABLE_NAME . " WHERE id = ?");
+        $request->execute([$userId]);
+        return $request;
+    }
+        
+    // email
+    public function updateEmail($email, $id) {
+        require ('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET email = ? WHERE id = ?");
+        $request->execute([$this->setEmail($email), $id]);
+        return $request;
+    }
+
+    // password
+    public function updatePasword($password, $id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET password = ?  WHERE id = ? ");
+        $request->execute([$this->setPassword($password),$id]);
+        return $request;
+    }
+
+    // firstname
+    public function updateFirstname($firstname, $id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET firstname = ?  WHERE id = ? ");
+         $request->execute([$this->setFirstname($firstname),$id]);
+        return $request;
+
+    }
+
+    // lastname
+    public function updateLastname($lastname, $id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET lastname = ?  WHERE id = ? ");
+         $request->execute([$this->setLastname($lastname),$id]);
+        return $request;
+
+    }
+
+    // role
+    public function updateUserRole($newRole, $id) {
+        require ('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET role = ? WHERE id = ?");
+        $request->execute([$this->setRole($newRole), $id]);
+        return $request;
+
+    }  
 }
-    
-    //  inscrire un utilisateur
-    // role en dernier car optionnel
-
-   
-
-
 
 
 ?>
