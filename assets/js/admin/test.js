@@ -7,3 +7,4 @@ fetch('../php/Controller/json.php')
                 console.log("id = " + data.cart[key].id);
             }
         })
+        .catch(error => console.log(error.message));
