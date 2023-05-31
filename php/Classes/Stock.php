@@ -101,7 +101,7 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response; 
     }
-    
+
     // alerte en cas de stock limité
     public function getAlertLimited($quantity) {
         require('../DB/DBManager.php');
@@ -113,10 +113,10 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($productId, $sizeId, $colorId, $quantity) {
+    public function addNew($productId, $sizeId, $colorId, $priceId, $quantity) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (product_id, size_id, color_id, price_id, quantity) VALUES (?,?,?,?,?)");
-        $request->execute([$this->setProduct_id($productId), $this->setSize_id($sizeId), $this->setColor_id($colorId), $this->setPrice_id($_price_id), $this->setQuantity($quantity)]);
+        $request->execute([$this->setProduct_id($productId), $this->setSize_id($sizeId), $this->setColor_id($colorId), $this->setPrice_id($priceId), $this->setQuantity($quantity)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         

@@ -71,9 +71,9 @@ class Orderdetails {
 
     public function getByCartId($cartId) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE cart_id = ? ");
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." INNER JOIN `cart` ON cart.id = ".$this::TABLE_NAME.".cart_id WHERE cart_id = ? ");
         $request->execute([$cartId]);
-        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
         return $response; 
     }
 
