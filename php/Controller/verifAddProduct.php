@@ -12,8 +12,6 @@ if(isset($_POST['valider'])){
         echo "Le titre est manquant";
     }else if(empty($_POST['description'])){
         echo "La description est manquante";
-    }else if(empty($_POST['subDesc'])){
-        echo "La sous-description est manquante";
     }else if(empty($_POST['quantity'])){
         echo "La quantitée est manquante";
     }else if(empty($_POST['price'])){
@@ -22,7 +20,7 @@ if(isset($_POST['valider'])){
         echo "La catégorie du produit n'a pas été choisi.";
     }else{
         $prod = new Products();
-        $newProductId = $prod->addNew($_POST['title'], $_POST['description'], $_POST['subDesc'], $_POST['quantity'], $_POST['price']);
+        $newProductId = $prod->addNew($_POST['title'], $_POST['description'], $_POST['quantity'], $_POST['price']);
     }
 
     if($newProductId !== null && $_POST['prodOption'] !== null){
