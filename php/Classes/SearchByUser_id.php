@@ -11,7 +11,15 @@ class SearchByUser_id {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE user_id = ? ");
         $request->execute([$userId]);
-        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
+    public function getUserInfo($userId) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." INNER JOIN `user` ON user.id = ".$this::TABLE_NAME.".user_id WHERE user_id = ? ");
+        $request->execute([$userId]);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
         return $response; 
     }
 }

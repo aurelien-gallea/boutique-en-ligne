@@ -3,7 +3,7 @@
 namespace Classes;
 use PDO;
 
-class status {
+class Status {
 
     const TABLE_NAME = "status";
     
@@ -50,7 +50,7 @@ class status {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
-        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
         return $response; 
     }
 

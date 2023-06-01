@@ -4,77 +4,77 @@ namespace Classes; // Déclaration de l'espace de noms "Classes"
 use PDO;
 class User { // Déclaration de la classe User qui hérite de la classe DBManager
     
-    private $id;
-    public $email;
-    public $password;
-    public $firstname; 
-    public $lastname; 
-    private $role;
+    private $_id;
+    private $_email;
+    private $_password;
+    private $_firstname; 
+    private $_lastname; 
+    private $_role;
     
     const TABLE_NAME = "user"; // Déclaration d'une constante de classe appelée TABLE_NAME avec la valeur "user"
     
     public function __construct() {
-        
-        $this->email;
-        $this->password;
-        $this->firstname;
-        $this->lastname;
-        $this->role;
+        $this->_id;
+        $this->_email;
+        $this->_password;
+        $this->_firstname;
+        $this->_lastname;
+        $this->_role;
     }
 
     // Getter et Setter de l'attribut $id
     public function getId() {
-        return $this->id;
+        return $this->_id;
     }
 
-    public function setId($id) {
-        $this->id = $id;
+    public function setId($newId) {
+        return $this->_id = $newId;
     }
 
     // Getter et Setter de l'attribut $email
     public function getEmail() {
-        return $this->email;
+        return $this->_email;
     }
 
-    public function setEmail($email) {
-        $this->email = $email;
+    public function setEmail($newEmail) {
+        return $this->_email = $newEmail;
     }
 
 
     // Getter et Setter de l'attribut $password
     public function getPassword() {
-        return $this->password;
+        return $this->_password;
     }
 
-    public function setPassword($password) {
-        $this->password = $password;
+    public function setPassword($newPassword) {
+        return $this->_password = $newPassword;
     }
 
     // Getter et Setter de l'attribut $firstname
     public function getFirstname() {
-        return $this->firstname;
+        return $this->_firstname;
     }
 
-    public function setFirstname($firstname) {
-        $this->firstname = $firstname;
+    public function setFirstname($newFirstname) {
+        return $this->_firstname = $newFirstname;
     }
 
     // Getter et Setter de l'attribut $lastname
     public function getLastname() {
-        return $this->lastname;
+        return $this->_lastname;
     }
 
-    public function setLastname($lastname) {
-        $this->lastname = $lastname;
+    public function setLastname($newLastname) {
+        return $this->_lastname = $newLastname;
     }
 
     // Getter et Setter de l'attribut $role
     public function getRole() {
-        return $this->role;
+        return $this->_role;
     }
 
-    public function setRole($role) {
-        $this->role = $role;
+    public function setRole($newRole) {
+        return $this->_role = $newRole;
     }
 
     // Méthodes sql
@@ -98,22 +98,21 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
-        return $response; 
-        
+        return $response;
     }
 
     public function getById($id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
-        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
         return $response; 
     }
 
-    public function addNew($email, $password, $firstname, $lastname, $role = "membre") {
+    public function addNew($email, $pass, $firstname, $lastname, $role = "membre") {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO " . $this::TABLE_NAME . " (email, password, firstname, lastname, role) VALUES (?, ?, ?, ?, ?)");
-        $request->execute([$email, $password, $firstname, $lastname, $role]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (email, password, firstname, lastname, role) VALUES (?, ?, ?, ?, ?)");
+        $request->execute([$this->setEmail($email), $this->setPassword($pass), $this->setFirstname($firstname), $this->setLastname($lastname), $this->setRole($role)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
     }
@@ -134,7 +133,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
     }
 
     // password
-    public function updatePasword($password, $id) {
+    public function updatePassword($password, $id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET password = ?  WHERE id = ? ");
         $request->execute([$this->setPassword($password),$id]);

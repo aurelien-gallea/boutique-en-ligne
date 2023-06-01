@@ -1,10 +1,8 @@
-fetch('../php/Controller/json.php')
+fetch('../php/Controller/getAllorderfinal.php')
         .then((response) => response.json())
         .then(data=> {
             console.log(data)
 
-            for (const key in data.cart) {
-                console.log("id = " + data.cart[key].id);
-            }
+            console.log(data.orderfinal.all);
         })
         .catch(error => console.log(error.message));
