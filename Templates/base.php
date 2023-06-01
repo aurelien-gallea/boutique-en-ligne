@@ -19,7 +19,7 @@ if(isset($_SESSION['id']));
     
 </head>
 
-<body class="">
+<body class="flex flex-col min-h-screen">
 
     <header class="">  
         <?php require_once("./php/Components/header.php") ?>
@@ -38,7 +38,7 @@ if(isset($_SESSION['id']));
 
     
     <section class="">
-        <div class="">
+        <div class="myDiv">
             <?= $content ?>
         </div>
     </section>
@@ -49,5 +49,11 @@ if(isset($_SESSION['id']));
         <?php require_once('./php/Components/footer.php'); ?>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <?php 
+    if (isset($script)) {
+        echo $script;
+    }
+
+    ?>
 </body>
 </html>
