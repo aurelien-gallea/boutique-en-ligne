@@ -20,8 +20,7 @@ $orderdtl = new Orderdetails();
 $orderfinal = new OrderFinal();
 $cart = new Cart();
 $delivery = new Delivery();
-// $orderdtl->addNew(1, "axel lère, 408 rue michoui 95000 paris, france");
-$user->addNew("ababab@aa.aa", "mescouili", "midas", "mexr", "trouduc");
+
 
 // $user->updatePassword("zoulou", 1);
 
