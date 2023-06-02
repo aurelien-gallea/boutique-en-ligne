@@ -3,7 +3,7 @@ import { key } from "../modules/key.js";
 
 // le container global de toutes nos cards
 const container = document.querySelector(".myDiv");
-container.classList.add("flex", "flex-grow", "gap-3", "my-6");
+container.classList.add("flex", "flex-grow", "gap-3", "my-6", "justify-content-center");
 
 fetch(`${key}jsonproducts.php`)
 .then(response => response.json())
@@ -18,9 +18,9 @@ fetch(`${key}jsonproducts.php`)
         console.log(product);
         
         // la card 
-        const card = document.createElement("div");
+        const card = document.createElement("a");
         card.classList.add("flex", "flex-col", "border", "rounded", "p-2", "w-60", "gap-3");
-
+        card.href = `product.php?id=${product.id}`;
         // le titre dans la carte - creation et personnalisation
         const cardHeader = document.createElement('div');
         cardHeader.innerHTML = `<span>${product.name}</span>`;

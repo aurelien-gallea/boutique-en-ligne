@@ -112,6 +112,15 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         return $response; 
     }
 
+    // recuperer tout le stock par id de produit
+    public function getByProductId($productId) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE product_id = ? ");
+        $request->execute([$productId]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
     // alerte en cas de rupture
     public function getAlertOutOfStock() {
         require('../DB/DBManager.php');
