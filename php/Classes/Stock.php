@@ -8,6 +8,7 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
     private $_product_id;
     private $_size_id;
     private $_color_id;
+    private $_images_id;
     private $_price_id;
     private $_quantity;
     
@@ -19,6 +20,7 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         $this->_product_id;
         $this->_size_id;
         $this->_color_id;
+        $this->_images_id;
         $this->_price_id;
         $this->_quantity;
     }
@@ -58,6 +60,14 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         return $this->_color_id = $newColor_id;
     }
 
+     // image_id
+     public function getImages_id() {
+        return $this->_images_id;
+    }
+    public function setImages_id($newImages_id) {
+        return $this->_images_id = $newImages_id;
+    }
+
     // price_id
     public function getPrice_id() {
         return $this->_price_id;
@@ -85,10 +95,28 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         
     }
 
+    // obtenir le chemin de l'image correspondant au produit
+    public function getallWithImagesInfo() {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." INNER JOIN images on images.id = ".$this::TABLE_NAME.".images_id");
+        $request->execute();
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
     public function getById($id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
+    // recuperer tout le stock par id de produit
+    public function getByProductId($productId) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE product_id = ? ");
+        $request->execute([$productId]);
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response; 
     }
@@ -110,6 +138,8 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response; 
     }
+
+    
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
@@ -153,6 +183,15 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET color_id = ?  WHERE id = ? ");
          $request->execute([$this->setColor_id($colorId),$id]);
+        return $request;
+
+    }
+
+     // color_id
+     public function updateImagesId($imageId, $id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET images_id = ?  WHERE id = ? ");
+         $request->execute([$this->setImages_id($imageId),$id]);
         return $request;
 
     }
