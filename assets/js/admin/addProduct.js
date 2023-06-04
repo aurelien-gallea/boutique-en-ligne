@@ -2,10 +2,10 @@ import { addElement } from "../modules/addElement.js";
 
 fetch('../../php/Json/AllCategories.php')
     .then(response => response.json())
-    .then( data => {
-        console.log(data);
+    .then( categorie => {
+        console.log(categorie);
         // Vérifie qu'il y a bien des données
-        if(data && data.length){
+        if(categorie && categorie.length){
 
             // Crée un conteneur categories
             let catContainer = addElement('div', ["flex", "flex-col", "shadow-md", "bg-white", "rounded-lg", "px-8", "py-4", "space-y-3", "dark:bg-gray-800"], {id: "categories"});
@@ -22,7 +22,7 @@ fetch('../../php/Json/AllCategories.php')
             catContainer.appendChild(selectCategories);
 
 
-            data.map(item => {
+            categorie.map(item => {
                 // Création des options pour le select
                 let options = addElement('option', [], {value: `${item.id}`}, `${item.name}`);
                 selectCategories.appendChild(options);

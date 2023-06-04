@@ -121,7 +121,7 @@
               </a>
             </li>
             <li>
-              <a href="./iframe/AllCategories.php" id="categories" class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <a href="./iframe/allCategories.php" id="categories" class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                 Collection
               </a>
             </li>

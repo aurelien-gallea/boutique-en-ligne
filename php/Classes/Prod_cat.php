@@ -66,6 +66,14 @@ class Prod_cat {
         return $request;
         
     }
+    public function getAllProductsByCategory_id($_category_id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE category_id = ? ");
+        $request->execute([$this->setCategory_id($_category_id)]);
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return $response;
+        
+    }
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
