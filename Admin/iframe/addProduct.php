@@ -122,9 +122,6 @@
                                 Collection
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"></a>
-                        </li>
                     </ul>
                 </li>
 
@@ -168,7 +165,7 @@
 
     <main class="sm:pl-64 pt-[64px] min-h-screen bg-gray-100 dark:bg-gray-700">
         <div class="flex pt-4 justify-center w-full">
-            <form class="flex flex-col w-11/12 md:w-5/12 h-full space-y-5" action="../php/Controller/verifAddProduct.php" method="POST">
+            <form class="flex flex-col w-11/12 md:w-5/12 h-full space-y-5" action="../../php/Controller/verifAddProduct.php" method="POST">
                 
                 <div class="flex flex-col shadow-md bg-white rounded-lg px-8 py-4 space-y-3 dark:bg-gray-800 dark:border">
                     <div>
@@ -197,7 +194,7 @@
                     </div>
                 </div>
 
-                <button name="valider" type="submit" class="text-white bg-blue-700 mt-5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                <button name="valider" type="submit" class="text-white bg-blue-700 mt-5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer</button>
             </form>
         </div>
     </main>

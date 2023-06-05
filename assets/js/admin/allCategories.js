@@ -4,13 +4,24 @@ document.addEventListener("DOMContentLoaded", function() {
 fetch('../../php/Json/AllCategories.php')
     .then(response => response.json())
     .then( categorie => {
+
         if(categorie && categorie.length){
 
-            let catContainer = addElement('div', ["flex", "p-4", "justify-start", "w-full", "overflow-x-auto", ], {});
-            document.getElementById('main').appendChild(catContainer);
+            
+            // let catContainer = addElement('div', ["flex", "flex-col", "p-4", "justify-start", "w-full", "overflow-x-auto", ], {});
+            // document.getElementById('main').appendChild(catContainer);
 
-            let ContainerTable = addElement('div', ["flex", "flex-col", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border"], {});
-            catContainer.appendChild(ContainerTable);
+            // let btnAddCategory = addElement('button', ["text-white", "bg-blue-700", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "px-5", "py-2.5", "text-center", "inline-flex", "items-center", "mr-2", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {type: "button"});
+            // catContainer.appendChild(btnAddCategory);
+
+            // let svgBtn = addElement('svg', ["w-6", "h-6"], {fill: "none", stroke:"currentColor", viewBox: "0 0 20 20", xmls: "http://www.w3.org/2000/svg", "aria-hidden": "true"}, "Ajouter collection");
+            // btnAddCategory.appendChild(svgBtn);
+
+            // let pathSvgBtn = addElement('path', ["h-full", "w-full", "text-white"], {d: "M12 6v6m0 0v6m0-6h6m-6 0H6", "stroke-linecap":"round", "stroke-linejoin":"round", "stroke-width":"2"})
+            // svgBtn.appendChild(pathSvgBtn);
+
+            let ContainerTable = addElement('div', ["flex", "flex-col", "w-full", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border"], {});
+            document.getElementById('catContainer').appendChild(ContainerTable);
 
             let tableCat = addElement('table', ["w-full", "text-sm", "text-left", "text-gray-500", "dark:text-gray-400"], {});
             ContainerTable.appendChild(tableCat);
@@ -20,40 +31,20 @@ fetch('../../php/Json/AllCategories.php')
 
             let trthead = addElement('tr', [], {});
             thead.appendChild(trthead);
-
+            
             let thId = addElement('th', ["px-6", "py-3"], {scope: "col"}, "Id");
-            let thName = addElement('th', ["px-6", "py-3"], {scope: "col"}, "Name");
+            let thName = addElement('th', ["px-6", "py-3"], {scope: "col"}, "Nom");
+            let thNbProduct = addElement('th', ["px-6", "py-3"], {scope: "col"}, "Produits"); 
             trthead.appendChild(thId);
             trthead.appendChild(thName);
-
+            trthead.appendChild(thNbProduct);
+            
             let tbody = addElement('tbody', [], {});
             thead.after(tbody);
             
             
             categorie.map(item =>{
-                var jsonData = JSON.stringify(item.id);
-                console.log(jsonData);
-
-                const url = "../../php/Json/AllProdCat.php";
-                
-
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({data: jsonData})
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data); // Afficher la réponse du fichier PHP pour le débogage
-                        // Traiter la réponse de votre fichier PHP si nécessaire
-                    })
-                    .catch(error => {
-                        console.error('Erreur lors de l\'envoi des données :', error);
-                    });
-                
-
+                const catId = item.id;
                 let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
                 tbody.appendChild(trtbody);
 
@@ -62,15 +53,19 @@ fetch('../../php/Json/AllCategories.php')
                 trtbody.appendChild(thContentId);
                 trtbody.appendChild(thContentName);
 
-
+                fetch('../../php/Json/AllProdcat.php')
+                    .then(response => response.json())
+                    .then(product_cat => {
+                        product_cat.map(item =>{
+                            if(item.category_id == catId){
+                                let thContentNbProduct = addElement('td', ["px-6", "py-4"], {}, `${item.product_count}`);
+                                trtbody.appendChild(thContentNbProduct);
+                            }
+                        })
+                    })
             })
             
 
-            fetch('../../php/Json/AllProdcat.php')
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.length);
-                })
 
         }
     });

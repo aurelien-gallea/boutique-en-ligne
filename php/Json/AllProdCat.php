@@ -1,25 +1,19 @@
 <?php 
-$data = json_decode(file_get_contents('php://input'), true);
-var_dump($data['data']);
 
-// use Classes\Prod_cat;
+use Classes\Prod_cat;
 
-// spl_autoload_register(function($classes) {
-//     require_once('../' .$classes. '.php');
-// });
+spl_autoload_register(function($classes) {
+    require_once('../' .$classes. '.php');
+});
 
-// $prod_cat = new Prod_cat();
-// var_dump($data);
+require('../DB/DBManager.php');
+$request = $bdd->prepare("SELECT pc.category_id, COUNT(p.id) AS product_count 
+                            FROM products_categories pc 
+                            LEFT JOIN products p ON pc.product_id = p.id 
+                            GROUP BY pc.category_id");
 
-// if($data !== null){
-//     foreach($data as $id){
-//         $result = $prod_cat->getAllProductsByCategory_id($id);
-//         echo json_encode($result);
-//     }
-
-// }
-
-// print_r($prod_cat->getAll());
-
-// print_r($prod_cat->getAllProductsByCategory_id($_POST['data']));
+$request->execute();
+$response = $request->fetchAll(PDO::FETCH_CLASS);
+$newJson = json_encode($response);
+print_r($newJson);
 ?>
