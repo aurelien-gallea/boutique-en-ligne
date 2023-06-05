@@ -10,8 +10,6 @@ class Products {
     private $_name;
     private $_description;
     private $_createAt;
-    private $_quantity;
-    private $_price;
 
     public function __construct()
     {
@@ -20,8 +18,6 @@ class Products {
         $this->_name = "";
         $this->_description; // ---------------
         $this->_createAt; // ------------------
-        $this->_quantity = null;
-        $this->_price = null;
         
     }
 
@@ -52,21 +48,6 @@ class Products {
         return $this->_description = $newDescription;
     }
 
-    // quantity
-    public function getQuantity() : ?int {
-        return $this->_quantity;
-    }
-    public function setQuantity($qty) : ?int {
-        return $this->_quantity = $qty;
-    }
-    
-    // price
-    public function getPrice() : ?float {
-        return $this->_price;
-    }
-    public function setPrice(?float $newPrice) : ?float {
-        return $this->_price = $newPrice;
-    }
 
     
     // gettersSQL : SELECT ---------------------------------------------------
@@ -89,11 +70,10 @@ class Products {
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name, $description, $quantity, $price) {
+    public function addNew($name, $description) {
         require('../DB/DBManager.php');
-        $formatPrice = number_format($price, 2, '.', '');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, quantity, price) VALUES (?,?,?,?,?)");
-        $request->execute([$this->setName($name), $this->setDescription($description), $this->setQuantity($quantity), $this->setPrice($formatPrice)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description) VALUES (?,?)");
+        $request->execute([$this->setName($name), $this->setDescription($description)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
     }
@@ -120,24 +100,6 @@ class Products {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET description = ?  WHERE id = ? ");
          $request->execute([$this->setDescription($description),$id]);
-        return $request;
-
-    }
-
-    // quantity
-    public function updateQuantity($qty,$id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET quantity = ?  WHERE id = ? ");
-          $request->execute([$this->setQuantity($qty),$id]);
-        return $request;
-
-    }
-
-    // price
-    public function updatePrice($price,$id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price = ?  WHERE id = ? ");
-         $request->execute([$this->setPrice($price),$id]);
         return $request;
 
     }
