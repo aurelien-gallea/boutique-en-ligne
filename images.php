@@ -25,15 +25,36 @@
         <img class="h-28 w-52 rounded-lg" src="./Public/img/Pull/pull_femme_couleur.jpg" alt="">
     </div>
     <div>
+        <img class="h-28 w-52 rounded-lg" src="./Public/img/Pull/pull_homme_bleu.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-28 w-52 rounded-lg" src="./Public/img/Pull/pull_homme_marron.jpg" alt="">
+    </div>
+    <div>
         <img class="h-28 w-52 rounded-lg" src="./Public/img/Short/short_jean_homme.jpg" alt="">
     </div>
+    
     <div>
         <img class="h-28 w-52 rounded-lg" src="./Public/img/Short/short_jean_femme.png" alt="">
     </div>
+    <div>
+        <img class="h-28 w-52 rounded-lg" src="./Public/img/Short/short_beige.jpg" alt="">
+    </div>
+    
+    <div>
+        <img class="h-28 w-52 rounded-lg" src="./Public/img/Short/short_fleurs.jpg" alt="">
+    </div>
+    
     <div>
         <img class="h-28 w-52 rounded-lg" src="./Public/img/T-shirt/t_shirt_blanc.jpg" alt="">
     </div>
     <div>
         <img class="h-28 w-52 rounded-lg" src="./Public/img/T-shirt/t_shirt_noir.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-28 w-52 rounded-lg" src="./Public/img/T-shirt/t_shirt_rouge.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-28 w-52 rounded-lg" src="./Public/img/T-shirt/t_shirt_redDevils.jpg" alt="">
     </div>
   
