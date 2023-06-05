@@ -56,7 +56,7 @@ session_start();
                       </div>
                       <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Mot de passe oublié?</a>
                   </div>
-                  <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Connexion</button>
+                  <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" >Connexion</button>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                   Vous n’avez pas encore de compte ? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500" style="color: #AD785D">S’enregistrer</a>
                   </p>

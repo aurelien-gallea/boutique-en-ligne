@@ -16,7 +16,7 @@ if(isset($_SESSION['id']));
     <link rel="stylesheet" href="./public/design/default.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    
     
 </head>
 
