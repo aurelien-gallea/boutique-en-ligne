@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+require('php/DB/DBManager.php');
+require('php/DB/DBTables.php');
+
 $title = "Accueil";
     ob_start();
     ?>
@@ -14,4 +17,5 @@ ob_start(); ?>
 <?php
 $script = ob_get_clean();
 require_once("./Templates/base.php");
+
 ?>

@@ -9,8 +9,10 @@
         ];
 
         $bdd = new PDO($dsn, $username, $password, $options);
+
         // echo 'connexion réussi';
     }catch(PDOException $e) {
         echo "Erreur de connexion : " . $e->getMessage();
     }
 ?>
+

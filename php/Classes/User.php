@@ -27,6 +27,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
         return $this->_id;
     }
 
+
     public function setId($newId) {
         return $this->_id = $newId;
     }
@@ -169,4 +170,6 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
 }
 
 
+
 ?>
+
