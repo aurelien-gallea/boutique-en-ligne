@@ -1,19 +1,18 @@
 <?php
 
-namespace Classes;
+namespace Classes; // Déclaration de l'espace de noms "Classes"
 use PDO;
-
-class Categories {
-
-    const TABLE_NAME = "categories";
+class Size { // Déclaration de la classe User qui hérite de la classe DBManager
     
     private $_id;
-    private $_name;
-
-    public function __construct()
-    {
+    private $_value;
+    
+    const TABLE_NAME = "size"; // Déclaration d'une constante de classe appelée TABLE_NAME avec la valeur "user"
+    
+    public function __construct() {
+        
         $this->_id;
-        $this->_name;
+        $this->_value;
     }
 
     // methodes objet: getters et setters ------------------------------------
@@ -27,12 +26,12 @@ class Categories {
         return $this->_id = $id;
     }
 
-    // name
-    public function getName() : string {
-        return $this->_name;
+    // quantity
+    public function getValue() {
+        return $this->_value;
     }
-    public function setName(string $newName) : string {
-       return $this->_name = $newName; 
+    public function setValue($newValue) {
+        return $this->_value = $newValue;
     }
 
     // gettersSQL : SELECT ---------------------------------------------------
@@ -42,7 +41,7 @@ class Categories {
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
-        return $response; 
+        return $response;  
         
     }
 
@@ -56,10 +55,10 @@ class Categories {
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name) {
+    public function addNew(string $value) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name) VALUES (?)");
-        $request->execute([$this->setName($name)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (value) VALUES (?)");
+        $request->execute([$this->setValue($value)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
@@ -73,10 +72,10 @@ class Categories {
 
     }
 
-    public function updateName($name,$id) {
+    public function updateValue($value, $id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ?  WHERE id = ? ");
-        $request->execute([$this->setName($name),$id]);
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET value = ?  WHERE id = ? ");
+         $request->execute([$this->setValue($value),$id]);
         return $request;
 
     }

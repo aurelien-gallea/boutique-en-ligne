@@ -1,10 +1,11 @@
 <?php
 
 namespace Classes; 
-
+require_once("SearchByProduct_id.php");
+use Classes\SearchByProduct_id;
 use PDO;
 
-class Prod_cat {
+class Prod_cat extends SearchByProduct_id {
 
     const TABLE_NAME = "products_categories";
 
@@ -54,17 +55,17 @@ class Prod_cat {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        $response = $request->fetchAll(PDO::FETCH_CLASS);
-        return json_encode($response);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response;
         
     }
-
-    public function getAllCategoriesByProduct_id($product_id) {
+    
+    public function getById($id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE product_id = ? ");
-        $request->execute([$this->getCategory_id($product_id)]);
-        return $request;
-        
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
+        $request->execute([$id]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
     }
     
     public function getAllProductsByCategory_id($_category_id) {

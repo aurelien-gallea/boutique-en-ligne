@@ -46,12 +46,13 @@ class Price {
 
     // getterSQL : SELECT
 
-    public function getAll(){
+    public function getAll() {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        $response = $request->fetchAll(PDO::FETCH_CLASS);
-        return json_encode($response);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response;  
+        
     }
 
     //setterSQL :INSERT INTO
@@ -63,5 +64,21 @@ class Price {
         $request->execute([$this->setPrice($formatPrice), $this->setProduct_id($product_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
+    }
+
+    public function deleteRow($id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
+        $request->execute([$id]);
+        return $request;
+
+    }
+
+    public function updatePrice($price, $id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price = ?  WHERE id = ? ");
+        $request->execute([$this->setValue($price),$id]);
+        return $request;
+
     }
 }

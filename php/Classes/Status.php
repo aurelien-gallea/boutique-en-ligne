@@ -1,29 +1,25 @@
 <?php
 
-namespace Classes; 
+namespace Classes;
 use PDO;
 
-class Products {
+class Status {
 
-    const TABLE_NAME = "products";
-
+    const TABLE_NAME = "status";
+    
     private $_id;
     private $_name;
-    private $_description;
-    
+
     public function __construct()
     {
-        // $this->_db;
-        $this->_id = null;
-        $this->_name = "";
-        $this->_description; // ---------------
-        
+        $this->_id;
+        $this->_name;
     }
 
     // methodes objet: getters et setters ------------------------------------
 
     // id
-    public function getId() : ?int {
+    public function getId() {
         return $this->_id;
     }
     public function setId($id) 
@@ -39,16 +35,6 @@ class Products {
        return $this->_name = $newName; 
     }
 
-    // description
-    public function getDescription() : string {
-        return $this->_description;
-    }
-    public function setDescription(string $newDescription) : string {
-        return $this->_description = $newDescription;
-    }
-
-
-    
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
@@ -56,10 +42,11 @@ class Products {
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
-        return $response;        
+        return $response; 
+        
     }
 
-    public function getAllById($id) {
+    public function getById($id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
@@ -69,12 +56,13 @@ class Products {
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name, $description) {
+    public function addNew($name) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description) VALUES (?,?)");
-        $request->execute([$this->setName($name), $this->setDescription($description)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name) VALUES (?)");
+        $request->execute([$this->setName($name)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
+        
     }
 
     public function deleteRow($id) {
@@ -85,7 +73,6 @@ class Products {
 
     }
 
-    // name
     public function updateName($name,$id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ?  WHERE id = ? ");
@@ -93,14 +80,4 @@ class Products {
         return $request;
 
     }
-
-    // description
-    public function updateDescription($description, $id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET description = ?  WHERE id = ? ");
-         $request->execute([$this->setDescription($description),$id]);
-        return $request;
-
-    }
-
 }
