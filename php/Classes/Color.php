@@ -5,14 +5,14 @@ use PDO;
 class Color { // Déclaration de la classe User qui hérite de la classe DBManager
     
     private $_id;
-    private $_value;
+    private $_colorName;
     
     const TABLE_NAME = "color"; // Déclaration d'une constante de classe appelée TABLE_NAME avec la valeur "user"
     
     public function __construct() {
         
         $this->_id;
-        $this->_value;
+        $this->_colorName;
     }
 
     // methodes objet: getters et setters ------------------------------------
@@ -27,11 +27,11 @@ class Color { // Déclaration de la classe User qui hérite de la classe DBManag
     }
 
     // quantity
-    public function getValue() {
-        return $this->_value;
+    public function getcolorName() {
+        return $this->_colorName;
     }
-    public function setValue($newValue) {
-        return $this->_value = $newValue;
+    public function setcolorName($newcolorName) {
+        return $this->_colorName = $newcolorName;
     }
 
     // gettersSQL : SELECT ---------------------------------------------------
@@ -55,10 +55,10 @@ class Color { // Déclaration de la classe User qui hérite de la classe DBManag
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew(string $value) {
+    public function addNew(string $colorName) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (value) VALUES (?)");
-        $request->execute([$this->setValue($value)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (colorName) VALUES (?)");
+        $request->execute([$this->setcolorName($colorName)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
@@ -73,10 +73,10 @@ class Color { // Déclaration de la classe User qui hérite de la classe DBManag
     }
 
 
-    public function updateValue($value, $id) {
+    public function updatecolorName($colorName, $id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET value = ?  WHERE id = ? ");
-         $request->execute([$this->setValue($value),$id]);
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET colorName = ?  WHERE id = ? ");
+         $request->execute([$this->setcolorName($colorName),$id]);
         return $request;
 
     }

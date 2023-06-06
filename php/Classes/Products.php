@@ -51,7 +51,8 @@ class Products {
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
-        require('../DB/DBManager.php');
+        
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
@@ -59,7 +60,8 @@ class Products {
     }
 
     public function getAllById($id) {
-        require('../DB/DBManager.php');
+
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         $response = $request->fetch(PDO::FETCH_ASSOC);
@@ -69,7 +71,7 @@ class Products {
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($name, $description) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description) VALUES (?,?)");
         $request->execute([$this->setName($name), $this->setDescription($description)]);
         $lastId = $bdd->lastInsertId();
