@@ -97,7 +97,8 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
 
     // obtenir le chemin de l'image correspondant au produit
     public function getallWithImagesInfo() {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." INNER JOIN images on images.id = ".$this::TABLE_NAME.".images_id");
         $request->execute();
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
@@ -105,17 +106,24 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
     }
 
     public function getById($id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response; 
     }
 
-    // recuperer tout le stock par id de produit
-    public function getByProductId($productId) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE product_id = ? ");
+    //  inner join multiple
+
+    // recuperer tout le stock par id de produit avec la valeur des couleurs
+    public function getAllInfosByProductId($productId) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+
+        $request = $bdd->prepare("SELECT ".$this::TABLE_NAME.".quantity, color.colorName AS color, size.sizeName AS size, price.value AS price FROM ".$this::TABLE_NAME." 
+        INNER JOIN `color` ON color.id = ".$this::TABLE_NAME.".color_id 
+        INNER JOIN `size` ON size.id = ".$this::TABLE_NAME.".size_id 
+        INNER JOIN `price` ON price.id = ".$this::TABLE_NAME.".price_id WHERE product_id = ? ");
         $request->execute([$productId]);
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response; 

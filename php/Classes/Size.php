@@ -5,14 +5,14 @@ use PDO;
 class Size { // Déclaration de la classe User qui hérite de la classe DBManager
     
     private $_id;
-    private $_value;
+    private $sizeName;
     
     const TABLE_NAME = "size"; // Déclaration d'une constante de classe appelée TABLE_NAME avec la valeur "user"
     
     public function __construct() {
         
         $this->_id;
-        $this->_value;
+        $this->sizeName;
     }
 
     // methodes objet: getters et setters ------------------------------------
@@ -27,11 +27,11 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
     }
 
     // quantity
-    public function getValue() {
-        return $this->_value;
+    public function getSizeName() {
+        return $this->sizeName;
     }
-    public function setValue($newValue) {
-        return $this->_value = $newValue;
+    public function setSizeName($newName) {
+        return $this->sizeName = $newName;
     }
 
     // gettersSQL : SELECT ---------------------------------------------------
@@ -55,10 +55,10 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew(string $value) {
+    public function addNew($sizeName) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (value) VALUES (?)");
-        $request->execute([$this->setValue($value)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (sizeName) VALUES (?)");
+        $request->execute([$this->setSizeName($sizeName)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
@@ -72,10 +72,10 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
 
     }
 
-    public function updateValue($value, $id) {
+    public function updateSizeName($sizeName, $id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET value = ?  WHERE id = ? ");
-         $request->execute([$this->setValue($value),$id]);
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET sizeName = ?  WHERE id = ? ");
+         $request->execute([$this->setsizeName($sizeName),$id]);
         return $request;
 
     }
