@@ -29,58 +29,57 @@ require_once("./php/Components/header.php");
 
 
 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/T-shirt/t_shirt_blanc.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/T-shirt/t_shirt_blanc.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/T-shirt/t_shirt_noir.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/T-shirt/t_shirt_noir.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/T-shirt/t_shirt_rouge.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/T-shirt/t_shirt_rouge.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/T-shirt/t_shirt_redDevils.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/T-shirt/t_shirt_redDevils.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg shadow-md" src="./Public/img/Pull/pull_femme_noir.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg shadow-md" src="./Public/img/Pull/pull_femme_noir.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/Pull/pull_femme_couleur.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/Pull/pull_femme_couleur.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/Pull/pull_homme_bleu.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/Pull/pull_homme_bleu.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/Pull/pull_homme_marron.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/Pull/pull_homme_marron.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/Short/short_jean_homme.jpg" alt="">
-        </div>
-
-        <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/Short/short_jean_femme.png" alt="">
-        </div>
-        <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/Short/short_beige.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/Short/short_jean_homme.jpg" alt="">
         </div>
 
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/Short/short_fleurs.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/Short/short_jean_femme.png" alt="">
+        </div>
+        <div>
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/Short/short_beige.jpg" alt="">
         </div>
 
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/pantalon/pantalon_blanc.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/Short/short_fleurs.jpg" alt="">
+        </div>
+
+        <div>
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/pantalon/pantalon_blanc.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/pantalon/pantalon_rouge.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/pantalon/pantalon_rouge.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/pantalon/pantalon_jean_homme.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/pantalon/pantalon_jean_homme.jpg" alt="">
         </div>
         <div>
-            <img class="h-28 w-52 rounded-lg" src="./Public/img/pantalon/pantalon_jean_femme.jpg" alt="">
+            <img class="md:h-48 md:w-80 lg:h-64 lg:w-96 rounded-lg" src="./Public/img/pantalon/pantalon_jean_femme.jpg" alt="">
         </div>
 
     </div>
