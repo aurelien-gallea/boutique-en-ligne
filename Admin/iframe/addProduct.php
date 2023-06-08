@@ -113,8 +113,8 @@
                     </button>
                     <ul id="dropdown-example" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="./addProduct.php" class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                                Ajouter un produit
+                            <a href="./allProducts.php" id="products" class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                Produits
                             </a>
                         </li>
                         <li>
@@ -178,14 +178,6 @@
                     </div>
                 </div>
 
-                <!-- <div class="flex flex-col shadow-md bg-white rounded-lg px-8 py-4 space-y-3 dark:bg-gray-800">
-                    <h2 class="text-md font-medium dark:text-white">Stock</h2>
-                    <div>
-                        <label for="quantity" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">quantité</label>
-                        <input type="number" id="quantity" name="quantity" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    </div>
-                </div> -->
-                
                 <div class="flex flex-col shadow-md bg-white rounded-lg px-8 py-4 space-y-3 dark:bg-gray-800">
                     <h2 class="text-md font-medium dark:text-white">Prix</h2>
                     <div>
@@ -193,6 +185,18 @@
                         <input type="number" step=0.01 id="price" name="price" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                 </div>
+                
+                <div class="flex flex-col shadow-md bg-white rounded-lg px-8 py-4 space-y-3 dark:bg-gray-800">
+
+                    <p class="text-start text-base font-normal text-blue-600 underline dark:text-blue-500 hover:no-underline">+ Ajouter une option</p>
+                    <div class="space-y-3">
+                        <h2 class="text-md font-medium dark:text-white">Options</h2>
+                        <div>
+                            <label for="color" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">couleur</label>
+                            <input type="text" id="color" name="color" class="block w-1/3 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </div>
+                    </div>
+                </div> 
 
                 <button id="button" name="valider" type="submit" class="text-white bg-blue-700 mt-5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer</button>
             </form>

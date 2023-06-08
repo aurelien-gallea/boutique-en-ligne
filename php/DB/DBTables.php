@@ -21,19 +21,8 @@ require_once('php/DB/DBManager.php');
                                 `id` INT AUTO_INCREMENT PRIMARY KEY,
                                 `name` varchar(255) NOT NULL,
                                 `description` varchar(255) DEFAULT NULL,
-                                `subDesc` varchar(255) DEFAULT NULL,
-                                `img` varchar(255) DEFAULT NULL,
                                 `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
-                                `quantity` int(11) DEFAULT NULL,
-                                `price` float DEFAULT NULL
                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
-
-            'images' => 'CREATE TABLE `images` (
-                            `id` INT AUTO_INCREMENT PRIMARY KEY,
-                            `name` VARCHAR(255) NOT NULL,
-                            `product_id` INT NOT NULL,
-                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
-                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
 
             'prod_cat' => 'CREATE TABLE `products_categories` (
                                 `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,15 +32,19 @@ require_once('php/DB/DBManager.php');
                                 FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
-            'options' => 'CREATE TABLE `productsOptions` (
-                                `id` INT AUTO_INCREMENT PRIMARY KEY,
-                                `name` VARCHAR(80) NOT NULL,
-                                `value` VARCHAR(80) NOT NULL,
-                                `quantity` INT(11) DEFAULT NULL,
-                                `price` FLOAT DEFAULT NULL,
-                                `product_id` INT NOT NULL,
-                                FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
-                                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
+            'price' => 'CREATE TABLE `price` (
+                            `id` INT AUTO_INCREMENT PRIMARY KEY,
+                            `price` FLOAT NOT NULL, 
+                            `product_id` INT NOT NULL,
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`),
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
+
+            'color' => 'CREATE TABLE `color` (
+                            `id` INT AUTO_INCREMENT PRIMARY KEY,
+                            `color` varchar(255) NOT NULL,
+                            `product_id` INT NOT NULL,
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`),
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'carriers' => 'CREATE TABLE `carriers` (
                                 `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,7 +52,6 @@ require_once('php/DB/DBManager.php');
                                 `description` varchar(255) NOT NULL,
                                 `price` float NOT NULL
                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
-            
 
             'delivery' => 'CREATE TABLE `delivery` (
                                 `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -74,30 +66,6 @@ require_once('php/DB/DBManager.php');
                                 `user_id` int(11) NOT NULL,
                                 FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
-
-            'order_details' => 'CREATE TABLE `order_details` (
-                                    `id` INT AUTO_INCREMENT PRIMARY KEY,
-                                    `cart_id` INT NOT NULL,
-                                    `delivery_full_address` TEXT NOT NULL,
-                                    `date_creation` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                    FOREIGN KEY (`cart_id`) REFERENCES `cart`(`id`)
-                                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
-            
-            'order' => 'CREATE TABLE `order` (
-                            `id` INT AUTO_INCREMENT PRIMARY KEY,
-                            `order_details_id` INT NOT NULL,
-                            `status` VARCHAR(255) NOT NULL,
-                            FOREIGN KEY (`order_details_id`) REFERENCES `order_details`(`id`)
-                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
-
-            'cart' => 'CREATE TABLE `cart` (
-                            `id` INT AUTO_INCREMENT PRIMARY KEY,
-                            `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
-                            `quantity` int(11) DEFAULT NULL,
-                            `price` float DEFAULT NULL,
-                            `user_id` int(11) NOT NULL,
-                            FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
-                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
             
         ];
 

@@ -5,14 +5,16 @@ use PDO;
 class Color { // Déclaration de la classe User qui hérite de la classe DBManager
     
     private $_id;
-    private $_colorName;
+    private $_color;
+    private $_product_id; //FK
     
     const TABLE_NAME = "color"; // Déclaration d'une constante de classe appelée TABLE_NAME avec la valeur "user"
     
     public function __construct() {
         
         $this->_id;
-        $this->_colorName;
+        $this->_color;
+        $this->_product_id;
     }
 
     // methodes objet: getters et setters ------------------------------------
@@ -27,11 +29,19 @@ class Color { // Déclaration de la classe User qui hérite de la classe DBManag
     }
 
     // quantity
-    public function getcolorName() {
-        return $this->_colorName;
+    public function getColor() {
+        return $this->_color;
     }
-    public function setcolorName($newcolorName) {
-        return $this->_colorName = $newcolorName;
+    public function setColor($newcolor) {
+        return $this->_color = $newcolor;
+    }
+
+    // product_id
+    public function getProduct_id() {
+        return $this->_product_id;
+    }
+    public function setProduct_id($newProduct_id) {
+        return $this->_product_id = $newProduct_id;
     }
 
     // gettersSQL : SELECT ---------------------------------------------------
@@ -55,10 +65,10 @@ class Color { // Déclaration de la classe User qui hérite de la classe DBManag
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew(string $colorName) {
+    public function addNew(string $color, $product_id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (colorName) VALUES (?)");
-        $request->execute([$this->setcolorName($colorName)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (color, product_id) VALUES (?,?)");
+        $request->execute([$this->setColor($color), $this->setProduct_id($product_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
@@ -73,10 +83,10 @@ class Color { // Déclaration de la classe User qui hérite de la classe DBManag
     }
 
 
-    public function updatecolorName($colorName, $id) {
+    public function updateColor($color, $id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET colorName = ?  WHERE id = ? ");
-         $request->execute([$this->setcolorName($colorName),$id]);
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET color = ?  WHERE id = ? ");
+         $request->execute([$this->setColor($color),$id]);
         return $request;
 
     }

@@ -3,7 +3,6 @@ import { addElement } from "../modules/addElement.js";
 fetch('../../php/Json/AllCategories.php')
     .then(response => response.json())
     .then( categorie => {
-        console.log(categorie);
         // Vérifie qu'il y a bien des données
         if(categorie && categorie.length){
 
