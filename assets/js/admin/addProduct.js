@@ -1,8 +1,24 @@
 import { addElement } from "../modules/addElement.js";
 
+const test = document.getElementById('test');
+test.addEventListener('click', () => {
+    let color = document.getElementById('color').value;
+    let size = document.getElementById('size').value;
+    let quantity = document.getElementById('quantity').value;
+    if(color && size){
+        console.log(color+'/'+size+'/'+quantity);
+        let Options = document.getElementById('Options');
+        let rowOptions = addElement('input', ["flex", "shadow-md"], {placeholder:`${color}`}, `${color}/${size}`);
+        Options.appendChild(rowOptions);
+        document.getElementById('size').value = "";
+    }
+})
+
+
 fetch('../../php/Json/AllCategories.php')
     .then(response => response.json())
-    .then( categorie => {
+    .then(categorie => {
+
         // Vérifie qu'il y a bien des données
         if(categorie && categorie.length){
 
