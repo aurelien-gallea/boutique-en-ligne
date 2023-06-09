@@ -21,7 +21,7 @@ require_once('php/DB/DBManager.php');
                                 `id` INT AUTO_INCREMENT PRIMARY KEY,
                                 `name` varchar(255) NOT NULL,
                                 `description` varchar(255) DEFAULT NULL,
-                                `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+                                `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
 
             'prod_cat' => 'CREATE TABLE `products_categories` (
@@ -36,14 +36,14 @@ require_once('php/DB/DBManager.php');
                             `id` INT AUTO_INCREMENT PRIMARY KEY,
                             `price` FLOAT NOT NULL, 
                             `product_id` INT NOT NULL,
-                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`),
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'color' => 'CREATE TABLE `color` (
                             `id` INT AUTO_INCREMENT PRIMARY KEY,
                             `color` varchar(255) NOT NULL,
                             `product_id` INT NOT NULL,
-                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`),
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'carriers' => 'CREATE TABLE `carriers` (
