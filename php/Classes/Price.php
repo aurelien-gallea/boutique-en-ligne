@@ -77,7 +77,7 @@ class Price {
     public function updatePrice($price, $id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price = ?  WHERE id = ? ");
-        $request->execute([$this->setValue($price),$id]);
+        $request->execute([$this->setPrice($price),$id]);
         return $request;
 
     }
