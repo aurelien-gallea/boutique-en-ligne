@@ -5,12 +5,35 @@ test.addEventListener('click', () => {
     let color = document.getElementById('color').value;
     let size = document.getElementById('size').value;
     let quantity = document.getElementById('quantity').value;
+    let i = 0;
+    
     if(color && size){
+        
         console.log(color+'/'+size+'/'+quantity);
-        let Options = document.getElementById('Options');
-        let rowOptions = addElement('input', ["flex", "shadow-md"], {placeholder:`${color}`}, `${color}/${size}`);
-        Options.appendChild(rowOptions);
+        
+        document.getElementById('containerTable').classList.remove('hidden');
+        document.getElementById('containerTable').classList.add('flex');
+
+        let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
+        document.getElementById('tbody').appendChild(trtbody);
+
+        let thColor = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], {scope: "row"});
+        trtbody.appendChild(thColor);
+        let thInputColor = addElement('input', ["block", "w-full", "p-2", "text-gray-900", "border", "border-gray-300", "rounded-lg", "bg-gray-50", "sm:text-xs", "focus:ring-blue-500", "focus:border-blue-500", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"], {name:"color[]", value:`${color}`});
+        thColor.appendChild(thInputColor);
+
+        let thSize = addElement('td', ["px-6", "py-4"], {});
+        trtbody.appendChild(thSize);
+        let thInputSize = addElement('input', ["block", "w-full", "p-2", "text-gray-900", "border", "border-gray-300", "rounded-lg", "bg-gray-50", "sm:text-xs", "focus:ring-blue-500", "focus:border-blue-500", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"], {name:"size[]", value:`${size}`});
+        thSize.appendChild(thInputSize);
+
+        let thQuantity = addElement('td', ["px-6", "py-4"], {});
+        trtbody.appendChild(thQuantity);
+        let thInputQuantity = addElement('input', ["block", "w-full", "p-2", "text-gray-900", "border", "border-gray-300", "rounded-lg", "bg-gray-50", "sm:text-xs", "focus:ring-blue-500", "focus:border-blue-500", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"], {name:"quantity[]", value:`${quantity}`});
+        thQuantity.appendChild(thInputQuantity);
+
         document.getElementById('size').value = "";
+        document.getElementById('quantity').value = "";
     }
 })
 

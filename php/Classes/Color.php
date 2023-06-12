@@ -65,7 +65,7 @@ class Color { // Déclaration de la classe User qui hérite de la classe DBManag
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew(string $color, $product_id) {
+    public function add(string $color, $product_id) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (color, product_id) VALUES (?,?)");
         $request->execute([$this->setColor($color), $this->setProduct_id($product_id)]);

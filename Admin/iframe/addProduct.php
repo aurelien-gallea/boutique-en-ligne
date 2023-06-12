@@ -171,6 +171,7 @@
                     <div>
                         <label for="title" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">title</label>
                         <input type="text" id="title" name="title" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-white dark:focus:border-white">
+                        
                     </div>
                     <div>
                         <label for="description" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">description</label>
@@ -182,7 +183,7 @@
                     <h2 class="text-md font-medium dark:text-white">Prix</h2>
                     <div>
                         <label for="price" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">prix</label>
-                        <input type="number" step=0.01 id="price" name="price" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <input type="number" step=0.01 id="price" name="price" class="block w-1/3 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                 </div>
                 
@@ -192,15 +193,15 @@
                         <div class="flex gap-2 w-full">
                             <div class="w-full">
                                 <label for="color" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Couleur</label>
-                                <input type="text" id="color" name="color" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <input type="text" id="color" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
                             <div class="w-full">
                                 <label for="size" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Taille</label>
-                                <input type="text" id="size" name="size" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <input type="text" id="size" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
                             <div class="w-full">
                                 <label for="quantity" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Quantité</label>
-                                <input type="number" id="quantity" name="quantity" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <input type="number" id="quantity" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
                             <div id="test" class="flex items-end justify-center pb-0.5 cursor-pointer">
                                 <svg class="w-8 h-8 text-gray-600 shadow-lg rounded bg-gray-50 dark:text-white dark:bg-gray-700 dark:border-gray-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -208,6 +209,20 @@
                                 </svg>
                             </div>
                         </div>
+                    </div>
+                    <div id="containerTable" class="hidden flex-col w-full shadow-md bg-white rounded-lg p-4 space-y-3 dark:bg-gray-800 dark:border">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Couleur</th>
+                                    <th scope="col" class="px-6 py-3">Taille</th>
+                                    <th scope="col" class="px-6 py-3">Quantité</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+
+                            </tbody>
+                        </table>
                     </div>
                 </div> 
 
