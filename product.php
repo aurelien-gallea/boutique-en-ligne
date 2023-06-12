@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$_SESSION['productID'] = $_GET['id'];
 $title = "Produit | M.A.H";
 ob_start();
 ?>

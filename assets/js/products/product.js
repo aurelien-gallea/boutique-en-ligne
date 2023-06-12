@@ -129,30 +129,33 @@ fetch(`${key}productCard.php`)
 
     // gestion du formulaire en asynchrone
     addToCart.addEventListener("click", function () {
-      fetch(`${key}addToCart.php`, {
-        method: "POST",
+      if (quantity.value > 0) {
 
-        body: JSON.stringify({
-          product_id: product.id,
-          color: color[myKeyColor].color,
-          color_id: color[myKeyColor].id,
-          size: mySize,
-          size_id : mySizeId,
-          quantity: myQty,
-          price: data.price[0].price,
-          price_id : data.price[0].id,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+        fetch(`${key}addToCart.php`, {
+          method: "POST",
+          
+          body: JSON.stringify({
+            product_id: product.id,
+            color: color[myKeyColor].color,
+            color_id: color[myKeyColor].id,
+            size: mySize,
+            size_id : mySizeId,
+            quantity: myQty,
+            price: data.price[0].price,
+            price_id : data.price[0].id,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
         .then(function (response) {
-          console.log("ok");
+          quantity.value = 1;
         })
         .catch(function (error) {
           console.log("pb");
         });
-    });
+      }
+      });
 
   })
   .catch((error) => console.log(error));

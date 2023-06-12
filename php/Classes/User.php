@@ -117,6 +117,22 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
         return $this->setId($lastId);
     }
 
+    public function passVerify($email, $pass) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT `password` FROM ".$this::TABLE_NAME." WHERE email = ?");
+        $request->execute([$this->setEmail($email)]);
+        $row = $request->fetch();
+        
+        return $row && password_verify($pass, $row['password']) ? $row['password'] : false;
+       
+    }  
+    public function connection($email, $hachedPassword) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE email = ? AND password = ?");
+        $request->execute([$this->setEmail($email), $this->setPassword($hachedPassword)]);
+        $response = $request->fetch();
+        return $response;
+    }
     public function deleteUser($userId) {
         require ('../DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM " . $this::TABLE_NAME . " WHERE id = ?");
