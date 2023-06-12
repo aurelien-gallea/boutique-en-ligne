@@ -10,16 +10,18 @@ use Classes\User;
 use Classes\Verify;
 
 if (isset($_POST['signUp'])) {
-    if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm-password'])) {
+    if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm-password'])) {
         if ($_POST['password'] === $_POST['confirm-password']) {
 
+            $firstname = htmlspecialchars($_POST['firstname']);
+            $lastname = htmlspecialchars($_POST['lastname']);
             $email = htmlspecialchars($_POST['email']);
             $pass1 = htmlspecialchars($_POST['password']);
             $pass2 = htmlspecialchars($_POST['confirm-password']);
 
             // a finir ne pas oublier de rajouter les conditions au dessus !
-            $firstname = "pipo";
-            $lastname = "molo";
+            // $firstname = "pipo";
+            // $lastname = "molo";
             // fin
 
             // verifications du mail (au cas où l'utilisateur change le type de l'input)
