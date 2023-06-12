@@ -19,11 +19,7 @@ if (isset($_POST['signUp'])) {
             $pass1 = htmlspecialchars($_POST['password']);
             $pass2 = htmlspecialchars($_POST['confirm-password']);
 
-            // a finir ne pas oublier de rajouter les conditions au dessus !
-            // $firstname = "pipo";
-            // $lastname = "molo";
-            // fin
-
+            
             // verifications du mail (au cas où l'utilisateur change le type de l'input)
             if (!Verify::verifySyntax($email)) {
                 header('location:signUp.php?error=1&message=merci de rentrer un email valide !');
