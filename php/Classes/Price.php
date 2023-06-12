@@ -1,8 +1,9 @@
 <?php
 
 namespace Classes; 
+require_once("SearchByProduct_id.php");
 use PDO;
-class Price {
+class Price extends SearchByProduct_id {
 
     const TABLE_NAME = "price";
 

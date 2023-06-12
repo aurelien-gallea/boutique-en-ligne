@@ -3,7 +3,7 @@
 spl_autoload_register(function($classes) {
     require_once('../' .$classes. '.php');
 });
-use Classes\Stock;
+// use Classes\Stock;
 use Classes\Products;
 
 
@@ -11,15 +11,15 @@ use Classes\Products;
 
 
 $prod = new Products();
-$stock = new Stock();
+// $stock = new Stock();
 
 
 $allProd = $prod->getAll();
-$allStock = $stock->getallWithImagesInfo();
+// $allStock = $stock->getallWithImagesInfo();
 
 
 $arrayJson = [ 
-    $stock::TABLE_NAME => $allStock,
+    // $stock::TABLE_NAME => $allStock,
     $prod::TABLE_NAME => $allProd,
    
 

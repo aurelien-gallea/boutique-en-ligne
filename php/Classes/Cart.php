@@ -12,16 +12,22 @@ class Cart extends SearchByUser_id {
 
     private $_id;
     private $_dateCreation;
+    private $_product_id;
+    private $_color_id;
+    private $_size_id;
     private $_quantity;
-    private $_price;
+    private $_price_id;
     private $_user_id;
 
     public function __construct()
     {
         $this->_id;
         $this->_dateCreation;
+        $this->_product_id;
+        $this->_color_id;
+        $this->_size_id;
         $this->_quantity;
-        $this->_price;
+        $this->_price_id;
         $this->_user_id;
     }
 
@@ -35,7 +41,30 @@ class Cart extends SearchByUser_id {
     {
         return $this->_id = $id;
     }
-
+    // product_id
+    public function getProduct_id() {
+        return $this->_product_id;
+    }
+    public function setProduct_id($product_id) 
+    {
+        return $this->_product_id = $product_id;
+    }
+    // color_id
+    public function getColor_id() {
+        return $this->_color_id;
+    }
+    public function setColor_id($color_id) 
+    {
+        return $this->_color_id = $color_id;
+    }
+    // size_id
+    public function getSize_id() {
+        return $this->_size_id;
+    }
+    public function setSize_id($size_id) 
+    {
+        return $this->_size_id = $size_id;
+    }
     // quantity
     public function getQuantity() {
         return $this->_quantity;
@@ -43,15 +72,13 @@ class Cart extends SearchByUser_id {
     public function setQuantity($newQuantity) {
         return $this->_quantity = $newQuantity;
     }
-
-    // price
-    public function getPrice() {
-        return $this->_price;
+    // price_id
+    public function getPrice_id() {
+        return $this->_price_id;
     }
-    public function setPrice($newPrice) {
-        return $this->_price = $newPrice;
+    public function setPrice_id($newPrice_id) {
+        return $this->_price_id = $newPrice_id;
     }
-
     // user_id
     public function getUser_id() {
         return $this->_user_id;
@@ -80,10 +107,18 @@ class Cart extends SearchByUser_id {
 
      // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($quantity, $price,$user_id) {
+    public function addNew($product_id, $color_id, $size_id, $quantity, $price_id,$user_id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (quantity, price, user_id) VALUES (?,?,?)");
-        $request->execute([$this->setQuantity($quantity), $this->setPrice($price), $this->setUser_id($user_id)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (product_id, color_id, size_id, quantity, price_id, user_id) VALUES (?,?,?,?,?,?)");
+        $request->execute(
+            [
+            $this->setProduct_id($product_id),
+            $this->setColor_id($color_id), 
+            $this->setSize_id($size_id),
+            $this->setQuantity($quantity), 
+            $this->setPrice_id($price_id), 
+            $this->setUser_id($user_id)
+        ]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
@@ -97,6 +132,27 @@ class Cart extends SearchByUser_id {
 
     }
 
+    // product_id
+    public function updateProduct_id($newProduct_id,$id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET product_id = ?  WHERE id = ? ");
+          $request->execute([$this->setProduct_id($newProduct_id),$id]);
+        return $request;
+    }
+    // color_id
+    public function updateColor_id($newColor_id,$id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET color_id = ?  WHERE id = ? ");
+        $request->execute([$this->setColor_id($newColor_id),$id]);
+        return $request;
+    }
+    // size_id
+    public function updateSize_id($newSize_id,$id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET size_id = ?  WHERE id = ? ");
+        $request->execute([$this->setSize_id($newSize_id),$id]);
+        return $request;
+    }
     // quantity
     public function updateQuantity($qty,$id) {
         require('../DB/DBManager.php');
@@ -106,11 +162,11 @@ class Cart extends SearchByUser_id {
 
     }
 
-    // price
-    public function updatePrice($price,$id) {
+    // price_id
+    public function updateprice_id($price_id,$id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price = ?  WHERE id = ? ");
-         $request->execute([$this->setPrice($price),$id]);
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price_id = ?  WHERE id = ? ");
+         $request->execute([$this->setPrice_id($price_id),$id]);
         return $request;
 
     }
