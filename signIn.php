@@ -19,9 +19,10 @@ session_start();
             
             if ($hachedPassword !== false) {
                 $response = $user->connection($email, $hachedPassword);
-                $_SESSION["userId"]=$response["id"];            
-                $_SESSION["email"]=$response["email"];
-                
+                $_SESSION["userId"] = $response["id"];            
+                $_SESSION["email"] = $response["email"];
+                $_SESSION["role"] = $response["role"];
+
                 header("location:./");
                 exit();                
             } else {
