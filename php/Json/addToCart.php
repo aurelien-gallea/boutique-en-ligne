@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$userId= 1; // <----- a changer imperativement avec le $_session 
+$userId= $_SESSION["userId"]; // <----- a changer imperativement avec le $_session 
 // Récupérer les données envoyées depuis la requête
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -14,7 +14,7 @@ $quantity = $data['quantity'];
 $price = $data['price'];
 $priceId = $data['price_id'];
 
-// Effectuer ici votre logique d'ajout au panier
+
 spl_autoload_register(function($classes) {
     require_once('../' .$classes. '.php');
 });
