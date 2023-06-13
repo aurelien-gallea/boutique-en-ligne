@@ -92,10 +92,10 @@ require_once('php/DB/DBManager.php');
                     $bdd->exec($createQuery);
                     echo "La table '$tableName' a été créée." . PHP_EOL;
                 } catch (PDOException $e) {
-                    echo "Erreur lors de la création de la table '$tableName': " . $e->getMessage() . PHP_EOL;
+                    // echo "Erreur lors de la création de la table '$tableName': " . $e->getMessage() . PHP_EOL;
                 }
             } else {
-                echo "La table '$tableName' existe déjà." . PHP_EOL;
+                // echo "La table '$tableName' existe déjà." . PHP_EOL;
             }
         }
 
