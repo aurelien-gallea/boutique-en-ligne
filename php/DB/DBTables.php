@@ -46,6 +46,20 @@ require_once('php/DB/DBManager.php');
                             FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
+            'size' => 'CREATE TABLE `size` (
+                            `id` INT AUTO_INCREMENT PRIMARY KEY,
+                            `size` varchar(255) NOT NULL,
+                            `color_id` INT NOT NULL,
+                            FOREIGN KEY (`color_id`) REFERENCES `color`(`id`)
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
+
+            'stock' => 'CREATE TABLE `stock` (
+                            `id` INT AUTO_INCREMENT PRIMARY KEY,
+                            `quantity` INT NOT NULL,
+                            `size_id` INT NOT NULL,
+                            FOREIGN KEY (`size_id`) REFERENCES `size`(`id`)
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
+
             'carriers' => 'CREATE TABLE `carriers` (
                                 `id` INT AUTO_INCREMENT PRIMARY KEY,
                                 `name` varchar(80) NOT NULL,

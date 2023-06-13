@@ -30,7 +30,7 @@ fetch('../../php/Json/AllProducts.php')
             thead.after(tbody);
 
             products.map(item => {
-
+        
                 let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
                 tbody.appendChild(trtbody);
 
@@ -39,7 +39,7 @@ fetch('../../php/Json/AllProducts.php')
                 trtbody.appendChild(thContentId);
                 trtbody.appendChild(thContentName);
                 
-                let date = new Date(item.date_creation);
+                let date = new Date(item.createdAt);
                 let jour = date.getDate();
                 let mois = date.getMonth() + 1;
                 let annee = date.getFullYear();

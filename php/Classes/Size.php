@@ -5,14 +5,15 @@ use PDO;
 class Size { // Déclaration de la classe User qui hérite de la classe DBManager
     
     private $_id;
-    private $_value;
-    private $_color_id;
+    private $size;
+    private $_color_id; //FK
+
     const TABLE_NAME = "size"; // Déclaration d'une constante de classe appelée TABLE_NAME avec la valeur "user"
     
     public function __construct() {
         
         $this->_id;
-        $this->_value;
+        $this->size;
         $this->_color_id;
     }
 
@@ -27,12 +28,21 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
         return $this->_id = $id;
     }
 
-    // quantity
-    public function getValue() {
-        return $this->_value;
+
+    public function getSize() {
+        return $this->size;
     }
-    public function setValue($newValue) {
-        return $this->_value = $newValue;
+    public function setSize($newSize) {
+        return $this->size = $newSize;
+    }
+
+    // color_id
+    public function getColor_id() {
+        return $this->_color_id;
+    }
+    public function setColor_id($newColor_id) {
+        return $this->_color_id = $newColor_id;
+
     }
 
     // gettersSQL : SELECT ---------------------------------------------------
@@ -63,10 +73,11 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
     }
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($value) {
+
+    public function add($size, $color_id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (value) VALUES (?)");
-        $request->execute([$this->setValue($value)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (size, color_id) VALUES (?,?)");
+        $request->execute([$this->setSize($size), $this->setColor_id($color_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
@@ -80,10 +91,11 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
 
     }
 
-    public function updateValue($value, $id) {
+
+    public function updateSizeName($size, $id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET value = ?  WHERE id = ? ");
-         $request->execute([$this->setValue($value),$id]);
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET size = ?  WHERE id = ? ");
+         $request->execute([$this->setsize($size),$id]);
         return $request;
 
     }
