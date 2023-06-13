@@ -22,4 +22,12 @@ class SearchByUser_id {
         $response = $request->fetch(PDO::FETCH_ASSOC);
         return $response; 
     }
+
+    public function deleteRowByUserId($user_id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE user_id = ? ");
+        $request->execute([$user_id]);
+        return $request;
+
+    }
 }

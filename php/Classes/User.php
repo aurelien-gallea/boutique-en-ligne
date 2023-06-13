@@ -87,8 +87,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
      */
 
     public function avalaibleEmail($email) {
-        require('../DB/DBManager.php');
-        
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE email = ? "); // Préparation d'une requête SQL pour sélectionner toutes les colonnes de la table user où l'email correspond au paramètre fourni
         $request->execute([$email]); // Exécution de la requête préparée en remplaçant le paramètre "?" par la valeur de $email
         return $request->rowCount(); // Retourne le nombre de lignes affectées par la requête, indiquant ainsi le nombre de résultats correspondant à l'email
@@ -111,7 +110,7 @@ class User { // Déclaration de la classe User qui hérite de la classe DBManage
     }
 
     public function addNew($email, $pass, $firstname, $lastname, $role = "membre") {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (email, password, firstname, lastname, role) VALUES (?, ?, ?, ?, ?)");
         $request->execute([$this->setEmail($email), $this->setPassword($pass), $this->setFirstname($firstname), $this->setLastname($lastname), $this->setRole($role)]);
         $lastId = $bdd->lastInsertId();

@@ -7,7 +7,7 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
     private $_id;
     private $size;
     private $_color_id; //FK
-    
+
     const TABLE_NAME = "size"; // Déclaration d'une constante de classe appelée TABLE_NAME avec la valeur "user"
     
     public function __construct() {
@@ -28,7 +28,7 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
         return $this->_id = $id;
     }
 
-    // quantity
+
     public function getSize() {
         return $this->size;
     }
@@ -42,6 +42,7 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
     }
     public function setColor_id($newColor_id) {
         return $this->_color_id = $newColor_id;
+
     }
 
     // gettersSQL : SELECT ---------------------------------------------------
@@ -63,7 +64,15 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
         return $response; 
     }
 
+    public function getByColorId($colorId) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE color_id = ? ");
+        $request->execute([$colorId]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
+
 
     public function add($size, $color_id) {
         require('../DB/DBManager.php');
@@ -81,6 +90,7 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
         return $request;
 
     }
+
 
     public function updateSizeName($size, $id) {
         require('../DB/DBManager.php');

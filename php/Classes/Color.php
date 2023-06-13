@@ -1,8 +1,11 @@
 <?php
 
 namespace Classes; // Déclaration de l'espace de noms "Classes"
+require_once("SearchByProduct_id.php");
+use Classes\SearchByProduct_id;
 use PDO;
-class Color { // Déclaration de la classe User qui hérite de la classe DBManager
+
+class Color extends SearchByProduct_id { // Déclaration de la classe User qui hérite de la classe DBManager
     
     private $_id;
     private $_color;
