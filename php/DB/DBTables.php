@@ -32,6 +32,13 @@ require_once('php/DB/DBManager.php');
                                 FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
+            'image' => 'CREATE TABLE `images` (
+                            `id` INT AUTO_INCREMENT PRIMARY KEY,
+                            `path` VARCHAR(255) NOT NULL,
+                            `product_id` INT NOT NULL,
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
+
             'price' => 'CREATE TABLE `price` (
                             `id` INT AUTO_INCREMENT PRIMARY KEY,
                             `price` FLOAT NOT NULL, 
