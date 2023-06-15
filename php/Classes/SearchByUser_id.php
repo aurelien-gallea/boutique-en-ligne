@@ -11,7 +11,7 @@ class SearchByUser_id {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE user_id = ? ");
         $request->execute([$userId]);
-        $response = $request->fetch(PDO::FETCH_ASSOC);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response; 
     }
 

@@ -20,7 +20,7 @@ $title = "Panier";
 $content = ob_get_clean();
 
 ob_start(); ?>
-<!-- <script type="module" src="./assets/js/products/productsCards.js"></script> -->
+<script type="module" src="./assets/js/products/myCart.js"></script>
 <?php
 $script = ob_get_clean();
 require_once("./Templates/base.php");
