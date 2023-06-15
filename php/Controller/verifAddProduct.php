@@ -1,6 +1,7 @@
 <?php
 
 use Classes\Products;
+use Classes\Images;
 use Classes\Price;
 use Classes\Color;
 use Classes\Size;
@@ -16,6 +17,8 @@ if(isset($_POST['valider'])){
         echo "Le titre est manquant";
     }else if(empty($_POST['description'])){
         echo "La description est manquante";
+    }else if(empty($_FILES['images'])){
+        echo "le média est manquant";
     }else if(empty($_POST['price'])){
         echo "Le prix du produit n'a pas été choisi.";
     }else if(empty($_POST['color'])){
@@ -28,7 +31,27 @@ if(isset($_POST['valider'])){
         echo "La catégorie du produit n'a pas été choisi.";
     }else{
         $prod = new Products();
-        $newProductId = $prod->addNew($_POST['title'], $_POST['description']);
+        $newProductId = $prod->add($_POST['title'], $_POST['description']);
+    }
+
+    if($newProductId !== null && $_FILES['images'] !== null){
+        $images = $_FILES['images'];
+
+        $count = count($images['name']);
+
+        for($i = 0; $i < $count; $i++){
+            $image = $images['name'][$i];
+            $fichiertmp = $images['tmp_name'][$i];
+            
+            $dest = 'C:/xampp/htdocs/e-commerce/Public/img/product/'.$image;
+            
+            if(move_uploaded_file($fichiertmp, $dest)){
+                $img = new Images();
+                $newImg = $img->add($image, $newProductId);
+            };
+            
+;
+        }
     }
     
     if($newProductId !== null && $_POST['price'] !== null){

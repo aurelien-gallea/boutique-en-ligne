@@ -71,7 +71,7 @@ class Products {
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name, $description) {
+    public function add($name, $description) {
         file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description) VALUES (?,?)");
         $request->execute([$this->setName($name), $this->setDescription($description)]);

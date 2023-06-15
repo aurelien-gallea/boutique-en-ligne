@@ -70,9 +70,9 @@ class Images extends SearchByProduct_id {
     
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($path, $product_id) {
+    public function add($path, $product_id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." ($path, $product_id) VALUES (?,?)");
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (path, product_id) VALUES (?,?)");
         $request->execute([$this->setPath($path), $this->setProduct_id($product_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);

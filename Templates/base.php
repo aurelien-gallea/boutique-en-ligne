@@ -16,6 +16,14 @@ if(isset($_SESSION['id']));
     <link rel="stylesheet" href="./public/design/default.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+    </script>
     
     
 </head>
@@ -39,7 +47,7 @@ if(isset($_SESSION['id']));
 
     
     <section class="">
-        <div class="myDiv">
+        <div class="myDiv min-h-screen">
             <?= $content ?>
         </div>
     </section>
@@ -50,6 +58,7 @@ if(isset($_SESSION['id']));
         <?php require_once('./php/Components/footer.php'); ?>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script type="module" src="./assets/js/modules/darkmode.js"></script>
     <?php 
     if (isset($script)) {
         echo $script;
