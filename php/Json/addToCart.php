@@ -30,12 +30,12 @@ if ($row !== 0) {
     $oldQty = $oldCart['quantity'];
     $oldCartId  = $oldCart['id'];
 
+    // on incrémente l'ancienne valeur déjà prensente en base de donnée
     $myCart->updateQuantity($quantity + $oldQty, $oldCartId);
 } else {
     
     $myCart->addNew($productId, $colorId, $sizeId, $quantity, $priceId, $userId);
 }
-
 
 // Répondre avec une réponse JSON indiquant le succès ou l'échec de l'opération
 $response = array('success' => true);
