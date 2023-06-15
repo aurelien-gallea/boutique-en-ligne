@@ -2,7 +2,7 @@
 import { addElement } from "../modules/addElement.js";
 
 // Attendre que le contenu soit chargé avant d'exécuter le code
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
     // Récupérer les produits à partir du fichier JSON
     fetch('../../php/Json/AllProducts.php')
@@ -31,30 +31,34 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Créer les éléments th pour chaque colonne de l'en-tête (Id, Nom, créé le) et les ajouter au trthead
                 let thId = addElement('th', ["px-6", "py-3"], { scope: "col" }, "Id");
                 let thName = addElement('th', ["px-6", "py-3"], { scope: "col" }, "Nom");
+                let thPrice = addElement('th', ["px-6", "py-3"], { scope: "col" }, "Prix");
                 let thDate = addElement('th', ["px-6", "py-3"], { scope: "col" }, "créé le");
                 trthead.appendChild(thId);
                 trthead.appendChild(thName);
+                trthead.appendChild(thPrice);
                 trthead.appendChild(thDate);
 
                 // Créer un élément tbody et l'ajouter après le thead
                 let tbody = addElement('tbody', [], {});
                 thead.after(tbody);
 
+                
                 // Parcourir les produits et créer les éléments correspondants pour chaque produit
-                products.map(item => {
+                products.map(product => {
 
+                    let prodId = product.id;
                     // Créer un élément tr pour chaque ligne du corps de la table et l'ajouter au tbody
                     let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
                     tbody.appendChild(trtbody);
 
                     // Créer les éléments th pour chaque contenu (Id, Nom) et les ajouter au trtbody
-                    let thContentId = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" }, `${item.id}`);
-                    let thContentName = addElement('td', ["px-6", "py-4"], {}, `${item.name}`);
+                    let thContentId = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" }, `${product.id}`);
+                    let thContentName = addElement('td', ["px-6", "py-4"], {}, `${product.name}`);
                     trtbody.appendChild(thContentId);
                     trtbody.appendChild(thContentName);
 
                     // Formater la date dans un format spécifique (jour-mois-année)
-                    let date = new Date(item.createdAt);
+                    let date = new Date(product.createdAt);
                     let jour = date.getDate();
                     let mois = date.getMonth() + 1;
                     let annee = date.getFullYear();
@@ -63,7 +67,19 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Créer l'élément th pour la date et l'ajouter au trtbody
                     let thContentDate = addElement('td', ["px-6", "py-4"], {}, `${dateFormat}`);
                     trtbody.appendChild(thContentDate);
-                })
+                    
+                    console.log(prodId);
+                });
+                fetch('../../php/Json/allPrice.php')
+                    .then(response => response.json())
+                    .then(prices => {
+                        prices.map(price => {
+                            console.log(price);
+
+                        })
+                    })
+
+
             }
         });
 });
