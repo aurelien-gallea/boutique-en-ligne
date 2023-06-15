@@ -105,6 +105,20 @@ class Cart extends SearchByUser_id {
         return $response; 
     }
 
+    public function productAlreadyAdded($product_id, $color_id, $size_id, $user_id) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE product_id = ? AND color_id = ? AND size_id = ? AND user_id = ?"); 
+        $request->execute([$this->setProduct_id($product_id), $this->setColor_id($color_id), $this->setSize_id($size_id), $this->setUser_id($user_id)]); // Exécution de la requête préparée en remplaçant le paramètre "?" par la valeur de $email
+        return $request->rowCount(); // Retourne le nombre de lignes affectées par la requête, indiquant ainsi le nombre de résultats correspondant à l'email
+    }
+    
+    public function getQtyByRow($product_id, $color_id, $size_id, $user_id) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT `quantity`, `id` FROM ".$this::TABLE_NAME." WHERE product_id = ? AND color_id = ? AND size_id = ? AND user_id = ?");
+        $request->execute([$this->setProduct_id($product_id), $this->setColor_id($color_id), $this->setSize_id($size_id), $this->setUser_id($user_id)]);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
+        return $response;   
+    }
      // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($product_id, $color_id, $size_id, $quantity, $price_id,$user_id) {
