@@ -119,6 +119,22 @@ class Cart extends SearchByUser_id {
         $response = $request->fetch(PDO::FETCH_ASSOC);
         return $response;   
     }
+
+    // avoir toutes les informations du panier
+
+    public function getAllInfoByUserId($product_id, $color_id, $size_id, $user_id) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT `cart.quantity` AS quantity, 
+        `color.color` AS color,
+        `size.size AS size
+         FROM ".$this::TABLE_NAME."INNER JOIN `products` ON products.id = ".$this::TABLE_NAME.".product_id
+          INNER JOIN `color` ON color.id = ".$this::TABLE_NAME.".color_id
+          INNER JOIN `size` ON size.id = ".$this::TABLE_NAME.".size_id 
+          WHERE product_id = ? AND color_id = ? AND size_id = ? AND user_id = ? GROUP BY product_id");
+        $request->execute([$this->setProduct_id($product_id), $this->setColor_id($color_id), $this->setSize_id($size_id), $this->setUser_id($user_id)]);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
+        return $response;
+    }
      // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($product_id, $color_id, $size_id, $quantity, $price_id,$user_id) {
