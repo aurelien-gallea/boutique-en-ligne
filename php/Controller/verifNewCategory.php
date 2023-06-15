@@ -11,7 +11,7 @@ if(isset($_POST['valider'])){
         echo "Il faut rentrer un nom de catégorie";
     }else{
         $newCategory = new Categories();
-        $newCategory->addNew($_POST['name']);
+        $newCategory->add($_POST['name']);
         header('location: http://localhost/e-commerce/admin/iframe/allCategories.php');
     }
 }

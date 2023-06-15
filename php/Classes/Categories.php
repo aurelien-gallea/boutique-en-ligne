@@ -56,7 +56,7 @@ class Categories {
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name) {
+    public function add($name) {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name) VALUES (?)");
         $request->execute([$this->setName($name)]);
