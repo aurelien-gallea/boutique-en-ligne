@@ -42,8 +42,12 @@ if(isset($_POST['valider'])){
         for($i = 0; $i < $count; $i++){
             $image = $images['name'][$i];
             $fichiertmp = $images['tmp_name'][$i];
+
+            $url = $_SERVER['SCRIPT_FILENAME'];
+            $path = parse_url($url, PHP_URL_PATH);
+            $directory = explode('/', $path)[3];
             
-            $dest = 'C:/xampp/htdocs/e-commerce/Public/img/product/'.$image;
+            $dest = $_SERVER['DOCUMENT_ROOT'].'/'.$directory.'/Public/img/product/'.$image;
             
             if(move_uploaded_file($fichiertmp, $dest)){
                 $img = new Images();
