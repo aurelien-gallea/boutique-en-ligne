@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$userId= $_SESSION["userId"]; // <----- a changer imperativement avec le $_session 
+$userId = $_SESSION["userId"]; // <----- a changer imperativement avec le $_session 
 // Récupérer les données envoyées depuis la requête
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -21,7 +21,21 @@ spl_autoload_register(function($classes) {
 use Classes\Cart;
 
 $myCart = new Cart();
-$myCart->addNew($productId, $colorId, $sizeId, $quantity, $priceId, $userId);
+
+// condition pour la mise à jour où l'ajout si le produit existe dans le panier ou non
+$row = $myCart->productAlreadyAdded($productId, $colorId, $sizeId, $userId);
+
+if ($row !== 0) {
+    $oldCart = $myCart->getQtyByRow($productId, $colorId, $sizeId, $userId);
+    $oldQty = $oldCart['quantity'];
+    $oldCartId  = $oldCart['id'];
+
+    $myCart->updateQuantity($quantity + $oldQty, $oldCartId);
+} else {
+    
+    $myCart->addNew($productId, $colorId, $sizeId, $quantity, $priceId, $userId);
+}
+
 
 // Répondre avec une réponse JSON indiquant le succès ou l'échec de l'opération
 $response = array('success' => true);
