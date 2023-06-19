@@ -1,1 +1,1 @@
-export const key = "./php/Json/";
+export const keyPath = "./php/Json/";

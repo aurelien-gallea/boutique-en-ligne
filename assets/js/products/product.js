@@ -1,7 +1,7 @@
 "use strict";
-import { key } from "../modules/key.js";
+import { keyPath } from "../modules/key.js";
 
-fetch(`${key}productCard.php`)
+fetch(`${keyPath}productCard.php`)
   .then((response) => response.json())
   .then((data) => {
     //  on créé une carte représentant notre article tant qu'il y'en as
@@ -148,7 +148,7 @@ fetch(`${key}productCard.php`)
     addToCart.addEventListener("click", function () {
       if (quantity.value > 0) {
 
-        fetch(`${key}addToCart.php`, {
+        fetch(`${keyPath}addToCart.php`, {
           method: "POST",
           
           body: JSON.stringify({
@@ -166,11 +166,14 @@ fetch(`${key}productCard.php`)
           },
         })
         .then(function (response) {
+          // on réinitialise les valeurs par défaut en cas de ressoumission du formulaire
           quantity.value = 1;
+          myQty = quantity.value;
         })
         .catch(function (error) {
           console.log("pb");
         });
+        
       }
       });
 
