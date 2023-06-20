@@ -1,19 +1,15 @@
 import { addElement } from "../modules/addElement.js";
 document.addEventListener("DOMContentLoaded", function () {
 
-    fetch('../../php/Json/AllCategories.php')
+    fetch('../../php/Json/allCarriers.php')
         .then(response => response.json())
-        .then(data => {
-            // console.log(data);
-            let categories = data.categories;
-            let products = data.product_count
-            // console.log(categories);
-            console.log(products);
-            
-            if (categories && categories.length) {
+        .then(carriers => {
+            console.log(carriers);
+
+            if (carriers && carriers.length) {
 
                 let ContainerTable = addElement('div', ["flex", "flex-col", "w-full", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border"], {});
-                document.getElementById('catContainer').appendChild(ContainerTable);
+                document.getElementById('carrierContainer').appendChild(ContainerTable);
 
                 let tableCat = addElement('table', ["w-full", "text-sm", "text-left", "text-gray-500", "dark:text-gray-400"], {});
                 ContainerTable.appendChild(tableCat);
@@ -26,54 +22,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let thId = addElement('th', ["px-6", "py-3"], { scope: "col" }, "Id");
                 let thName = addElement('th', ["px-6", "py-3"], { scope: "col" }, "Nom");
-                let thNbProduct = addElement('th', ["px-6", "py-3"], { scope: "col" }, "Produits");
+                let thDescription = addElement('th', ["px-6", "py-3"], { scope: "col" }, "Description");
+                let thPrice = addElement('th', ["px-6", "py-3"], { scope: "col" }, "Price");
                 let thDelete = addElement('th', ["px-6", "py-3"], { scope: "col" });
                 trthead.appendChild(thId);
                 trthead.appendChild(thName);
-                trthead.appendChild(thNbProduct);
+                trthead.appendChild(thDescription);
+                trthead.appendChild(thPrice);
                 trthead.appendChild(thDelete);
 
                 let tbody = addElement('tbody', [], {});
                 thead.after(tbody);
 
-                categories.map(category => {
-                    
+                carriers.map(carrier => {
+
+                    console.log(carrier.id);
                     let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
                     tbody.appendChild(trtbody);
 
-                    let thContentId = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" }, `${category.id}`);
-                    let thContentName = addElement('td', ["px-6", "py-4"], {}, `${category.name}`);
+                    let thContentId = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" }, `${carrier.id}`);
+                    let thContentName = addElement('td', ["px-6", "py-4"], {}, `${carrier.name}`);
+                    let thContentDescription = addElement('td', ["px-6", "py-4"], {}, `${carrier.description}`);
+                    let thContentPrice = addElement('td', ["px-6", "py-4"], {}, `${carrier.price}`)
+                    let thContentDelete = addElement('td', ["px-6", "py-4"], {});
                     trtbody.appendChild(thContentId);
                     trtbody.appendChild(thContentName);
-
-                    if(products.length !== 0){
-                       products.map(product =>{
-                            console.log(product);
-                            if(category.id == product.category_id){
-                                let thContentNbProduct = addElement('td', ["px-6", "py-4"], {}, `${product.product_count}`);
-                                trtbody.appendChild(thContentNbProduct);
-                            }else{
-                                let thContentNbProduct = addElement('td', ["px-6", "py-4"], {}, ``);
-                                trtbody.appendChild(thContentNbProduct);
-                            }
-                        }) 
-                    }else{
-                        let thContentNbProduct = addElement('td', ["px-6", "py-4"], {}, ``);
-                        trtbody.appendChild(thContentNbProduct);
-                    }
-                    
-
-                    let thContentDelete = addElement('td', ["px-6", "py-4"], {});
+                    trtbody.appendChild(thContentDescription);
+                    trtbody.appendChild(thContentPrice);
                     trtbody.appendChild(thContentDelete);
 
-                    let pathDelete = addElement('button', [], { type: "button", "data-modal-target": `popup-modal-${category.id}`, "data-modal-toggle": `popup-modal-${category.id}` });
+
+                    let pathDelete = addElement('button', [], { type: "button", "data-modal-target": `popup-modal-${carrier.id}`, "data-modal-toggle": `popup-modal-${carrier.id}` });
                     thContentDelete.appendChild(pathDelete);
 
                     let DeleteItem = addElement('i', ["fa-regular", "fa-trash-can", "text-red-900", "dark:text-red-500", "fa-lg"], {});
                     pathDelete.appendChild(DeleteItem);
 
                     pathDelete.addEventListener('click', () => {
-                        let backdropModal = addElement('div', ["fixed", "backdrop-blur", "top-[0]", "left-[0]", "right-[0]", "z-50", "p-4", "overflow-x-hidden", "overflow-y-auto", "md:inset-0", "h-[calc(100%-1rem)]", "max-h-full"], { id: `popup-modal-${category.id}`, tabindex: "-1" });
+                        let backdropModal = addElement('div', ["fixed", "backdrop-blur", "top-[0]", "left-[0]", "right-[0]", "z-50", "p-4", "overflow-x-hidden", "overflow-y-auto", "md:inset-0", "h-[calc(100%-1rem)]", "max-h-full"], { id: `popup-modal-${carrier.id}`, tabindex: "-1" });
                         document.body.appendChild(backdropModal);
 
                         let positionModal = addElement('div', ["flex", "justify-center", "items-center", "w-full", "h-full"], {});
@@ -88,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         let headerModal = addElement('div', ["flex", "w-full", "pt-3", "px-3", "justify-end"], {});
                         contentModal.appendChild(headerModal);
 
-                        let closeModal = addElement('button', [], { "data-modal-hide": `popup-modal-${category.id}` });
+                        let closeModal = addElement('button', [], { "data-modal-hide": `popup-modal-${carrier.id}` });
                         headerModal.appendChild(closeModal);
 
                         let closeItem = addElement('i', ["fa-solid", "fa-xmark", "fa-lg", "text-gray-700", "dark:text-white"], {});
@@ -104,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         let bodyItem = addElement('i', ["fa-solid", "fa-circle-exclamation", "text-5xl", "text-gray-500", "mb-2"], {});
                         bodyModal.appendChild(bodyItem);
 
-                        let pModal = addElement('p', ["text-lg", "font-normal", "text-gray-500", "dark:text-white"], {}, `Êtes-vous sur de vouloir supprimer le produit ${category.name}`);
+                        let pModal = addElement('p', ["text-lg", "font-normal", "text-gray-500", "dark:text-white"], {}, `Êtes-vous sur de vouloir supprimer le produit ${carrier.name}`);
                         bodyModal.appendChild(pModal);
 
                         let footerModal = addElement('div', ["flex", "justify-around", "w-full", "py-3", "px-12"], {});
@@ -120,30 +106,31 @@ document.addEventListener("DOMContentLoaded", function () {
                         })
 
                         buttonAgree.addEventListener('click', function () {
-                            fetch('../../php/Controller/deleteCategory.php', {
+                            fetch('../../php/Controller/deleteCarrier.php', {
                                 method: "POST",
                                 body: JSON.stringify({
-                                    category_id: category.id
+                                    carrier_id: carrier.id
                                 }),
                                 headers: {
-                                    'Content-Type': "application/json",
+                                    'Content-Type':"application/json",
                                 },
                             })
-                                .then(function (response) {
-                                    console.log('envoie réussi');
-                                    console.log(category.id);
-                                    backdropModal.classList.add('hidden');
-                                    window.location.href = '../../php/Controller/deleteCategory.php';
-                                })
-                                .catch(function (error) {
-                                    console.log('problème');
-                                });
+                            .then(function (response) {
+                                console.log('envoie réussi');
+                                console.log(carrier.id);
+                                backdropModal.classList.add('hidden');
+                                window.location.href = '../../php/Controller/deleteCarrier.php';
+                            })
+                            .catch(function (error) {
+                                console.log('problème');
+                            });
                         })
+
                     })
+
+
+
                 })
-
-
-
             }
-        });
-});
+        })
+})

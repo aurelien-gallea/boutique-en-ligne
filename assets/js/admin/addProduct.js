@@ -40,10 +40,12 @@ test.addEventListener('click', () => {
 
 fetch('../../php/Json/AllCategories.php')
     .then(response => response.json())
-    .then(categorie => {
-
+    .then(data => {
+       
+        let categories = data.categories;
+    
         // Vérifie qu'il y a bien des données
-        if(categorie && categorie.length){
+        if(categories && categories.length){
 
             // Crée un conteneur categories
             let catContainer = addElement('div', ["flex", "flex-col", "shadow-md", "bg-white", "rounded-lg", "px-8", "py-4", "space-y-3", "dark:bg-gray-800"], {id: "categories"});
@@ -59,10 +61,9 @@ fetch('../../php/Json/AllCategories.php')
             catContainer.appendChild(labelCategories);
             catContainer.appendChild(selectCategories);
 
-
-            categorie.map(item => {
+            categories.map(category => {
                 // Création des options pour le select
-                let options = addElement('option', [], {value: `${item.id}`}, `${item.name}`);
+                let options = addElement('option', [], {value: `${category.id}`}, `${category.name}`);
                 selectCategories.appendChild(options);
             })
         } 

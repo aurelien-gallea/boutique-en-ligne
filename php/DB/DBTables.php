@@ -27,9 +27,9 @@ require_once('php/DB/DBManager.php');
             'prod_cat' => 'CREATE TABLE `products_categories` (
                                 `id` INT AUTO_INCREMENT PRIMARY KEY,
                                 `product_id` INT NOT NULL,
-                                `category_id` INT NOT NULL,
+                                `category_id` INT NULL,
                                 FOREIGN KEY (`product_id`) REFERENCES `products`(`id`),
-                                FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`)
+                                FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE SET NULL
                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'image' => 'CREATE TABLE `images` (
