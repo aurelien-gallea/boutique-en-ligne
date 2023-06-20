@@ -102,9 +102,9 @@ class User {
     }
 
     public function getById($id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
-        $request->execute([$id]);
+        $request->execute([$this->setId($id)]);
         $response = $request->fetch(PDO::FETCH_ASSOC);
         return $response; 
     }

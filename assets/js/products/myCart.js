@@ -6,10 +6,10 @@ const mainContainer = document.querySelector("#confirmCart");
 fetch(`${keyPath}checkMyCart.php`)
 .then((response) => response.json())
 .then((data) => {
-  console.log(data)
-    
-  let arrayPrice = [];
-
+  
+  if (data.cart.length !== 0) {
+    let arrayPrice = [];
+  
     for (const key in data.cart) {
 
       const item = data.cart[key];
@@ -133,7 +133,7 @@ fetch(`${keyPath}checkMyCart.php`)
     // on boucle dessus et on leur créé la meme intéraction
     for (let i = 0; i < btnDelete.length; i++) {
       const element = btnDelete[i];
-
+      
       element.addEventListener('click', () => {
         input[i].value = 0;
         updateValuesHandler();
@@ -142,7 +142,15 @@ fetch(`${keyPath}checkMyCart.php`)
     }
     
     // bouton "valider le panier"
-    child9.addEventListener("click", () => updateValuesHandler());
-        
+    child9.addEventListener("click", () => {
+      updateValuesHandler()
+            
+    });
+     
+    // -------------------------------------------
+    } else {
+      const emptyMessage = addElement("h2", ["text-3xl", "text-center"], {}, "Votre panier est vide"); 
+      mainContainer.append(emptyMessage);
+      
+    }
   }).catch(error => console.log(error.message));
-
