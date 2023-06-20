@@ -66,6 +66,45 @@ class Color extends SearchByProduct_id { // Déclaration de la classe User qui h
         return $response; 
     }
 
+    public function getCountColorByProduct(){
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT product_id, COUNT(*) AS color_count FROM ".$this::TABLE_NAME." GROUP BY product_id");
+        $request->execute();
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
+    public function getProductIdByColorId($id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT product_id FROM ".$this::TABLE_NAME." WHERE id = ?");
+        $request->execute([$id]);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
+
+        if ($response) {
+            return $response['product_id'];
+        }
+
+        return null;
+    }
+
+    public function findByProductAndColor($product_id, $color){
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE product_id = ? AND color = ?");
+        $request->execute([$product_id, $color]);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
+
+        if($response) {
+            $existingColor = new Color();
+            $existingColor->setId($response['id']);
+            $existingColor->setColor($response['color']);
+            $existingColor->setProduct_id($response['product_id']);
+            return $existingColor;
+        }
+
+        return null;
+        
+    }
+
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function add(string $color, $product_id) {

@@ -71,6 +71,15 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response; 
     }
+
+    public function getCountSizeByColor(){
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT color_id, COUNT(*) AS size_count FROM ".$this::TABLE_NAME." GROUP BY color_id");
+        $request->execute();
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
 

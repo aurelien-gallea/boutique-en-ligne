@@ -43,8 +43,9 @@ fetch('../../php/Json/AllCategories.php')
                     .then(response => response.json())
                     .then(product_cat => {
                         product_cat.map(item =>{
+                            
                             if(item.category_id == catId){
-                                console.log(catId);
+                                
                                 let thContentNbProduct = addElement('td', ["px-6", "py-4"], {}, `${item.product_count}`);
                                 trtbody.appendChild(thContentNbProduct);
                             }
