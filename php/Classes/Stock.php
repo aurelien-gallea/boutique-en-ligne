@@ -56,6 +56,14 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         
     }
 
+    public function getTotalQuantityBySizeId($size_id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT SUM(quantity) AS total_quantity FROM stock WHERE size_id = ?");
+        $request->execute([$size_id]);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
+        return $response['total_quantity'];
+    }
+
     // obtenir le chemin de l'image correspondant au produit
     public function getallWithImagesInfo() {
         file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');

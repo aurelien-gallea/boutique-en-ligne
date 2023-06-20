@@ -75,9 +75,16 @@ if(isset($_POST['valider'])){
             $color = $colors[$i];
             $size = $sizes[$i];
             $quantity = $quantities[$i];
+
+            $colorInstance = new Color();
+            $existingColor = $colorInstance->findByProductAndColor($newProductId, $color);
             
-            $newColor = new Color();
-            $newColorId = $newColor->add($color, $newProductId);
+            if ($existingColor) {
+                $newColorId = $existingColor->getId();
+            } else {
+                $newColor = new Color();
+                $newColorId = $newColor->add($color, $newProductId);
+            }
             
             $newSize = new Size();
             $newSizeId = $newSize->add($size, $newColorId);

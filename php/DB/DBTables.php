@@ -36,35 +36,35 @@ require_once('php/DB/DBManager.php');
                             `id` INT AUTO_INCREMENT PRIMARY KEY,
                             `path` VARCHAR(255) NOT NULL,
                             `product_id` INT NOT NULL,
-                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'price' => 'CREATE TABLE `price` (
                             `id` INT AUTO_INCREMENT PRIMARY KEY,
                             `price` FLOAT NOT NULL, 
                             `product_id` INT NOT NULL,
-                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'color' => 'CREATE TABLE `color` (
                             `id` INT AUTO_INCREMENT PRIMARY KEY,
                             `color` varchar(255) NOT NULL,
                             `product_id` INT NOT NULL,
-                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'size' => 'CREATE TABLE `size` (
                             `id` INT AUTO_INCREMENT PRIMARY KEY,
                             `size` varchar(255) NOT NULL,
                             `color_id` INT NOT NULL,
-                            FOREIGN KEY (`color_id`) REFERENCES `color`(`id`)
+                            FOREIGN KEY (`color_id`) REFERENCES `color`(`id`) ON DELETE CASCADE
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'stock' => 'CREATE TABLE `stock` (
                             `id` INT AUTO_INCREMENT PRIMARY KEY,
                             `quantity` INT NOT NULL,
                             `size_id` INT NOT NULL,
-                            FOREIGN KEY (`size_id`) REFERENCES `size`(`id`)
+                            FOREIGN KEY (`size_id`) REFERENCES `size`(`id`) ON DELETE CASCADE
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
             'carriers' => 'CREATE TABLE `carriers` (
