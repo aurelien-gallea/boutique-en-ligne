@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-$userId = $_SESSION["userId"]; // <----- a changer imperativement avec le $_session 
-// Récupérer les données envoyées depuis la requête
+$userId = $_SESSION["userId"]; // <----- a changer imperativement avec le $_session
+
+// Récupérer les données envoyées depuis la requête fetch POST
 $data = json_decode(file_get_contents('php://input'), true);
 
 $productId = $data['product_id'];
@@ -30,7 +31,7 @@ if ($row !== 0) {
     $oldQty = $oldCart['quantity'];
     $oldCartId  = $oldCart['id'];
 
-    // on incrémente l'ancienne valeur déjà prensente en base de donnée
+    // on incrémente l'ancienne valeur déjà présente en base de données
     $myCart->updateQuantity($quantity + $oldQty, $oldCartId);
 } else {
     

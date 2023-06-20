@@ -16,10 +16,15 @@ $title = "Panier";
     ?>
 <h1 class="text-center">Mon Panier</h1>
 <div class="text-center text-xl">Id utilisateur =  <?php echo isset($_SESSION['userId']) ? $_SESSION['userId'] : null ?></div>
-<?php 
-$content = ob_get_clean();
+<form id="confirmCart" action="" method="POST">
 
-ob_start(); ?>
+    
+    <?php 
+    
+    $content = ob_get_clean();
+    
+    ob_start(); ?>
+</form>
 <script type="module" src="./assets/js/products/myCart.js"></script>
 <?php
 $script = ob_get_clean();

@@ -2,7 +2,7 @@
 
 namespace Classes; // Déclaration de l'espace de noms "Classes"
 use PDO;
-class User { // Déclaration de la classe User qui hérite de la classe DBManager
+class User { 
     
     private $_id;
     private $_email;

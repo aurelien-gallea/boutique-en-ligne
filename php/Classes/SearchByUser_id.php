@@ -3,6 +3,7 @@
 namespace Classes;
 use PDO;
 
+// classe parente ne servant qu'à être hérité
 class SearchByUser_id {
 
     const TABLE_NAME = "";
