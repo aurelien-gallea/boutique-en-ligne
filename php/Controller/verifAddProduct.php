@@ -99,6 +99,14 @@ if(isset($_POST['valider'])){
         $prod_cat->addNew($newProductId, $_POST['selectCategories']);
     }
 
+    $url = $_SERVER['SCRIPT_FILENAME'];
+    $path = parse_url($url, PHP_URL_PATH);
+    $directory = explode('/', $path)[3];
+
+    $destination = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME']."/".$directory;
+
+    header('location: '.$destination.'/admin/iframe/allProducts.php');
+
     // if ($newProductId !== null) {
     //     // L'ID du nouvel élément est disponible
     //     echo "Le produit a été créé avec succès. L'ID du produit est : " . $newProductId;

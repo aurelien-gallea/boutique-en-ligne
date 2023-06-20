@@ -78,10 +78,11 @@ class Carriers {
 
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name, $description, $price) {
+    public function add($name, $description, $price) {
         require('../DB/DBManager.php');
+        $formatPrice = number_format($price, 2, '.', '');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, price) VALUES (?,?,?)");
-        $request->execute([$this->setName($name), $this->setDescription($description), $this->setPrice($price)]);
+        $request->execute([$this->setName($name), $this->setDescription($description), $this->setPrice($formatPrice)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         

@@ -13,7 +13,7 @@ class Images extends SearchByProduct_id {
     private $_path;
     private $_product_id;
     
-    public function __constructor() {
+    public function __construct() {
         $this->_id;
         $this->_path;
         $this->_product_id;
