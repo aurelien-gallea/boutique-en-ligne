@@ -5,9 +5,7 @@ fetch(`${keyPath}productCard.php`)
   .then((response) => response.json())
   .then((data) => {
     //  on créé une carte représentant notre article tant qu'il y'en as
-    console.log(data);
-    console.log(data.images);
-
+    
     const product = data.products;
     const color = data.color;
 
@@ -23,7 +21,7 @@ fetch(`${keyPath}productCard.php`)
 
     // l'image dans la carte - selection et personnalisation
     const cardImg = document.querySelector("#js-cardImg");
-    console.log(data.images.length);
+    
     if (data.images.length > 1) {
       for (const key in data.images) {
         const stash = data.images[key];
@@ -32,8 +30,7 @@ fetch(`${keyPath}productCard.php`)
         if (stash.product_id === product.id) {
           cardImg.src = `./Public/img/product/${stash.path}`;
           cardImg.setAttribute("alt", product.name);
-          // }
-          console.log(stash.path);
+         
         }
       }
     } else if (data.images.length === 1) {
@@ -71,10 +68,6 @@ fetch(`${keyPath}productCard.php`)
       btnColor.name = "choice";
       btnColor.value = `${data.color[key].color}`;
       
-
-      //  on selectionne le bouton radio qui correspond à l'image et on le met en checked
-      data.color.length - 1 == key ? (btnColor.checked = true) : null;
-
       btnColor.classList.add("m-3", "py-2", "px-2");
 
       // on envoie les données dans le conteneur parent
@@ -82,25 +75,28 @@ fetch(`${keyPath}productCard.php`)
 
       // on crée l'interaction de changement de photo en cas de clique sur le bouton
       // attention cet algo ne fonctionne que s'il n'y a qu'une seule image par couleur
-      btnColor.addEventListener("click", () => {
-         
-        try {
-          cardImg.src =`./Public/img/product/${data.images[key].path}`;
-        } catch {
-          cardImg.src =`./Public/img/product/${data.images[0].path}`;
-        };
-        
-        // on réasigne une valeur si jamais on change la couleur
-        myKeyColor = key;
-        console.log(myKeyColor);
-        sizeRangeByColor(myKeyColor);
-      });
+      const colorEventHandler = (action) => {
+
+        btnColor.addEventListener(action, () => {
+          
+          try {
+            cardImg.src =`./Public/img/product/${data.images[key].path}`;
+          } catch {
+            cardImg.src =`./Public/img/product/${data.images[0].path}`;
+          };
+          
+          // on réasigne une valeur si jamais on change la couleur
+          myKeyColor = key;
+          sizeRangeByColor(myKeyColor);
+        });
+      }
+      
+      colorEventHandler("focus");
     }
 
     // récupération des tailles
     const select = document.querySelector('#js-select');
     
-
     const colorRange = data.color.length;
     
     // on rempli notre select avec les balises options remplies dynamiquement
@@ -109,7 +105,7 @@ fetch(`${keyPath}productCard.php`)
     const sizeRangeByColor = (colorIndex = colorRange-1) => {
       select.innerHTML = '';
       sizeRange = data.size[colorIndex].size;
-      console.log(sizeRange);
+      
       for (const key in sizeRange) {
         const row = sizeRange[key];
         const option = document.createElement("option");
@@ -123,19 +119,16 @@ fetch(`${keyPath}productCard.php`)
 
     sizeRangeByColor();
     
-
     // le bouton d'ajout au panier
     
     const quantity = document.querySelector('#js-quantity');
-    
     const addToCart = document.querySelector('#js-addToCart');
 
-    // initialisation du choix de la taille et quantité par défaut
-    let mySize = data.size[0].size[0].size;
-    let mySizeId = data.size[0].size[0].id;
+    // initialisation du choix de la taille et quantité par défaut (la longueur du tableau -1)
+    let mySize = data.size[data.size.length-1].size[0].size;
+    let mySizeId = data.size[data.size.length-1].size[0].id;
     let myQty = quantity.value;
 
-    console.log(mySizeId);
     // on recupère la valeur de la taille et la quantité
     select.addEventListener("change", () => {
       mySize = select.textContent;
@@ -144,10 +137,17 @@ fetch(`${keyPath}productCard.php`)
     });
     quantity.addEventListener("change", () => (myQty = quantity.value));
 
+    // on créé une intéraction à la fin de toutes les promesses pour associer toutes les valeurs envoyés à la vue
+    const radios = document.querySelectorAll('input[type="radio"]');
+    radios[radios.length-1].checked = true;
+    radios[radios.length-1].focus();
+    
+
     // gestion du formulaire en asynchrone
     addToCart.addEventListener("click", function () {
+      
       if (quantity.value > 0) {
-
+        
         fetch(`${keyPath}addToCart.php`, {
           method: "POST",
           
@@ -177,5 +177,9 @@ fetch(`${keyPath}productCard.php`)
       }
       });
 
+      
+
   })
   .catch((error) => console.log(error));
+
+  

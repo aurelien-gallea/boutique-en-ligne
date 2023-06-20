@@ -27,8 +27,7 @@ foreach ($cart as $key => $value) {
     
 }
 
-
-
+// notre json disponible pour le front
 $arrayJson = [ 
     
     $myCart::TABLE_NAME => $arrayCart,

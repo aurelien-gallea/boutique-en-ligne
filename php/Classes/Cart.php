@@ -121,8 +121,7 @@ class Cart extends SearchByUser_id {
         return $response;   
     }
 
-    // avoir toutes les informations du panier
-
+    // avoir toutes les informations du panier avec le nom des valeurs de chaque id
     public function getRowAllInfosByUserId($product_id, $color_id, $size_id, $price_id, $quantity, $user_id) {
         
         file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');

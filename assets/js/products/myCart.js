@@ -84,9 +84,11 @@ fetch(`${keyPath}checkMyCart.php`)
     const select = document.querySelectorAll("select");
     const input = document.querySelectorAll("input");
     
+    
+    // gestion du formulaire en asynchrone
     const updateValuesHandler = () => {
-
       
+      // notre futur json envoyé dans une seule promesse, on boucle en back pour extraire les valeurs
       let jsonData = [];
       
       for (const index in data.cart) {
@@ -105,28 +107,30 @@ fetch(`${keyPath}checkMyCart.php`)
         
         jsonData.push(jsonValidation);
         
-        fetch(`${keyPath}validateMyCart.php`, {
-          method: "POST",
-          
-          body: JSON.stringify(jsonData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(function (response) {
-          
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        
       }
+
+      // on envoie ensuite un json plein de données
+      fetch(`${keyPath}validateMyCart.php`, {
+        method: "POST",
+        
+        body: JSON.stringify(jsonData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+        
     }
 
     // bouttons supprimer
     const btnDelete = document.querySelectorAll(".btnDelete");
     
-// gestion du formulaire en asynchrone
+    // on boucle dessus et on leur créé la meme intéraction
     for (let i = 0; i < btnDelete.length; i++) {
       const element = btnDelete[i];
 
@@ -136,14 +140,9 @@ fetch(`${keyPath}checkMyCart.php`)
       })
       
     }
-
     
-    child9.addEventListener("click", function () {
-      
-      console.log(data.cart);
-      updateValuesHandler();
+    // bouton "valider le panier"
+    child9.addEventListener("click", () => updateValuesHandler());
         
-      });
-
   }).catch(error => console.log(error.message));
 
