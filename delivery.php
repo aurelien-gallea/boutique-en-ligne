@@ -99,13 +99,13 @@ ob_start();
                         <div class="flex items-center gap-2 p-2 text-gray-900 dark:text-white">
                             <input class="js-delivery" type="radio" name="delivery" value="<?= $value['name'] ?>" />
                             <label for="<?= $value['name'] ?>"><?= $value['name'] . " (" . $value['postalCode'] . ") " . $value['city']  ?></label>
-                            <input type="hidden" class="js-fistname" value="<?= $value['firstname'] ?>">
-                            <input type="hidden" class="js-lastname" value="<?= $value['lastname'] ?>">
-                            <input type="hidden" class="js-address" value="<?= $value['adress'] ?>">
-                            <input type="hidden" class="js-postalCode" value="<?= $value['postalCode'] ?>">
-                            <input type="hidden" class="js-city" value="<?= $value['city'] ?>">
-                            <input type="hidden" class="js-country" value="<?= $value['country'] ?>">
-                            <input type="hidden" class="js-phone" value="<?= $value['phone'] ?>">
+                            <input type="hidden" class="jsFirstname" value="<?= $value['firstname'] ?>">
+                            <input type="hidden" class="jsLastname" value="<?= $value['lastname'] ?>">
+                            <input type="hidden" class="jsAddress" value="<?= $value['adress'] ?>">
+                            <input type="hidden" class="jsPostalCode" value="<?= $value['postalCode'] ?>">
+                            <input type="hidden" class="jsCity" value="<?= $value['city'] ?>">
+                            <input type="hidden" class="jsCountry" value="<?= $value['country'] ?>">
+                            <input type="hidden" class="jsPhone" value="<?= $value['phone'] ?>">
                         </div>
                     <?php } ?>
 
@@ -190,7 +190,14 @@ ob_start();
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h3 id="titleNextAddress" class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">Votre lieu de livraison selectionné</h3>
             </div>
-            <div id="contentNextAddress" class="text-gray-900 dark:text-white mx-6 py-4"></div>
+            <div id="contentNextAddress" class="text-gray-900 dark:text-white mx-6 py-4">
+                <h4 id="adName" class="pb-2"></h4>
+                <p id="person"></p>
+                <p id="adDelivery"></p>
+                <p id="adPcAndCity"></p>
+                <p id="adCountry" class="pb-2"></p>
+                <p id="adPhone"></p>
+            </div>
         </div>
     </div>
 </section>
