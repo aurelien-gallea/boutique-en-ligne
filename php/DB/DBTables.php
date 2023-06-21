@@ -87,6 +87,22 @@ require_once('php/DB/DBManager.php');
                                 `user_id` int(11) NOT NULL,
                                 FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
+
+            'cart' => 'CREATE TABLE `cart` (
+                            `id` INT AUTO_INCREMENT PRIMARY KEY,
+                            `quantity` INT NOT NULL,
+                            `product_id` INT NOT NULL,
+                            `color_id` INT NOT NULL,
+                            `size_id` INT NOT NULL,
+                            `price_id` INT NOT NULL,
+                            `user_id` INT NOT NULL,
+                            FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
+                            FOREIGN KEY (`price_id`) REFERENCES `price`(`id`),
+                            FOREIGN KEY (`size_id`) REFERENCES `size`(`id`),
+                            FOREIGN KEY (`product_id`) REFERENCES `products`(`id`),
+                            FOREIGN KEY (`color_id`) REFERENCES `color`(`id`),
+                            `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
             
         ];
 

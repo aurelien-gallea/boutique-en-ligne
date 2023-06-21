@@ -11,7 +11,7 @@ class Cart extends SearchByUser_id {
     const TABLE_NAME = "cart";
 
     private $_id;
-    private $_dateCreation;
+    private $_createdAt;
     private $_product_id;
     private $_color_id;
     private $_size_id;
@@ -22,7 +22,7 @@ class Cart extends SearchByUser_id {
     public function __construct()
     {
         $this->_id;
-        $this->_dateCreation;
+        $this->_createdAt;
         $this->_product_id;
         $this->_color_id;
         $this->_size_id;

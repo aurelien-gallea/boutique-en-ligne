@@ -1,17 +1,17 @@
 <?php
 session_start();
 $_SESSION['productID'] = $_GET['id'];
+
 $title = "Produit | M.A.H";
-$home = "./";
-$admin = "./admin/accueiladmin.php";
-$products = "./templates/products.php";
-$cart = "./mycart.php";
+$home = "../";
+$admin = "../admin/accueiladmin.php";
+$products = "./products.php";
+$cart = "../mycart.php";
 // ob_start();
 
-require_once("./php/Components/head.php");
-require_once("./php/Components/header.php");
+require_once("../php/Components/head.php");
+require_once("../php/Components/header.php");
 ?>
-
 <!-- styliser à partir d'ici -->
 <div class="flex flex-grow items-center gap-3 my-6 justify-center">
 
@@ -45,9 +45,9 @@ require_once("./php/Components/header.php");
 // $content = ob_get_clean();
 
 // ob_start(); ?>
-<script type="module" src="./assets/js/products/product.js"></script>
+<script type="module" src="../assets/js/products/test.js"></script>
 <?php
-require_once("./php/Components/footer.php");
+require_once("../php/Components/footer.php");
 // $script = ob_get_clean();
 // require_once("./Templates/base.php");
 ?>
