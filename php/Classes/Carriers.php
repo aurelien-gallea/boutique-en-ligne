@@ -60,16 +60,16 @@ class Carriers {
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll() {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response;  
         
     }
 
     public function getById($id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
@@ -79,7 +79,7 @@ class Carriers {
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function add($name, $description, $price) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $formatPrice = number_format($price, 2, '.', '');
         $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, description, price) VALUES (?,?,?)");
         $request->execute([$this->setName($name), $this->setDescription($description), $this->setPrice($formatPrice)]);
@@ -89,7 +89,7 @@ class Carriers {
     }
 
     public function deleteRow($id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
@@ -97,7 +97,7 @@ class Carriers {
     }
 
     public function updateName($name,$id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ?  WHERE id = ? ");
         $request->execute([$this->setName($name),$id]);
         return $request;
@@ -105,7 +105,7 @@ class Carriers {
     }
 
     public function updateDescription($description, $id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET description = ?  WHERE id = ? ");
          $request->execute([$this->setDescription($description),$id]);
         return $request;
@@ -113,7 +113,7 @@ class Carriers {
     }
 
     public function updatePrice($price,$id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET price = ?  WHERE id = ? ");
          $request->execute([$this->setPrice($price),$id]);
         return $request;
