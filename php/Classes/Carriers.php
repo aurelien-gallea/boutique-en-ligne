@@ -63,7 +63,7 @@ class Carriers {
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
         $request->execute();
-        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
         return $response;  
         
     }

@@ -24,15 +24,13 @@ if(isset($_SESSION['id']));
           document.documentElement.classList.remove('dark')
         }
     </script>
-    
-    
+
 </head>
-
 <body class="flex flex-col min-h-screen">
-
-    <header class="">  
-        <?php require_once("./php/Components/header.php") ?>
-    </header>
+    
+    <!-- <header>
+        <?php // file_exists('./php/Components/header.php') ? require('./php/Components/header.php') : require('../php/Components/header.php'); ?>
+     </header> -->
 
     <!-- Alert en cas de success  -->
     <?php if (isset($_SESSION['success'])) { ?>
@@ -46,7 +44,7 @@ if(isset($_SESSION['id']));
     <?php } ?>
 
     
-    <section class="">
+    <section>
         <div class="myDiv min-h-screen">
             <?= $content ?>
         </div>
@@ -55,7 +53,7 @@ if(isset($_SESSION['id']));
 
 
     <footer class="bg-white dark:bg-gray-900">
-        <?php require_once('./php/Components/footer.php'); ?>
+        <?php // file_exists('./php/Components/footer.php') ? require('./php/Components/footer.php') : require('../php/Components/footer.php'); ?>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script type="module" src="./assets/js/modules/darkmode.js"></script>

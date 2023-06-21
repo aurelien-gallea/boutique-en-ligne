@@ -9,14 +9,18 @@ use Classes\Price;
 use Classes\Color;
 use Classes\Size;
 use Classes\Stock;
+use Classes\Images;
 
 $myProduct = new Products();
+$myImg = new Images();
 $myPrice = new Price();
 $myColor = new Color();
 $mySize = new Size();
 $myStock = new Stock();
 
-$prod = $myProduct->getAll();
+
+$prod = $myProduct->getAll(); 
+$img = $myImg->getAll(); 
 $price = $myPrice->getAll();
 $color = $myColor->getAll();
 $colorCount = $myColor->getCountColorByProduct();
@@ -57,6 +61,7 @@ foreach ($size as $sizeItem) {
 
 $arrayJson = [ 
     $myPrice::TABLE_NAME => $price,
+    $myImg::TABLE_NAME => $img,
     $myProduct::TABLE_NAME => $prod,
     $myColor::TABLE_NAME => $color, 
     'color_count' => $colorCounts,
