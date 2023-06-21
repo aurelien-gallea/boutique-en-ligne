@@ -136,6 +136,12 @@ class Delivery extends SearchByUser_id {
         return $response; 
     }
 
+    public function avalaibleName($name) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE name = ? "); // Préparation d'une requête SQL pour sélectionner toutes les colonnes de la table user où l'email correspond au paramètre fourni
+        $request->execute([$name]); // Exécution de la requête préparée en remplaçant le paramètre "?" par la valeur de $email
+        return $request->rowCount(); // Retourne le nombre de lignes affectées par la requête, indiquant ainsi le nombre de résultats correspondant à l'email
+    }
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function addNew($name, $firstname, $lastname, $adress, $postalCode, $city, $country, $phone, $user_id) {
