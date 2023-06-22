@@ -63,7 +63,7 @@ $title = "Livraison";
 ob_start();
 ?>
 <h1 class="text-center">Mon adresse de livraison</h1>
-<div class="text-center text-xl">Id utilisateur = <?php echo isset($_SESSION['userId']) ? $_SESSION['userId'] : null ?></div>
+
 <!-- bloc 0 -->
 <section id="myChoice" class="bg-gray-50 dark:bg-gray-900">
     <div class="flex flex-col items-center px-6 py-8 mx-auto ">
