@@ -82,7 +82,7 @@ ob_start();
         </div>
     </div>
 </section>
-<!-- bloc 1 -->
+<!-- bloc adresses existantes -->
 <section id="myAddress" class="bg-gray-50 dark:bg-gray-900 hidden">
     <div class="flex flex-col items-center px-6 py-8 mx-auto  ">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -99,13 +99,13 @@ ob_start();
                         <div class="flex items-center gap-2 p-2 text-gray-900 dark:text-white">
                             <input class="js-delivery" type="radio" name="delivery" value="<?= $value['name'] ?>" />
                             <label for="<?= $value['name'] ?>"><?= $value['name'] . " (" . $value['postalCode'] . ") " . $value['city']  ?></label>
-                            <input type="hidden" class="js-fistname" value="<?= $value['firstname'] ?>">
-                            <input type="hidden" class="js-lastname" value="<?= $value['lastname'] ?>">
-                            <input type="hidden" class="js-address" value="<?= $value['adress'] ?>">
-                            <input type="hidden" class="js-postalCode" value="<?= $value['postalCode'] ?>">
-                            <input type="hidden" class="js-city" value="<?= $value['city'] ?>">
-                            <input type="hidden" class="js-country" value="<?= $value['country'] ?>">
-                            <input type="hidden" class="js-phone" value="<?= $value['phone'] ?>">
+                            <input type="hidden" class="jsFirstname" value="<?= $value['firstname'] ?>">
+                            <input type="hidden" class="jsLastname" value="<?= $value['lastname'] ?>">
+                            <input type="hidden" class="jsAddress" value="<?= $value['adress'] ?>">
+                            <input type="hidden" class="jsPostalCode" value="<?= $value['postalCode'] ?>">
+                            <input type="hidden" class="jsCity" value="<?= $value['city'] ?>">
+                            <input type="hidden" class="jsCountry" value="<?= $value['country'] ?>">
+                            <input type="hidden" class="jsPhone" value="<?= $value['phone'] ?>">
                         </div>
                     <?php } ?>
 
@@ -116,7 +116,7 @@ ob_start();
     </div>
 </section>
 
-<!-- bloc2 -->
+<!-- bloc nouvelle adresse -->
 <section id="newAddress" class="bg-gray-50 dark:bg-gray-900 hidden">
     <div class="flex flex-col items-center px-6 py-8 mx-auto ">
 
@@ -190,7 +190,14 @@ ob_start();
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h3 id="titleNextAddress" class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">Votre lieu de livraison selectionné</h3>
             </div>
-            <div id="contentNextAddress" class="text-gray-900 dark:text-white mx-6 py-4"></div>
+            <div id="contentNextAddress" class="text-gray-900 dark:text-white mx-6 py-4">
+                <h4 id="adName" class="pb-2"></h4>
+                <p id="person"></p>
+                <p id="adDelivery"></p>
+                <p id="adPcAndCity"></p>
+                <p id="adCountry" class="pb-2"></p>
+                <p id="adPhone"></p>
+            </div>
         </div>
     </div>
 </section>
@@ -210,8 +217,11 @@ ob_start();
 
                 <?php foreach ($carriers as $key => $value) { ?>
                     <div class="flex items-center gap-2 p-2 text-gray-900 dark:text-white">
-                        <input type="radio" name="carriers" value="<?= $value['name'] ?>" />
+                        <input class="js-carriers" type="radio" name="carriers" id="<?=$value['name'] ?>" value="<?= $value['name'] ?>" />
                         <label for="<?= $value['name'] ?>"><?= $value['name'] . " (" . $value['description'] . ") " . $value['price'] . " €" ?></label>
+                        <input type="hidden" class="jsCarName" value="<?= $value['name']?>">
+                        <input type="hidden" class="jsCarDesc" value="<?= $value['description']?>">
+                        <input type="hidden" class="jsCarPrice" value="<?= $value['price']?>">
                     </div>
                 <?php } ?>
 
@@ -221,7 +231,7 @@ ob_start();
     </div>
     <div class="flex justify-center py-3 bg-gray-50 dark:bg-gray-900">
 
-        <button type="button" class="border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Étape suivante</button>
+        <button type="button" id="confirmAll" class="hidden border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Étape suivante</button>
     </div>
 </section>
 

@@ -169,9 +169,12 @@ fetch(`${keyPath}productCard.php`)
           // on réinitialise les valeurs par défaut en cas de ressoumission du formulaire
           quantity.value = 1;
           myQty = quantity.value;
+          if (!response.ok) {
+            alert("Un problème a été détecté, merci de contacter un administrateur.");
+          }
         })
         .catch(function (error) {
-          console.log("pb");
+          console.log(error);
         });
         
       }
