@@ -82,7 +82,7 @@ ob_start();
         </div>
     </div>
 </section>
-<!-- bloc 1 -->
+<!-- bloc adresses existantes -->
 <section id="myAddress" class="bg-gray-50 dark:bg-gray-900 hidden">
     <div class="flex flex-col items-center px-6 py-8 mx-auto  ">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -116,7 +116,7 @@ ob_start();
     </div>
 </section>
 
-<!-- bloc2 -->
+<!-- bloc nouvelle adresse -->
 <section id="newAddress" class="bg-gray-50 dark:bg-gray-900 hidden">
     <div class="flex flex-col items-center px-6 py-8 mx-auto ">
 
@@ -217,8 +217,11 @@ ob_start();
 
                 <?php foreach ($carriers as $key => $value) { ?>
                     <div class="flex items-center gap-2 p-2 text-gray-900 dark:text-white">
-                        <input type="radio" name="carriers" value="<?= $value['name'] ?>" />
+                        <input class="js-carriers" type="radio" name="carriers" id="<?=$value['name'] ?>" value="<?= $value['name'] ?>" />
                         <label for="<?= $value['name'] ?>"><?= $value['name'] . " (" . $value['description'] . ") " . $value['price'] . " €" ?></label>
+                        <input type="hidden" class="jsCarName" value="<?= $value['name']?>">
+                        <input type="hidden" class="jsCarDesc" value="<?= $value['description']?>">
+                        <input type="hidden" class="jsCarPrice" value="<?= $value['price']?>">
                     </div>
                 <?php } ?>
 
@@ -228,7 +231,7 @@ ob_start();
     </div>
     <div class="flex justify-center py-3 bg-gray-50 dark:bg-gray-900">
 
-        <button type="button" class="border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Étape suivante</button>
+        <button type="button" id="confirmAll" class="hidden border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Étape suivante</button>
     </div>
 </section>
 

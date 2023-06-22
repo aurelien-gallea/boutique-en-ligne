@@ -14,13 +14,11 @@ const showHiddenToggler = (button, show, hidden) => {
   button.addEventListener("click", () => {
     show.classList.remove("hidden");
     hidden.classList.add("hidden");
-    
   });
 };
 
 showHiddenToggler(btnMyAddress, myAddress, newAddress);
 showHiddenToggler(btnNewAddress, newAddress, myAddress);
-
 
 // récupérations de tous les noms d'adresses pour bloquer en cas de doublons
 // ici tous les inputs radios
@@ -37,11 +35,10 @@ const jsPhone = document.querySelectorAll(".jsPhone");
 
 let arrayDeliveryNames = [];
 let arrayFullDelivery = [];
-
+let deliveryChoiceIndex = 0;
 // on remplit un tableau de nom pour éviter les doublons
-deliveryNames.forEach(element => {
-    arrayDeliveryNames.push(element.value);
-    
+deliveryNames.forEach((element) => {
+  arrayDeliveryNames.push(element.value);
 });
 
 // remplir un tableau à plusieurs dimensions pour récuperer les adresses complètes déjà existantes
@@ -57,16 +54,15 @@ for (let i = 0; i < deliveryNames.length; i++) {
   const phon = jsPhone[i].value;
 
   arrayFullDelivery.push({
-    addressName : addN,
-    firstname : fn,
-    lastname : ln,
-    address : add,
-    postalCode : pc,
-    city : cit,
-    country : coun,
-    phone : phon
+    addressName: addN,
+    firstname: fn,
+    lastname: ln,
+    address: add,
+    postalCode: pc,
+    city: cit,
+    country: coun,
+    phone: phon,
   });
-
 }
 console.log(arrayFullDelivery);
 
@@ -83,18 +79,21 @@ const adPhone = document.querySelector("#adPhone");
 for (let i = 0; i < deliveryNames.length; i++) {
   const element = deliveryNames[i];
 
-  element.addEventListener('focus', ()=>{
+  element.addEventListener("click", () => {
     myAddress.classList.add("hidden");
     nextAddress.classList.remove("hidden");
-    carriers.classList.remove("hidden"); 
-    adName.textContent = 'nom : ' + arrayFullDelivery[i].addressName;
-    person.textContent = arrayFullDelivery[i].firstname + " " + arrayFullDelivery[i].lastname;
+    carriers.classList.remove("hidden");
+    adName.textContent = "nom : " + arrayFullDelivery[i].addressName;
+    person.textContent =
+      arrayFullDelivery[i].firstname + " " + arrayFullDelivery[i].lastname;
     adDelivery.textContent = arrayFullDelivery[i].address;
-    adPcAndCity.textContent = arrayFullDelivery[i].postalCode + " " + arrayFullDelivery[i].city;
+    adPcAndCity.textContent =
+      arrayFullDelivery[i].postalCode + " " + arrayFullDelivery[i].city;
     adCountry.textContent = arrayFullDelivery[i].country;
     adPhone.textContent = arrayFullDelivery[i].phone;
+    deliveryChoiceIndex = i;
+    console.log("delivery = " + i);
   });
-  
 }
 
 // le formulaire d'ajout d'adresse -------------------------------------------
@@ -117,14 +116,12 @@ const errorMsg = document.querySelector("#errorMsg");
 // et modifier le visuel pour montrer que les données ont été ajoutées
 
 // si le nom est en doublon on bloque le formulaire
-nameAddress.addEventListener('keyup', () => {
+nameAddress.addEventListener("keyup", () => {
   if (arrayDeliveryNames.indexOf(nameAddress.value) !== -1) {
-    
     confirmAddress.disabled = true;
     confirmAddress.style.cursor = "not-allowed";
     errorMsg.textContent = "Nom déjà existant !";
   } else {
-    
     confirmAddress.disabled = false;
     confirmAddress.style.cursor = "";
     errorMsg.textContent = "";
@@ -133,30 +130,30 @@ nameAddress.addEventListener('keyup', () => {
 
 // le formulaire de nouvelle adresse ----------------------------------
 addNewAddress.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const nameAdValue = nameAddress.value;
-    const firstnameToCapitalize = (firstname.value).charAt(0).toUpperCase() + (firstname.value).slice(1);
-    const lastnameToUpperCase = (lastname.value).toUpperCase();
-    const addValue = address.value;
-    const PcToNb = Number(postalCode.value);
-    const cityToUpperCase = (city.value).toUpperCase();
-    const countryToUpperCase = (country.value).toUpperCase();
-    const phoneValue = phone.value;
+  e.preventDefault();
+  const nameAdValue = nameAddress.value;
+  const firstnameToCapitalize =
+    firstname.value.charAt(0).toUpperCase() + firstname.value.slice(1);
+  const lastnameToUpperCase = lastname.value.toUpperCase();
+  const addValue = address.value;
+  const PcToNb = Number(postalCode.value);
+  const cityToUpperCase = city.value.toUpperCase();
+  const countryToUpperCase = country.value.toUpperCase();
+  const phoneValue = phone.value;
 
-    const jsonValidation = {
-
-        nameAddress : nameAdValue,
-        firstname : firstnameToCapitalize,
-        lastname : lastnameToUpperCase,
-        address : addValue,
-        postalCode : PcToNb,
-        city : cityToUpperCase,
-        country : countryToUpperCase ,
-        phone : phoneValue
-    };
+  const jsonValidation = {
+    nameAddress: nameAdValue,
+    firstname: firstnameToCapitalize,
+    lastname: lastnameToUpperCase,
+    address: addValue,
+    postalCode: PcToNb,
+    city: cityToUpperCase,
+    country: countryToUpperCase,
+    phone: phoneValue,
+  };
 
   console.log(jsonValidation);
-//   on envoie notre json vers la BDD
+  //   on envoie notre json vers la BDD
   fetch(`${keyPath}addToDelivery.php`, {
     method: "POST",
 
@@ -165,21 +162,91 @@ addNewAddress.addEventListener("submit", (e) => {
       "Content-Type": "application/json",
     },
   })
-    .then(function (response) {
-        // on écrit la suite de l'interaction dans le bloc 
-        newAddress.classList.add("hidden");
+    .then((response) => {
+      // on écrit la suite de l'interaction dans le bloc
+      newAddress.classList.add("hidden");
+      nextAddress.classList.remove("hidden");
+      carriers.classList.remove("hidden");
+
+      if (response.ok) {
         adName.textContent = `${nameAdValue}`;
         person.textContent = `${lastnameToUpperCase}  ${firstnameToCapitalize}`;
         adDelivery.textContent = `${addValue}`;
         adPcAndCity.textContent = `${PcToNb} ${cityToUpperCase}`;
-        adCountry.textContent = `Pays : ${countryToUpperCase}`;
-        adPhone.textContent = `téléphone : ${phoneValue}`;
-
-        nextAddress.classList.remove("hidden");
-        carriers.classList.remove("hidden");    
+        adCountry.textContent = `${countryToUpperCase}`;
+        adPhone.textContent = `${phoneValue}`;
+      } else {
+        adName.textContent =
+          "Suite à un problème, l'ajout de la nouvelle adresse est impossible, merci de rechager la page et renouveler l'opération. Si le problème persiste, contactez un administrateur.";
+      }
     })
     .catch(function (error) {
       console.log(error);
     });
 });
 
+// le choix du service de livraison
+//  récupérations de toutes les input hidden des livreurs dans un tableau
+const carriersRadio = document.querySelectorAll(".js-carriers");
+const jsCarName = document.querySelectorAll(".jsCarName");
+const jsCarDesc = document.querySelectorAll(".jsCarDesc");
+const jsCarPrice = document.querySelectorAll(".jsCarPrice");
+
+// le bouton de confirmation pour valider les informations et passer à la page suivante
+const confirmAll = document.querySelector("#confirmAll");
+
+let arrayCarriers = [];
+let carriersCurrentIndex = 0;
+for (let i = 0; i < carriersRadio.length; i++) {
+  const jsCname = jsCarName[i].value;
+  const jsCdesc = jsCarDesc[i].value;
+  const jsCprice = jsCarPrice[i].value;
+
+  arrayCarriers.push({
+    name: jsCname,
+    description: jsCdesc,
+    price: jsCprice,
+  });
+
+  carriersRadio[i].addEventListener("click", () => {
+    console.log(carriersRadio[i].value);
+    carriersCurrentIndex = i;
+    confirmAll.classList.remove("hidden");
+  });
+}
+
+confirmAll.addEventListener("click", () => {
+  // on récupère toutes les valeurs saisies du formulaire et ont les envoient
+    
+  const deliveryFullAdress = `${person.textContent}, ${adDelivery.textContent},
+    ${adPcAndCity.textContent}, ${adCountry.textContent}`;
+  const carriersDetails = `${arrayCarriers[carriersCurrentIndex].name}, ${arrayCarriers[carriersCurrentIndex].description}`;
+  const carriersPrice = Number(arrayCarriers[carriersCurrentIndex].price);
+  
+  const jsonOrderData = {
+    deliveryFullAddress : deliveryFullAdress,
+    carriersDetails : carriersDetails,
+    carriers_price : carriersPrice
+  }
+
+  fetch(`${keyPath}addToOrderdetails.php`, {
+    method: "POST",
+
+    body: JSON.stringify(jsonOrderData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+
+      if (response.ok) {
+        // on redirige vers la page récapitulatif en cas de succès
+        window.location.href = "./resume.php";
+      } else {
+        alert("problème detecté merci de contacter un administrateur.");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
