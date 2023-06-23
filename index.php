@@ -6,8 +6,8 @@ require('php/DB/DBTables.php');
    
 $title = "Accueil";
 $home = "./";
-$admin = "./admin/accueiladmin.php";
-$products = "./templates/products.php";
+$admin = "./admin/";
+$products = "./products.php";
 $cart = "./mycart.php";
 
 require_once("./php/Components/head.php");

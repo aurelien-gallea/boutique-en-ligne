@@ -3,7 +3,7 @@ import { addElement } from "../modules/addElement.js";
 document.addEventListener("DOMContentLoaded", function () {
 
     const grid = document.getElementById('grid_prod');
-    fetch('../php/json/allproducts.php')
+    fetch('./php/json/allproducts.php')
         .then(response => response.json())
         .then(data => {
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             products.map(product => {
                 
-                let containerProd = addElement('a', ["flex", "justify-center", "items-center", "relative", "shadow-sm", "bg-white", "rounded-lg"], {href:`./product.php?name=${product.name}&id=${product.id}`});
+                let containerProd = addElement('a', ["flex", "justify-center", "items-center", "relative", "shadow-sm", "bg-white", "rounded-lg"], {href:`../product.php?name=${product.name}&id=${product.id}`});
                 grid.appendChild(containerProd);
 
                 let productImg = images.filter(image => image.product_id === product.id);

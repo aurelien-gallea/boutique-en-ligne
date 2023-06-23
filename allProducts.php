@@ -2,14 +2,14 @@
 session_start();
 
 $title = "Tous les produits | M.A.H";
-$home = "../";
-$admin = "../admin/accueiladmin.php";
+$home = "./";
+$admin = "./admin/accueiladmin.php";
 $products = "./products.php";
-$cart = "../mycart.php";
+$cart = "./mycart.php";
 
  
-require_once("../php/Components/head.php");
-require_once("../php/Components/header.php");
+require_once("./php/Components/head.php");
+require_once("./php/Components/header.php");
 ?>
 
 <div class="min-h-screen">
@@ -25,9 +25,9 @@ require_once("../php/Components/header.php");
 </div>
         
 <?php
-    require_once("../php/Components/footer.php");
+    require_once("./php/Components/footer.php");
 ?>
 
-<script type="module" src="../assets/js/products/allproducts.js"></script>
+<script type="module" src="./assets/js/products/allproducts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-<script type="module" src="../assets/js/modules/darkmode.js"></script>
+<script type="module" src="./assets/js/modules/darkmode.js"></script>

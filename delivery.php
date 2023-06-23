@@ -60,11 +60,19 @@ if (isset($_POST['confirmAddress'])) {
 }
 // la vue -----------------------------------------------------------
 $title = "Livraison";
-ob_start();
+$home = "./";
+$admin = "./admin/accueiladmin.php";
+$products = "./products.php";
+$cart = "./mycart.php";
+// ob_start();
+require_once("./php/Components/head.php");
+require_once("./php/Components/header.php");
 ?>
-<h1 class="text-center">Mon adresse de livraison</h1>
 
-<!-- bloc 0 -->
+<div class="min-h-screen">
+    <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
+        <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
+            <h1 class="text-center">Mon adresse de livraison</h1>
 <section id="myChoice" class="bg-gray-50 dark:bg-gray-900">
     <div class="flex flex-col items-center px-6 py-8 mx-auto ">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -234,16 +242,13 @@ ob_start();
         <button type="button" id="confirmAll" class="hidden border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Étape suivante</button>
     </div>
 </section>
-
-<?php
-
-$content = ob_get_clean();
-
-ob_start(); ?>
+      </div>
+  </div>
+</div>
 
 <script type="module" src="./assets/js/products/myDelivery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script type="module" src="./assets/js/modules/darkmode.js"></script>
 <?php
-$script = ob_get_clean();
-require_once("./Templates/base.php");
-
+    require_once("./php/Components/footer.php");
 ?>
