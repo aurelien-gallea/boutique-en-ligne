@@ -6,7 +6,7 @@ $_SESSION['productID'] = $_GET['id'];
 $title = $_GET['name'] . " | M.A.H";
 $home = "./";
 $admin = "./admin/accueiladmin.php";
-$products = "./products.php";
+$products = "./allproducts.php";
 $cart = "./mycart.php";
 
 require_once("./php/Components/head.php");

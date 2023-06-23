@@ -7,7 +7,7 @@ require('php/DB/DBTables.php');
 $title = "Accueil";
 $home = "./";
 $admin = "./admin/";
-$products = "./products.php";
+$products = "./allproducts.php";
 $cart = "./mycart.php";
 
 require_once("./php/Components/head.php");
