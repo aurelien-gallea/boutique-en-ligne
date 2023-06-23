@@ -16,7 +16,7 @@ use Classes\Cart;
 $myCart = new Cart();
 $cart = $myCart->getAllByUserId($userId);
 
-// si l'utilsateur a un panier vide il est redirigé vers son panier
+// si l'utilisateur a un panier vide il est redirigé vers son panier
 if (empty($cart)) {
     header('location:./mycart.php');
     exit();
@@ -68,6 +68,7 @@ $cart = "./mycart.php";
 require_once("./php/Components/head.php");
 require_once("./php/Components/header.php");
 ?>
+
 
 <div class="min-h-screen">
     <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
@@ -238,7 +239,7 @@ require_once("./php/Components/header.php");
                     </div>
                 </div>
                 <div class="flex justify-center py-3 bg-gray-50 dark:bg-gray-900">
-
+                    <button type="button" id="goBack" class="hidden border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Retour au panier</button>
                     <button type="button" id="confirmAll" class="hidden border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Étape suivante</button>
                 </div>
             </section>

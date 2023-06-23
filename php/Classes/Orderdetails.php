@@ -14,8 +14,13 @@ class Orderdetails extends SearchByUser_id
     private $_deliveryFullAddress;
     private $_carriersDetails;
     private $_carriers_price;
+    private $_product_ids;
+    private $_color_ids;
+    private $_size_ids;
+    private $_quantity;
+    private $_total_amount;
     private $_user_id;
-    private $_dateCreation;
+    private $_createdAt;
 
     public function __construct()
     {
@@ -23,8 +28,13 @@ class Orderdetails extends SearchByUser_id
         $this->_deliveryFullAddress;
         $this->_carriersDetails;
         $this->_carriers_price;
+        $this->_product_ids;
+        $this->_color_ids;
+        $this->_size_ids;
+        $this->_quantity;
+        $this->_total_amount;
         $this->_user_id;
-        $this->_dateCreation;
+        $this->_createdAt;
     }
 
     // methodes objet: getters et setters ------------------------------------
@@ -38,8 +48,6 @@ class Orderdetails extends SearchByUser_id
     {
         return $this->_id = $id;
     }
-
-
 
     // deliveryFullAdress
     public function getdeliveryFullAddress()
@@ -73,7 +81,53 @@ class Orderdetails extends SearchByUser_id
     {
         return $this->_carriers_price = $newCarriers_price;
     }
-    // user_id
+
+    // product_ids
+    public function getProduct_ids() {
+        return $this->_product_ids;
+    }
+
+    public function setProduct_ids($newProduct_ids) {
+        return $this->_product_ids = $newProduct_ids;
+    }
+    
+    // color_ids
+    public function getColor_ids() {
+        return $this->_color_ids;
+    }
+
+    public function setColor_ids($newColor_ids) {
+        return $this->_color_ids = $newColor_ids;
+    }
+
+    // size_ids
+    public function getSize_ids() {
+        return $this->_size_ids;
+    }
+
+    public function setSize_ids($newSize_ids) {
+        return $this->_size_ids = $newSize_ids;
+    }
+
+    // quantity
+    public function getQuantity() {
+        return $this->_quantity;
+    }
+
+    public function setQuantity($newQuantity) {
+        return $this->_quantity = $newQuantity;
+    }
+
+    // total_amount
+    public function getTotal_amount() {
+        return $this->_total_amount;
+    }
+
+    public function setTotal_amount($newTotal_amount) {
+        return $this->_total_amount = $newTotal_amount;
+    }
+
+    // user_ids
     public function getUser_id()
     {
         return $this->_user_id;
@@ -83,6 +137,7 @@ class Orderdetails extends SearchByUser_id
     {
         return $this->_user_id = $newUser_id;
     }
+
     // gettersSQL : SELECT ---------------------------------------------------
 
     public function getAll()
@@ -111,15 +166,22 @@ class Orderdetails extends SearchByUser_id
         return $request->rowCount(); // Retourne le nombre de lignes affectées par la requête, indiquant ainsi le nombre de résultats correspondant à l'email
     }
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
-
-    public function addNew($deliveryFullAddress, $carriersDetails, $carriers_price, $user_id)
+    
+    public function addNew($deliveryFullAddress, $carriersDetails, $carriers_price, $product_ids, $color_ids, $size_ids, $quantity, $total_amount, $user_id)
     {
+        
         file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO " . $this::TABLE_NAME . " (deliveryFullAddress, carriersDetails, carriers_price, user_id) VALUES (?,?,?,?)");
+        $request = $bdd->prepare("INSERT INTO " . $this::TABLE_NAME . " 
+        (deliveryFullAddress, carriersDetails, carriers_price, product_ids, color_ids, size_ids, quantity, total_amount, user_id) VALUES (?,?,?,?,?,?,?,?,?)");
         $request->execute([ 
         $this->setdeliveryFullAddress($deliveryFullAddress),
         $this->setCarriersDetails($carriersDetails),
         $this->setCarriers_price($carriers_price),
+        $this->setProduct_ids($product_ids),
+        $this->setColor_ids($color_ids),
+        $this->setSize_ids($size_ids),
+        $this->setQuantity($quantity),
+        $this->setTotal_amount($total_amount),
         $this->setUser_id($user_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
@@ -159,4 +221,50 @@ class Orderdetails extends SearchByUser_id
         $request->execute([$this->setCarriers_price($newCarriers_price), $user_id]);
         return $request;
     }
+
+    // product_ids
+    public function updateProduct_ids($product_ids, $user_id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET product_ids = ?  WHERE user_id = ? ");
+        $request->execute([$this->setProduct_ids($product_ids), $user_id]);
+        return $request;
+    }
+
+    // color_ids
+    public function updateColor_ids($color_ids, $user_id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET color_ids = ?  WHERE user_id = ? ");
+        $request->execute([$this->setColor_ids($color_ids), $user_id]);
+        return $request;
+    }
+
+    // size_ids
+    public function updateSize_ids($size_ids, $user_id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET size_ids = ?  WHERE user_id = ? ");
+        $request->execute([$this->setSize_ids($size_ids), $user_id]);
+        return $request;
+    }
+
+    // quantity
+    public function updateQuantity($quantity, $user_id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET quantity = ?  WHERE user_id = ? ");
+        $request->execute([$this->setQuantity($quantity), $user_id]);
+        return $request;
+    }
+
+    // total_amount
+    public function updateTotal_amount($total_amount, $user_id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET total_amount = ?  WHERE user_id = ? ");
+        $request->execute([$this->setTotal_amount($total_amount), $user_id]);
+        return $request;
+    }
+    
 }

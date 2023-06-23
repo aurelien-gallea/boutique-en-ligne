@@ -1,145 +1,288 @@
 <?php
 
 namespace Classes;
+require_once("SearchByUser_id.php");
+use Classes\SearchByUser_id;
 use PDO;
 
-class OrderFinal {
-    
+class Orderfinal extends SearchByUser_id
+{
+
     const TABLE_NAME = "orderfinal";
 
     private $_id;
-    private $_orderDetails_id;
-    private $_status_id;
-    
+    private $_deliveryFullAddress;
+    private $_carriersDetails;
+    private $_carriers_price;
+    private $_product_ids;
+    private $_color_ids;
+    private $_size_ids;
+    private $_quantity;
+    private $_total_amount;
+    private $_payement_status;
+    private $_user_id;
+    private $_createdAt;
+
     public function __construct()
     {
         $this->_id;
-        $this->_orderDetails_id;
-        $this->_status_id;
+        $this->_deliveryFullAddress;
+        $this->_carriersDetails;
+        $this->_carriers_price;
+        $this->_product_ids;
+        $this->_color_ids;
+        $this->_size_ids;
+        $this->_quantity;
+        $this->_total_amount;
+        $this->_payement_status;
+        $this->_user_id;
+        $this->_createdAt;
     }
 
     // methodes objet: getters et setters ------------------------------------
 
     // id
-    public function getId() {
+    public function getId(): ?int
+    {
         return $this->_id;
     }
-    public function setId($id) 
+    public function setId($id)
     {
         return $this->_id = $id;
     }
 
-    // cart_id
-    public function getOrderDetails_id() {
-        return $this->_orderDetails_id;
-    }
-
-    public function setOrderDetails_id($neworderDetails_id) {
-        return $this->_orderDetails_id = $neworderDetails_id;
-    }
-
-    // status
-    public function getStatus() {
-        return $this->_status_id;
-    }
-    public function setStatus($newStatus_id) 
+    // deliveryFullAdress
+    public function getdeliveryFullAddress()
     {
-        return $this->_status_id = $newStatus_id;
+        return $this->_deliveryFullAddress;
+    }
+
+    public function setdeliveryFullAddress($newdeliveryFullAddress)
+    {
+        return $this->_deliveryFullAddress = $newdeliveryFullAddress;
+    }
+
+    // carriersDetails
+    public function getCarriersDetails()
+    {
+        return $this->_carriersDetails;
+    }
+
+    public function setCarriersDetails($newCarriersDetails)
+    {
+        return $this->_carriersDetails = $newCarriersDetails;
+    }
+
+    // carriersPrice
+    public function getCarriers_price()
+    {
+        return $this->_carriersDetails;
+    }
+
+    public function setCarriers_price($newCarriers_price)
+    {
+        return $this->_carriers_price = $newCarriers_price;
+    }
+
+    // product_ids
+    public function getProduct_ids() {
+        return $this->_product_ids;
+    }
+
+    public function setProduct_ids($newProduct_ids) {
+        return $this->_product_ids = $newProduct_ids;
+    }
+    
+    // color_ids
+    public function getColor_ids() {
+        return $this->_color_ids;
+    }
+
+    public function setColor_ids($newColor_ids) {
+        return $this->_color_ids = $newColor_ids;
+    }
+
+    // size_ids
+    public function getSize_ids() {
+        return $this->_size_ids;
+    }
+
+    public function setSize_ids($newSize_ids) {
+        return $this->_size_ids = $newSize_ids;
+    }
+
+    // quantity
+    public function getQuantity() {
+        return $this->_quantity;
+    }
+
+    public function setQuantity($newQuantity) {
+        return $this->_quantity = $newQuantity;
+    }
+
+    // total_amount
+    public function getTotal_amount() {
+        return $this->_total_amount;
+    }
+
+    public function setTotal_amount($newTotal_amount) {
+        return $this->_total_amount = $newTotal_amount;
+    }
+
+    // payement_status
+    public function getPayement_status() {
+        return $this->_payement_status;
+    }
+
+    public function setPayement_status($newPayement_status) {
+        return $this->_payement_status = $newPayement_status;
+    }
+
+    // user_ids
+    public function getUser_id()
+    {
+        return $this->_user_id;
+    }
+
+    public function setUser_id($newUser_id)
+    {
+        return $this->_user_id = $newUser_id;
     }
 
     // gettersSQL : SELECT ---------------------------------------------------
 
-    public function getAll() {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME);
+    public function getAll()
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM " . $this::TABLE_NAME);
         $request->execute();
         $response = $request->fetchAll(PDO::FETCH_ASSOC);
-        return $response;  
-        
+        return $response;
     }
 
-    // recuperer tout de façon décroissante
-    public function getLastOrders() {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME. " ORDER BY DESC");
-        $request->execute();
-        $response = $request->fetchAll(PDO::FETCH_ASSOC);
-        return $response;  
-        
-    }
-
-    public function getById($id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE id = ? ");
+    public function getByUserId($id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM " . $this::TABLE_NAME . " WHERE user_id = ? ");
         $request->execute([$id]);
-        $response = $request->fetchAll(PDO::FETCH_ASSOC);
-        return $response; 
-    }
-
-    // getByStatus 
-    public function getByStatus($currentStatus_id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." INNER JOIN status ON status.id = ".$this::TABLE_NAME.".status_id WHERE status_id = ? ");
-        $request->execute([$currentStatus_id]);
-        $response = $request->fetchAll(PDO::FETCH_ASSOC);
-        return $response; 
-
-    }
-
-    public function getByOrderDetailsId($orderDetailsId) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE orderDetails_id = ? ");
-        $request->execute([$orderDetailsId]);
         $response = $request->fetch(PDO::FETCH_ASSOC);
-        return $response; 
+        return $response;
     }
 
-    public function getStatusByOrderDetailsId($orderDetailsId) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." INNER JOIN `status` ON status.id = ".$this::TABLE_NAME.".status_id WHERE orderDetails_id = ? ");
-        $request->execute([$orderDetailsId]);
-        $response = $request->fetch(PDO::FETCH_ASSOC);
-        return $response;  
+    // une seule commande en cours possible
+    public function alreadyAdded($user_id) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE user_id = ?"); 
+        $request->execute([ $this->setUser_id($user_id)]); 
+        return $request->rowCount(); // Retourne le nombre de lignes affectées par la requête, indiquant ainsi le nombre de résultats correspondant à l'email
     }
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
-
-    public function addNew($orderDetails_id, $status_id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (orderDetails_id, status_id) VALUES (?,?)");
-        $request->execute([$this->setOrderDetails_id($orderDetails_id), $this->setStatus($status_id)]);
+    
+    public function addNew($deliveryFullAddress, $carriersDetails, $carriers_price, $product_ids, $color_ids, $size_ids, $quantity, $total_amount, $user_id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("INSERT INTO " . $this::TABLE_NAME . " 
+        (deliveryFullAddress, carriersDetails, carriers_price, product_ids, color_ids, size_ids, quantity, total_amount, user_id) VALUES (?,?,?,?,?,?,?,?,?)");
+        $request->execute([ 
+        $this->setdeliveryFullAddress($deliveryFullAddress),
+        $this->setCarriersDetails($carriersDetails),
+        $this->setCarriers_price($carriers_price),
+        $this->setProduct_ids($product_ids),
+        $this->setColor_ids($color_ids),
+        $this->setSize_ids($size_ids),
+        $this->setQuantity($quantity),
+        $this->setTotal_amount($total_amount),
+        $this->setUser_id($user_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
-        
     }
 
-    public function deleteRow($id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
-        $request->execute([$id]);
+    public function deleteRow($user_id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("DELETE FROM " . $this::TABLE_NAME . " WHERE user_id = ? ");
+        $request->execute([$user_id]);
         return $request;
-
     }
 
-    
-    
-    // orderDetails_id
-    public function updateOrderDetails_id($newOrderDetails_id,$id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET orderDetails_id = ?  WHERE id = ? ");
-        $request->execute([$this->setOrderDetails_id($newOrderDetails_id),$id]);
+    // delivery address
+    public function updateDeliveryFullAddress($newDeliveryFullAddress, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET deliveryFullAddress = ?  WHERE id = ? ");
+        $request->execute([$this->setDeliveryFullAddress($newDeliveryFullAddress), $id]);
         return $request;
-
     }
 
-    // status
-    public function updateStatus($newStatus,$id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET status_id = ?  WHERE id = ? ");
-        $request->execute([$this->setStatus($newStatus),$id]);
+    // carriersDetails
+    public function updateCarriersDetails($newCarriersDetails, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET carriersDetails = ?  WHERE id = ? ");
+        $request->execute([$this->setCarriersDetails($newCarriersDetails), $id]);
         return $request;
-
     }
 
-    
+    // carriers_price
+    public function updateCarriers_price($newCarriers_price, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET carriers_price = ?  WHERE id = ? ");
+        $request->execute([$this->setCarriers_price($newCarriers_price), $id]);
+        return $request;
+    }
 
+    // product_ids
+    public function updateProduct_ids($product_ids, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET product_ids = ?  WHERE id = ? ");
+        $request->execute([$this->setProduct_ids($product_ids), $id]);
+        return $request;
+    }
+
+    // color_ids
+    public function updateColor_ids($color_ids, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET color_ids = ?  WHERE id = ? ");
+        $request->execute([$this->setColor_ids($color_ids), $id]);
+        return $request;
+    }
+
+    // size_ids
+    public function updateSize_ids($size_ids, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET size_ids = ?  WHERE id = ? ");
+        $request->execute([$this->setSize_ids($size_ids), $id]);
+        return $request;
+    }
+
+    // quantity
+    public function updateQuantity($quantity, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET quantity = ?  WHERE id = ? ");
+        $request->execute([$this->setQuantity($quantity), $id]);
+        return $request;
+    }
+
+    // total_amount
+    public function updateTotal_amount($total_amount, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET total_amount = ?  WHERE id = ? ");
+        $request->execute([$this->setTotal_amount($total_amount), $id]);
+        return $request;
+    }
+    
+    // payement_status
+    public function updatePayement_status($payement_status, $id)
+    {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET payement_status = ?  WHERE id = ? ");
+        $request->execute([$this->setPayement_status($payement_status), $id]);
+        return $request;
+    }
 }

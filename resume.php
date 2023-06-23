@@ -7,10 +7,6 @@ if (!isset($_SESSION['userId'])) {
 
 $userId = $_SESSION['userId'];
 
-spl_autoload_register(function ($classes) {
-    require_once('./php/' . $classes . '.php');
-});
-
 $title = "Résumé de la commande";
 ob_start();
 ?>
@@ -53,7 +49,8 @@ ob_start();
             </div>
         </div>
     </div>
-    <div class="flex justify-center py-6 ">
+    <div class="flex justify-center py-6 gap-4 ">
+        <button id="goBack" type="button" class="border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Etape précédente</button>
         <button id="confirmOrder" type="button" class="border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Payer la commande</button>
     </div>
 </section>
