@@ -1,44 +1,46 @@
 <?php
-session_start();
-$title = "Connexion";
-$home = "./";
-$admin = "./admin/accueiladmin.php";
-$products = "./allproducts.php";
-$cart = "./mycart.php";
-spl_autoload_register(function ($classes) {
-    require_once('./php/' . $classes . '.php');
-});
+    session_start();
 
-use Classes\User;
+    spl_autoload_register(function ($classes) {
+        require_once('./php/' . $classes . '.php');
+    });
 
-if (isset($_POST['signIn'])) {
-    if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    use Classes\User;
 
-        $email = htmlspecialchars($_POST['email']);
-        $pass = htmlspecialchars($_POST['password']);
+    if (isset($_POST['signIn'])) {
+        if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
-        $user = new User();
+            $email = htmlspecialchars($_POST['email']);
+            $pass = htmlspecialchars($_POST['password']);
 
-        $hachedPassword = $user->passVerify($email, $pass);
+            $user = new User();
 
-        if ($hachedPassword !== false) {
-            $response = $user->connection($email, $hachedPassword);
-            $_SESSION["userId"] = $response["id"];
-            $_SESSION["email"] = $response["email"];
-            $_SESSION["role"] = $response["role"];
+            $hachedPassword = $user->passVerify($email, $pass);
 
-            header("location:./");
-            exit();
-        } else {
-            header('location:./signIn.php?error=1&message=Nom d\'utilisateur ou mot de passe incorrect. Veuillez réessayer.');
-            exit();
+            if ($hachedPassword !== false) {
+                $response = $user->connection($email, $hachedPassword);
+                $_SESSION["userId"] = $response["id"];
+                $_SESSION["email"] = $response["email"];
+                $_SESSION["role"] = $response["role"];
+
+                header("location:./");
+                exit();
+            } else {
+                header('location:./signIn.php?error=1&message=Nom d\'utilisateur ou mot de passe incorrect. Veuillez réessayer.');
+                exit();
+            }
         }
     }
-}
 
-require_once("./php/Components/head.php");
-require_once("./php/Components/header.php");
-// ob_start();
+    $title = "Connexion";
+    $home = "./";
+    $admin = "./admin/";
+    $products = "./allproducts.php";
+    $cart = "./mycart.php";
+
+    require_once("./php/Components/head.php");
+    require_once("./php/Components/header.php");
+    
 ?>
 
 <div class="min-h-screen">
@@ -77,14 +79,10 @@ require_once("./php/Components/header.php");
         </div>
     </div>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 <script type="module" src="./assets/js/modules/darkmode.js"></script>
+
 <?php
 require_once("./php/Components/footer.php");
-?>
-
-<?php
-// $content = ob_get_clean();
-// require_once("./Templates/base.php");
-
 ?>

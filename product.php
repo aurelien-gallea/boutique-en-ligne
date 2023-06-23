@@ -1,16 +1,16 @@
 <?php
-session_start();
-$_SESSION['productID'] = $_GET['id'];
-
-
-$title = $_GET['name'] . " | M.A.H";
-$home = "./";
-$admin = "./admin/accueiladmin.php";
-$products = "./allproducts.php";
-$cart = "./mycart.php";
-
-require_once("./php/Components/head.php");
-require_once("./php/Components/header.php");
+    session_start();
+    $_SESSION['productID'] = $_GET['id'];
+    
+    
+    $title = $_GET['name'] . " | M.A.H";
+    $home = "./";
+    $admin = "./admin/";
+    $products = "./allproducts.php";
+    $cart = "./mycart.php";
+    
+    require_once("./php/Components/head.php");
+    require_once("./php/Components/header.php");
 ?>
 
 <div class="min-h-screen">
