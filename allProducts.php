@@ -4,7 +4,7 @@ session_start();
 $title = "Tous les produits | M.A.H";
 $home = "./";
 $admin = "./admin/accueiladmin.php";
-$products = "./products.php";
+$products = "./allproducts.php";
 $cart = "./mycart.php";
 
  

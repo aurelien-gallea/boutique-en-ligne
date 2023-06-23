@@ -8,7 +8,7 @@
     $title = "Panier";
     $home = "./";
     $admin = "./admin/accueiladmin.php";
-    $products = "./products.php";
+    $products = "./allproducts.php";
     $cart = "./mycart.php";
     // ob_start();
     require_once("./php/Components/head.php");

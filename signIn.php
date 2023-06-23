@@ -3,7 +3,7 @@ session_start();
 $title = "Connexion";
 $home = "./";
 $admin = "./admin/accueiladmin.php";
-$products = "./products.php";
+$products = "./allproducts.php";
 $cart = "./mycart.php";
 spl_autoload_register(function ($classes) {
     require_once('./php/' . $classes . '.php');
