@@ -10,6 +10,7 @@ use Classes\Color;
 use Classes\Size;
 use Classes\Stock;
 use Classes\Images;
+use Classes\Categories;
 
 $myProduct = new Products();
 $myImg = new Images();
@@ -17,9 +18,10 @@ $myPrice = new Price();
 $myColor = new Color();
 $mySize = new Size();
 $myStock = new Stock();
+$myCat = new Categories();
 
 
-$prod = $myProduct->getAll(); 
+$prod = $myProduct->getProductsByOrderDesc(); 
 $img = $myImg->getAll(); 
 $price = $myPrice->getAll();
 $color = $myColor->getAll();
@@ -27,6 +29,7 @@ $colorCount = $myColor->getCountColorByProduct();
 $size = $mySize->getAll();
 $sizeCount = $mySize->getCountSizeByColor();
 $stock = $myStock->getAll();
+$categories = $myCat->getAll();
 
 // Obtenir le nombre total de couleurs par produit
 $colorCounts = array();
@@ -68,7 +71,8 @@ $arrayJson = [
     $mySize::TABLE_NAME => $size,
     'size_count' => $sizeCounts,
     'stock_count' => $quantityCounts,
-    $myStock::TABLE_NAME => $stock
+    $myStock::TABLE_NAME => $stock,
+    $myCat::TABLE_NAME => $categories,
 ];
 
 print_r(json_encode($arrayJson));
