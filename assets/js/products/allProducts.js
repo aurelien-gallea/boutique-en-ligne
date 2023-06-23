@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('../php/json/allproducts.php')
         .then(response => response.json())
         .then(data => {
+
             let products = data.products;
             let images = data.images;
             let prices = data.price;
