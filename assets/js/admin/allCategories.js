@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         let bodyItem = addElement('i', ["fa-solid", "fa-circle-exclamation", "text-5xl", "text-gray-500", "mb-2"], {});
                         bodyModal.appendChild(bodyItem);
 
-                        let pModal = addElement('p', ["text-lg", "font-normal", "text-gray-500", "dark:text-white"], {}, `Êtes-vous sur de vouloir supprimer le produit ${category.name}`);
+                        let pModal = addElement('p', ["text-lg", "font-normal", "text-gray-500", "dark:text-white"], {}, `Êtes-vous sur de vouloir supprimer la collection ${category.name}`);
                         bodyModal.appendChild(pModal);
 
                         let footerModal = addElement('div', ["flex", "justify-around", "w-full", "py-3", "px-12"], {});
@@ -141,9 +141,21 @@ document.addEventListener("DOMContentLoaded", function () {
                         })
                     })
                 })
+            }else{
 
+                document.getElementById('addCat').classList.add('hidden');
+                // Créer un élément div avec des classes et des attributs spécifiques 
+                let Container = addElement('div', ["flex", "w-full", "justify-center", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border", "overflow-x-auto"], {});
+                document.getElementById('catContainer').appendChild(Container);
 
+                let content = addElement('div', ["flex", "flex-col", "shadow-md", "items-center", "p-4", "bg-white", "rounded-lg", "space-y-3", "dark:bg-gray-700", "dark:border"], {});
+                Container.appendChild(content);
 
+                let title = addElement('h5', ["dark:text-white", "text-center"], {}, "Oops vous n'avez pas encore de collection");
+                content.appendChild(title);
+
+                let btnAddUser = addElement('a', ["text-white", "w-auto", "mb-2", "bg-blue-700", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "px-3", "py-2", "inline-flex", "items-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {href:"./addCategory.php"}, "Ajouter une catégorie");
+                content.appendChild(btnAddUser);
             }
         });
 });

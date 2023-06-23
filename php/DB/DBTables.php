@@ -9,7 +9,7 @@ require_once('php/DB/DBManager.php');
                             `firstname` varchar(255) NOT NULL,
                             `lastname` varchar(255) NOT NULL,
                             `role` varchar(80) NOT NULL,
-                            `date_creation` timestamp NOT NULL DEFAULT current_timestamp()
+                            `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
 
             'categories' => 'CREATE TABLE `categories` (
@@ -79,7 +79,7 @@ require_once('php/DB/DBManager.php');
                                 `name` varchar(255) NOT NULL,
                                 `firstname` varchar(255) NOT NULL,
                                 `lastname` varchar(255) NOT NULL,
-                                `adress` varchar(255) NOT NULL,
+                                `address` varchar(255) NOT NULL,
                                 `postalCode` int(11) NOT NULL,
                                 `city` varchar(255) NOT NULL,
                                 `country` varchar(255) NOT NULL,

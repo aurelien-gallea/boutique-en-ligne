@@ -3,16 +3,22 @@ session_start();
 
 $title = "Tous les produits | M.A.H";
 $home = "../";
+$admin = "../admin/accueiladmin.php";
+$products = "./products.php";
+$cart = "../mycart.php";
+
  
 require_once("../php/Components/head.php");
 require_once("../php/Components/header.php");
 ?>
 
 <div class="min-h-screen">
-    <div class="flex flex-col items-center min-h-screen w-full dark:bg-gray-800">
-        <div class="flex lg:max-w-screen-xl h-full shadow-md bg-gray-50">
-            <div id="grid_prod" class="grid grid-cols-2 md:grid-cols-3 gap-4 dark:bg-gray-700 p-8">
+    <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
+        <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
+            <div class="flex justify-center lg:max-w-screen-xl">
+                <div id="grid_prod" class="grid grid-cols-2 lg:grid-cols-3 gap-4 dark:bg-gray-700 p-8">
                 
+                </div>
             </div>
         </div>
     </div>
