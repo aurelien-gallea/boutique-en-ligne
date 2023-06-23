@@ -70,9 +70,19 @@ fetch(`${keyPath}checkMyOrder.php`)
     const carriersChoice = document.querySelector("#carriersChoice");
     carriersChoice.innerHTML = `<p>${data.orderdetails.carriersDetails.replace(/,/g, "<br>")}</p>`;
 
+    // le bouton goBack
+    const goBack = document.querySelector("#goBack");
+    goBack.addEventListener('click', () =>{
+        window.history.back();
+    });
+
     // le bouton payer
     const confirmOrder = document.querySelector("#confirmOrder");
     confirmOrder.addEventListener('click', () => {
-        alert("en cours de création");
+        // on envoie des données pour creer une nouvelle commande prête à être payé
+        
+        
+
+        window.location.href = "./done.php";
     });
 });

@@ -193,6 +193,7 @@ const jsCarDesc = document.querySelectorAll(".jsCarDesc");
 const jsCarPrice = document.querySelectorAll(".jsCarPrice");
 
 // le bouton de confirmation pour valider les informations et passer à la page suivante
+const goBack = document.querySelector("#goBack");
 const confirmAll = document.querySelector("#confirmAll");
 
 let arrayCarriers = [];
@@ -212,41 +213,85 @@ for (let i = 0; i < carriersRadio.length; i++) {
     console.log(carriersRadio[i].value);
     carriersCurrentIndex = i;
     confirmAll.classList.remove("hidden");
+    goBack.classList.remove("hidden");
   });
 }
+// le bouton goBack
 
-confirmAll.addEventListener("click", () => {
-  // on récupère toutes les valeurs saisies du formulaire et ont les envoient
-    
-  const deliveryFullAdress = `${person.textContent}, ${adDelivery.textContent},
-    ${adPcAndCity.textContent}, ${adCountry.textContent}`;
-  const carriersDetails = `${arrayCarriers[carriersCurrentIndex].name}, ${arrayCarriers[carriersCurrentIndex].description}`;
-  const carriersPrice = Number(arrayCarriers[carriersCurrentIndex].price);
-  
-  const jsonOrderData = {
-    deliveryFullAddress : deliveryFullAdress,
-    carriersDetails : carriersDetails,
-    carriers_price : carriersPrice
-  }
-
-  fetch(`${keyPath}addToOrderdetails.php`, {
-    method: "POST",
-
-    body: JSON.stringify(jsonOrderData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-
-      if (response.ok) {
-        // on redirige vers la page récapitulatif en cas de succès
-        window.location.href = "./resume.php";
-      } else {
-        alert("problème detecté merci de contacter un administrateur.");
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+goBack.addEventListener("click", () => {
+  window.history.back();
 });
+// on récupère le panier actuel
+fetch(`${keyPath}checkMyCart.php`)
+  .then((response) => response.json())
+  .then((values) => {
+    console.log(values);
+    let stringProdIds = "";
+    let stringColorIds = "";
+    let stringSizeIds = "";
+    const cart = values.cart;
+    let arrayPrices = [];
+
+    cart.map((product) => {
+      if (product === cart[cart.length-1]) {
+        stringProdIds += `${product.productId}`;
+        stringColorIds += `${product.colorId}`;
+        stringSizeIds += `${product.sizeId}`;
+      } else {
+        stringProdIds += `${product.productId}, `;
+        stringColorIds += `${product.colorId}, `;
+        stringSizeIds += `${product.sizeId}, `;
+      }
+      arrayPrices.push(product.price * product.quantity);
+    });
+    const initialValue = 0;
+    const totalPrice = arrayPrices.reduce((accumulator, currentValue) => accumulator + currentValue,
+    initialValue).toFixed(2);
+    console.log(totalPrice);
+    console.log(arrayPrices);
+    console.log(stringProdIds);
+    console.log(stringColorIds);
+    console.log(stringSizeIds);
+    // le bouton étape suivante
+    confirmAll
+      .addEventListener("click", () => {
+        // on récupère toutes les valeurs saisies du formulaire et ont les envoient
+
+        const deliveryFullAdress = `${person.textContent}, ${adDelivery.textContent},
+      ${adPcAndCity.textContent}, ${adCountry.textContent}`;
+        const carriersDetails = `${arrayCarriers[carriersCurrentIndex].name}, ${arrayCarriers[carriersCurrentIndex].description}`;
+        const carriersPrice = Number(arrayCarriers[carriersCurrentIndex].price);
+
+        const jsonOrderData = {
+          deliveryFullAddress: deliveryFullAdress,
+          carriersDetails: carriersDetails,
+          carriers_price: carriersPrice,
+          products_ids: stringProdIds,
+          color_ids: stringColorIds,
+          size_ids: stringSizeIds,
+          quantity: cart.length,
+          total_amount: (totalPrice + Number(carriersPrice)).toFixed(2),
+        };
+
+        fetch(`${keyPath}addToOrderdetails.php`, {
+          method: "POST",
+
+          body: JSON.stringify(jsonOrderData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              // on redirige vers la page récapitulatif en cas de succès
+              window.location.href = "./resume.php";
+            } else {
+              alert("problème detecté merci de contacter un administrateur.");
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+    })
+    .catch((error) => console.log(error));
