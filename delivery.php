@@ -1,72 +1,71 @@
 <?php
-session_start();
-if (!isset($_SESSION['userId'])) {
-    header('location:./signIn.php');
-    exit();
-}
+    session_start();
+    if (!isset($_SESSION['userId'])) {
+        header('location:./signIn.php');
+        exit();
+    }
 
-$userId = $_SESSION['userId'];
+    $userId = $_SESSION['userId'];
 
-spl_autoload_register(function ($classes) {
-    require_once('./php/' . $classes . '.php');
-});
+    spl_autoload_register(function ($classes) {
+        require_once('./php/' . $classes . '.php');
+    });
 
-use Classes\Cart;
+    use Classes\Cart;
 
-$myCart = new Cart();
-$cart = $myCart->getAllByUserId($userId);
+    $myCart = new Cart();
+    $cart = $myCart->getAllByUserId($userId);
 
-// si l'utilisateur a un panier vide il est redirigé vers son panier
-if (empty($cart)) {
-    header('location:./mycart.php');
-    exit();
-}
+    // si l'utilisateur a un panier vide il est redirigé vers son panier
+    if (empty($cart)) {
+        header('location:./mycart.php');
+        exit();
+    }
 
+    use Classes\User;
+    use Classes\Delivery;
+    use Classes\Carriers;
 
-use Classes\User;
-use Classes\Delivery;
-use Classes\Carriers;
+    $myUser = new User();
+    $user = $myUser->getById($userId);
 
-$myUser = new User();
-$user = $myUser->getById($userId);
+    $myDelivery = new Delivery();
+    $delivery = $myDelivery->getAllByUserId($userId);
 
-$myDelivery = new Delivery();
-$delivery = $myDelivery->getAllByUserId($userId);
+    $myCarriers = new Carriers();
+    $carriers = $myCarriers->getAll();
 
-$myCarriers = new Carriers();
-$carriers = $myCarriers->getAll();
+    if (isset($_POST['confirmAddress'])) {
 
-if (isset($_POST['confirmAddress'])) {
+        if (
+            !empty($_POST['nameAddress']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])
+            && !empty($_POST['address']) && !empty($_POST['postalCode']) && !empty($_POST['city'])
+            && !empty($_POST['country']) && !empty($_POST['phone'])
+        ) {
 
-    if (
-        !empty($_POST['nameAddress']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])
-        && !empty($_POST['address']) && !empty($_POST['postalCode']) && !empty($_POST['city'])
-        && !empty($_POST['country']) && !empty($_POST['phone'])
-    ) {
+            $nameAddress = htmlspecialchars($_POST['nameAddress']);
+            $firstname  = htmlspecialchars($_POST['firstname']);
+            $lastname   = htmlspecialchars($_POST['lastname']);
+            $address     = htmlspecialchars($_POST['address']);
+            $postalCode = htmlspecialchars($_POST['postalCode']);
+            $city       = htmlspecialchars($_POST['city']);
+            $country    = htmlspecialchars($_POST['country']);
+            $phone      = htmlspecialchars($_POST['phone']);
 
-        $nameAddress = htmlspecialchars($_POST['nameAddress']);
-        $firstname  = htmlspecialchars($_POST['firstname']);
-        $lastname   = htmlspecialchars($_POST['lastname']);
-        $address     = htmlspecialchars($_POST['address']);
-        $postalCode = htmlspecialchars($_POST['postalCode']);
-        $city       = htmlspecialchars($_POST['city']);
-        $country    = htmlspecialchars($_POST['country']);
-        $phone      = htmlspecialchars($_POST['phone']);
-
-        if ($myDelivery->avalaibleName($nameAddress) === 0) {
-            $myDelivery->addNew($nameAddress, $firstname, $lastname, $address, $postalCode, $city, $country, $phone, $userId);
+            if ($myDelivery->avalaibleName($nameAddress) === 0) {
+                $myDelivery->addNew($nameAddress, $firstname, $lastname, $address, $postalCode, $city, $country, $phone, $userId);
+            }
         }
     }
-}
-// la vue -----------------------------------------------------------
-$title = "Livraison";
-$home = "./";
-$admin = "./admin/accueiladmin.php";
-$products = "./allproducts.php";
-$cart = "./mycart.php";
-// ob_start();
-require_once("./php/Components/head.php");
-require_once("./php/Components/header.php");
+
+    $title = "Livraison";
+    $home = "./";
+    $admin = "./admin/";
+    $products = "./allproducts.php";
+    $cart = "./mycart.php";
+
+    require_once("./php/Components/head.php");
+    require_once("./php/Components/header.php");
 ?>
 
 
@@ -250,6 +249,7 @@ require_once("./php/Components/header.php");
 <script type="module" src="./assets/js/products/myDelivery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 <script type="module" src="./assets/js/modules/darkmode.js"></script>
+
 <?php
 require_once("./php/Components/footer.php");
 ?>

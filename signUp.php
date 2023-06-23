@@ -2,7 +2,7 @@
 session_start();
 $title = "Inscription";
 $home = "./";
-$admin = "./admin/accueiladmin.php";
+$admin = "./admin/";
 $products = "./allproducts.php";
 $cart = "./mycart.php";
 spl_autoload_register(function ($classes) {
@@ -46,9 +46,10 @@ if (isset($_POST['signUp'])) {
         }
     }
 }
+
 require_once("./php/Components/head.php");
 require_once("./php/Components/header.php");
-// ob_start();
+
 ?>
 
 <!-- fin du com précédent -->
@@ -107,10 +108,7 @@ require_once("./php/Components/header.php");
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 <script type="module" src="./assets/js/modules/darkmode.js"></script>
+
 <?php
 require_once("./php/Components/footer.php");
-?>
-<?php
-// $content = ob_get_clean();
-// require_once("./Templates/base.php");
 ?>
