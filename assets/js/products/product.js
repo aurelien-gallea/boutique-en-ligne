@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         })
                     }
 
+
                 }else if(images.length === 1){
                     
                     const stash = images[0];
@@ -176,11 +177,13 @@ document.addEventListener("DOMContentLoaded", function () {
                                     .then(function (response){
                                         inputQty.value = 1;
                                         myQty = inputQty.value;
+                                        if (!response.ok) {
+                                          alert("Un problème a été détecté, merci de contacter un administrateur.");
+                                        }
                                     })
                                     .catch(function (error){
                                         console.log(error);
                                     })
-
                                 }
                             })
                         }) 

@@ -19,7 +19,7 @@
 <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
 <h1 class="text-center">Mon Panier</h1>
 <div class="text-center text-xl">Id utilisateur = <?php echo isset($_SESSION['userId']) ? $_SESSION['userId'] : null ?></div>
-<form id="confirmCart" action="./delivery.php" method="POST">
+<form id="confirmCart" action="" method="POST">
 
 
     <?php
