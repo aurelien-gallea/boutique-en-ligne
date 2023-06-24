@@ -9,7 +9,7 @@ require_once('php/DB/DBManager.php');
                             `firstname` varchar(255) NOT NULL,
                             `lastname` varchar(255) NOT NULL,
                             `role` varchar(80) NOT NULL,
-                            `date_creation` timestamp NOT NULL DEFAULT current_timestamp()
+                            `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
 
             'categories' => 'CREATE TABLE `categories` (
@@ -79,7 +79,7 @@ require_once('php/DB/DBManager.php');
                                 `name` varchar(255) NOT NULL,
                                 `firstname` varchar(255) NOT NULL,
                                 `lastname` varchar(255) NOT NULL,
-                                `adress` varchar(255) NOT NULL,
+                                `address` varchar(255) NOT NULL,
                                 `postalCode` int(11) NOT NULL,
                                 `city` varchar(255) NOT NULL,
                                 `country` varchar(255) NOT NULL,
@@ -103,6 +103,23 @@ require_once('php/DB/DBManager.php');
                             FOREIGN KEY (`color_id`) REFERENCES `color`(`id`),
                             `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
+
+            // 'orderDetails' => 'CREATE TABLE `orderdetails` (
+            //                         `id` INT AUTO_INCREMENT PRIMARY KEY,
+            //                         `deliveryFullAddress` TEXT NOT NULL,
+            //                         `carriersDetails` TEXT NOT NULL,
+            //                         `carrier_price` FLOAT NOT NULL,
+            //                         `user_id` INT NOT NULL,
+            //                         FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
+            //                         `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+            //                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
+
+            // 'orderFinal' => 'CREATE TABLE `` (
+            //                     `id` INT AUTO_INCREMENT PRIMARY KEY,
+            //                     `orderDetails_id` INT NOT NULL,
+            //                     `` 
+            //                     FOREIGN KEY (`orderDetails_id`) REFERENCES `orderdetails`(`id`),
+            //                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
             
         ];
 

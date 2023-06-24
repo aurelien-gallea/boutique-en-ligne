@@ -1,15 +1,12 @@
 import { addElement } from "../modules/addElement.js";
 
-const test = document.getElementById('test');
-test.addEventListener('click', () => {
+const btnOption = document.getElementById('addOptions');
+btnOption.addEventListener('click', () => {
     let color = document.getElementById('color').value;
     let size = document.getElementById('size').value;
     let quantity = document.getElementById('quantity').value;
-    let i = 0;
     
-    if(color && size){
-        
-        console.log(color+'/'+size+'/'+quantity);
+    if(color && size && quantity){
         
         document.getElementById('containerTable').classList.remove('hidden');
         document.getElementById('containerTable').classList.add('flex');
