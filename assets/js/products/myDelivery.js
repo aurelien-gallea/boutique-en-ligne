@@ -246,7 +246,7 @@ fetch(`${keyPath}checkMyCart.php`)
     });
     const initialValue = 0;
     const totalPrice = arrayPrices.reduce((accumulator, currentValue) => accumulator + currentValue,
-    initialValue).toFixed(2);
+    initialValue);
     console.log(totalPrice);
     console.log(arrayPrices);
     console.log(stringProdIds);
@@ -261,7 +261,7 @@ fetch(`${keyPath}checkMyCart.php`)
       ${adPcAndCity.textContent}, ${adCountry.textContent}`;
         const carriersDetails = `${arrayCarriers[carriersCurrentIndex].name}, ${arrayCarriers[carriersCurrentIndex].description}`;
         const carriersPrice = Number(arrayCarriers[carriersCurrentIndex].price);
-
+        const totalAmount = totalPrice + carriersPrice;
         const jsonOrderData = {
           deliveryFullAddress: deliveryFullAdress,
           carriersDetails: carriersDetails,
@@ -270,7 +270,7 @@ fetch(`${keyPath}checkMyCart.php`)
           color_ids: stringColorIds,
           size_ids: stringSizeIds,
           quantity: cart.length,
-          total_amount: (totalPrice + Number(carriersPrice)).toFixed(2),
+          total_amount: totalAmount.toFixed(2),
         };
 
         fetch(`${keyPath}addToOrderdetails.php`, {

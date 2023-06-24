@@ -169,20 +169,14 @@ class Orderfinal extends SearchByUser_id
         return $response;
     }
 
-    // une seule commande en cours possible
-    public function alreadyAdded($user_id) {
-        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE user_id = ?"); 
-        $request->execute([ $this->setUser_id($user_id)]); 
-        return $request->rowCount(); // Retourne le nombre de lignes affectées par la requête, indiquant ainsi le nombre de résultats correspondant à l'email
-    }
+    
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
     
-    public function addNew($deliveryFullAddress, $carriersDetails, $carriers_price, $product_ids, $color_ids, $size_ids, $quantity, $total_amount, $user_id)
+    public function addNew($deliveryFullAddress, $carriersDetails, $carriers_price, $product_ids, $color_ids, $size_ids, $quantity, $total_amount, $payement_status, $user_id)
     {
         file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("INSERT INTO " . $this::TABLE_NAME . " 
-        (deliveryFullAddress, carriersDetails, carriers_price, product_ids, color_ids, size_ids, quantity, total_amount, user_id) VALUES (?,?,?,?,?,?,?,?,?)");
+        (deliveryFullAddress, carriersDetails, carriers_price, product_ids, color_ids, size_ids, quantity, total_amount, payement_status, user_id) VALUES (?,?,?,?,?,?,?,?,?,?)");
         $request->execute([ 
         $this->setdeliveryFullAddress($deliveryFullAddress),
         $this->setCarriersDetails($carriersDetails),
@@ -192,16 +186,17 @@ class Orderfinal extends SearchByUser_id
         $this->setSize_ids($size_ids),
         $this->setQuantity($quantity),
         $this->setTotal_amount($total_amount),
+        $this->setPayement_status($payement_status),
         $this->setUser_id($user_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
     }
 
-    public function deleteRow($user_id)
+    public function deleteRow($id)
     {
         file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("DELETE FROM " . $this::TABLE_NAME . " WHERE user_id = ? ");
-        $request->execute([$user_id]);
+        $request = $bdd->prepare("DELETE FROM " . $this::TABLE_NAME . " WHERE id = ? ");
+        $request->execute([$id]);
         return $request;
     }
 
