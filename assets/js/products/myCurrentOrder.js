@@ -64,7 +64,13 @@ fetch(`${keyPath}checkMyOrder.php`)
 
     // l'adresse de livraison
     const fullAddress = document.querySelector("#fullAddress");
-    fullAddress.innerHTML = `<p>${data.orderdetails.deliveryFullAddress.replace(/,/g, "<br>")}</p>`;
+    console.log(data.orderdetails.deliveryFullAddress);
+    if (typeof data.orderdetails.deliveryFullAddress === "undefined") {
+      window.location.href= "./"; // <---- changer la redirection
+    } else {
+
+      fullAddress.innerHTML = `<p>${data.orderdetails.deliveryFullAddress.replace(/,/g, "<br>")}</p>`;
+    }
 
     // le livreur choisi
     const carriersChoice = document.querySelector("#carriersChoice");

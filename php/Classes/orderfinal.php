@@ -51,7 +51,7 @@ class Orderfinal extends SearchByUser_id
         return $this->_id = $id;
     }
 
-    // deliveryFullAdress
+    // deliveryFullAddress
     public function getdeliveryFullAddress()
     {
         return $this->_deliveryFullAddress;
