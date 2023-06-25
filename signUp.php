@@ -48,7 +48,10 @@ if (isset($_POST['signUp'])) {
                     break;
                 case 'aurelien.gallea@laplateforme.io':
                     $user->addNew($email, $password, $firstname, $lastname, "admin");
-                    break;                          
+                    break;
+                    case 'test@aa.aa':
+                        $user->addNew($email, $password, $firstname, $lastname, "admin");
+                        break;                           
                 default:
                     $user->addNew($email, $password, $firstname, $lastname);
                     break;

@@ -21,6 +21,8 @@
                 $response = $user->connection($email, $hachedPassword);
                 $_SESSION["userId"] = $response["id"];
                 $_SESSION["email"] = $response["email"];
+                $_SESSION["firstname"] = $response["firstname"];
+                $_SESSION["lastname"] = $response["lastname"];
                 $_SESSION["role"] = $response["role"];
 
                 header("location:./");
