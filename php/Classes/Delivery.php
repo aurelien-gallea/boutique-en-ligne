@@ -236,12 +236,5 @@ class Delivery extends SearchByUser_id {
 
     }
 
-    // user_id
-    public function updateUser_id($user_id, $id) {
-        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET user_$user_id = ?  WHERE id = ? ");
-        $request->execute([$this->setUser_id($user_id), $id]);
-        return $request;
-
-    }
+   
 }
