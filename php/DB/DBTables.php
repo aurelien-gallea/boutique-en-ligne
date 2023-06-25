@@ -104,22 +104,36 @@ require_once('php/DB/DBManager.php');
                             `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
 
-            // 'orderDetails' => 'CREATE TABLE `orderdetails` (
-            //                         `id` INT AUTO_INCREMENT PRIMARY KEY,
-            //                         `deliveryFullAddress` TEXT NOT NULL,
-            //                         `carriersDetails` TEXT NOT NULL,
-            //                         `carrier_price` FLOAT NOT NULL,
-            //                         `user_id` INT NOT NULL,
-            //                         FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
-            //                         `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
-            //                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
+            'orderDetails' => 'CREATE TABLE `orderdetails` (
+                                    `id` INT AUTO_INCREMENT PRIMARY KEY,
+                                    `deliveryFullAddress` TEXT NOT NULL,
+                                    `carriersDetails` TEXT NOT NULL,
+                                    `carrier_price` FLOAT NOT NULL,
+                                    `product_ids` TEXT NOT NULL,
+                                    `color_ids` TEXT NOT NULL,
+                                    `size_ids` TEXT NOT NULL,
+                                    `quantity` INT NOT NULL,
+                                    `total_amount` FLOAT NOT NULL,
+                                    `user_id` INT NOT NULL,
+                                    FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
+                                    `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+                                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
 
-            // 'orderFinal' => 'CREATE TABLE `` (
-            //                     `id` INT AUTO_INCREMENT PRIMARY KEY,
-            //                     `orderDetails_id` INT NOT NULL,
-            //                     `` 
-            //                     FOREIGN KEY (`orderDetails_id`) REFERENCES `orderdetails`(`id`),
-            //                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
+            'orderFinal' => 'CREATE TABLE `orderfinal` (
+                                    `id` INT AUTO_INCREMENT PRIMARY KEY,
+                                    `deliveryFullAddress` TEXT NOT NULL,
+                                    `carriersDetails` TEXT NOT NULL,
+                                    `carrier_price` FLOAT NOT NULL,
+                                    `product_ids` TEXT NOT NULL,
+                                    `color_ids` TEXT NOT NULL,
+                                    `size_ids` TEXT NOT NULL,
+                                    `quantity` INT NOT NULL,
+                                    `total_amount` FLOAT NOT NULL,
+                                    `payements_status` BOOLEAN NOT NULL,
+                                    `user_id` INT NOT NULL,
+                                    FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
+                                    `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+                                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;',
             
         ];
 
