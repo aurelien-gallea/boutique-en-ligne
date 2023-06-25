@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             let divImgs = addElement('div', ["flex", "w-full", "items-center", "justify-center"], {});
                             containerAllImg.appendChild(divImgs);
 
-                            let imgs = addElement('img', ["max-h-[70px]", "max-w-full", "min-[425px]:max-h-24", "sm:max-h-[150px]", "md:max-h-44", "lg:max-h-[246px]", "xl:max-h-80", "rounded-lg"], {src:`../public/img/product/${image.path}`, alt:`${product.name}`});
+                            let imgs = addElement('img', ["max-h-[70px]", "max-w-full", "min-[425px]:max-h-24", "sm:max-h-[150px]", "md:max-h-44", "lg:max-h-[246px]", "xl:max-h-80", "rounded-lg"], {src:`./public/img/product/${image.path}`, alt:`${product.name}`});
                             divImgs.appendChild(imgs);
 
                         })
