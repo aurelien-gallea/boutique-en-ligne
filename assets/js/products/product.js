@@ -109,7 +109,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 let btnAddToCart = addElement('button', ["w-1/3", "text-white", "bg-blue-700", "hover:bg-blue-800", "focus:outline-none", "focus:ring-4", "focus:ring-blue-300", "font-medium", "rounded-full", "text-sm", "px-5", "py-2.5", "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {type:"submit", disabled:""}, "Ajouter au panier");
                 containerBtn.appendChild(btnAddToCart);
 
+                let sizeChoice = "";
+                let colorChoice = "";
+                let myColorId = "";
 
+                let mySize = "";
+                let mySizeId = "";
+                let myQty = 1;
+                
                 colors.map(color =>{
                     let contentColor = addElement('div', [], {});
                     containerColor.appendChild(contentColor);
@@ -125,15 +132,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     let colorName = addElement('div', ["w-full", "text-lg", "font-semibold"], {}, `${color.color}`);
                     divBlock.appendChild(colorName);
 
-
-
                     const colorEventHandler = (action) => {
 
                         inputColor.addEventListener(action, () => {
                             selectSize.innerHTML = '';
                             sizes.map(size => {
                                 if(size.colorId == color.id){
-                                    let sizeChoice = size.size;
+                                    sizeChoice = size.size;
+                                    colorChoice = color.color;
+                                    myColorId = Number(color.id);
+                                    console.log(colorChoice, myColorId);
                                     sizeChoice.map(item => {
                                         let optionSize = addElement('option', [], {value:`${item.id}`}, `${item.size}`);
                                         selectSize.appendChild(optionSize);
@@ -141,57 +149,59 @@ document.addEventListener("DOMContentLoaded", function () {
                                 }
                             })
 
-                            let mySize = selectSize.options[selectSize.selectedIndex].textContent;
-                            let mySizeId = selectSize.value;
-                            let myQty = inputQty.value;
+                            mySize = selectSize.options[selectSize.selectedIndex].textContent;
+                            mySizeId = selectSize.value;
+                            myQty = inputQty.value;
+                            console.log(mySize, mySizeId, myQty);
                             
         
                             selectSize.addEventListener("change", () => {
                                 mySize = selectSize.options[selectSize.selectedIndex].textContent;
                                 mySizeId = selectSize.value;
+                                console.log(mySize, mySizeId, myQty);
                             })
 
                             inputQty.addEventListener("change", () => (myQty = inputQty.value));
                             btnAddToCart.removeAttribute('disabled');
                             
-                            btnAddToCart.addEventListener('click', function (){
-                                if(mySize !== null & myQty > 0){
-
-                                    fetch('./php/Controller/verifAddToCart.php', {
-                                        method: "POST",
-
-                                        body: JSON.stringify({
-                                            product_id: product.id,
-                                            color: color.color,
-                                            color_id: color.id,
-                                            size: mySize,
-                                            size_id: mySizeId,
-                                            quantity: myQty,
-                                            price: price[0].price,
-                                            price_id: price[0].id,
-                                        }),
-                                        headers: {
-                                            "Content-Type": "application/json",
-                                        },
-                                    })
-                                    .then(function (response){
-                                        inputQty.value = 1;
-                                        myQty = inputQty.value;
-                                        if (!response.ok) {
-                                          alert("Un problème a été détecté, merci de contacter un administrateur.");
-                                        }
-                                    })
-                                    .catch(function (error){
-                                        console.log(error);
-                                    })
-                                }
-                            })
                         }) 
                     }
                     colorEventHandler("click");              
                 })
 
-                console.log(product);
+                btnAddToCart.addEventListener('click', function (){
+                    if(mySize !== null & myQty > 0){
+
+                        fetch('./php/Controller/verifAddToCart.php', {
+                            method: "POST",
+
+                            body: JSON.stringify({
+                                product_id: product.id,
+                                color: colorChoice,
+                                color_id: myColorId,
+                                size: mySize,
+                                size_id: Number(mySizeId),
+                                quantity: Number(myQty),
+                                price: price[0].price,
+                                price_id: price[0].id,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        })
+                        .then(function (response){
+                            inputQty.value = 1;
+                            myQty = inputQty.value;
+                            if (!response.ok) {
+                              alert("Un problème a été détecté, merci de contacter un administrateur.");
+                            }
+                        })
+                        .catch(function (error){
+                            console.log(error);
+                        })
+                    }
+                })
+                
             }else{
 
                 gridProd.classList.add('flex-col', 'items-center');
