@@ -129,7 +129,7 @@ require_once('php/DB/DBManager.php');
                                     `size_ids` TEXT NOT NULL,
                                     `quantity` INT NOT NULL,
                                     `total_amount` FLOAT NOT NULL,
-                                    `payements_status` BOOLEAN NOT NULL,
+                                    `payement_status` BOOLEAN NOT NULL,
                                     `user_id` INT NOT NULL,
                                     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
                                     `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
