@@ -109,7 +109,7 @@
                                         <label for="<?= $value['name'] ?>"><?= $value['name'] . " (" . $value['postalCode'] . ") " . $value['city']  ?></label>
                                         <input type="hidden" class="jsFirstname" value="<?= $value['firstname'] ?>">
                                         <input type="hidden" class="jsLastname" value="<?= $value['lastname'] ?>">
-                                        <input type="hidden" class="jsAddress" value="<?= $value['adress'] ?>">
+                                        <input type="hidden" class="jsAddress" value="<?= $value['address'] ?>">
                                         <input type="hidden" class="jsPostalCode" value="<?= $value['postalCode'] ?>">
                                         <input type="hidden" class="jsCity" value="<?= $value['city'] ?>">
                                         <input type="hidden" class="jsCountry" value="<?= $value['country'] ?>">
