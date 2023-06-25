@@ -82,9 +82,9 @@
                             </h2>
                         </div>
                         <div class="flex justify-around pb-6">
-                            <?php if (!empty($delivery)) { ?>
+                           
                                 <button id="btnMyAddress" type="button" class="border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">adresse existante</button>
-                            <?php } ?>
+                            
                             <button id="btnNewAddress" type="button" class="border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">nouvelle adresse</button>
                         </div>
                     </div>

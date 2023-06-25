@@ -16,7 +16,7 @@ fetch(`${keyPath}checkMyCart.php`)
         const item = data.cart[key];
 
         let totalPrice = item.price * item.quantity;
-        const dad = addElement("div", ["flex", "gap-3", "my-2"], {});
+        const dad = addElement("div", ["flex", "gap-3", "items-center", "my-2", "border", "p-2", "dark:text-white"], {});
         const child0 = addElement("img", ["object-cover", "h-full", "w-6"], {
           src: `Public/img/product/${item.imagePath}`,
         });
@@ -27,7 +27,7 @@ fetch(`${keyPath}checkMyCart.php`)
           `${item.productName}`
         );
         const child2 = addElement("div", [], {}, `${item.color}`);
-        const child3 = addElement("select", [], {
+        const child3 = addElement("select", ["block", "p-2", "text-sm", "text-gray-900", "border", "border-gray-300", "rounded-lg", 'bg-gray-50', 'focus:ring-blue-500', 'focus:border-blue-500', 'dark:bg-gray-900', 'dark:border-gray-600', 'dark:placeholder-gray-500', 'dark:text-gray-400', 'dark:focus:ring-blue-500', "dark:focus:border-blue-500"], {
           name: item.sizeId,
           value: item.size,
         });
@@ -46,7 +46,7 @@ fetch(`${keyPath}checkMyCart.php`)
         }
         const child4 = addElement(
           "input",
-          ["w-20"],
+          ["block", "w-20","h-[38px]", "p-2", "text-gray-900", "border", "border-gray-300", "rounded-lg", "bg-gray-50", "sm:text-xs", "focus:ring-blue-500", "focus:border-blue-500", "dark:bg-gray-900", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-gray-400", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"],
           { type: "number", value: item.quantity },
           `${item.quantity}`
         );
@@ -54,7 +54,7 @@ fetch(`${keyPath}checkMyCart.php`)
         const child6 = addElement("div", [], {}, `${totalPrice.toFixed(2)} €`);
         const child7 = addElement(
           "button",
-          ["btnDelete"],
+          ["btnDelete", "py-2", "px-5",  "text-white", "bg-blue-700", "hover:bg-blue-800", "focus:outline-none", "focus:ring-4", "focus:ring-blue-300", "font-medium", "rounded-full","px-2",  "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"],
           {
             type: "button",
             name: item.id,
@@ -144,7 +144,7 @@ fetch(`${keyPath}checkMyCart.php`)
       );
       const child9 = addElement(
         "button",
-        [],
+        ["py-2", "px-5",  "text-white", "bg-blue-700", "hover:bg-blue-800", "focus:outline-none", "focus:ring-4", "focus:ring-blue-300", "font-medium", "rounded-full","px-2",  "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"],
         { type: "submit" },
         "Valider mon panier"
       );
@@ -187,7 +187,6 @@ fetch(`${keyPath}checkMyCart.php`)
         // on gère en fonction de la réponse du serveur
           .then(function (response) {
             if (response.ok) {
-              window.location.href = "./delivery.php";
             } else {
               alert("Mise à jour du panier impossible ! Veuillez contactez un administrateur.");
             }
@@ -199,20 +198,22 @@ fetch(`${keyPath}checkMyCart.php`)
 
       // bouttons supprimer
       const btnDelete = document.querySelectorAll(".btnDelete");
-
+      
       // on boucle dessus et on leur créé la meme intéraction
       for (let i = 0; i < btnDelete.length; i++) {
         const element = btnDelete[i];
-
+        
         element.addEventListener("click", () => {
           input[i].value = 0;
           updateValuesHandler();
+          window.location.reload();
         });
       }
-
+      
       // bouton "valider le panier"
       child9.addEventListener("click", () => {
         updateValuesHandler();
+        window.location.href = "./delivery.php";
       });
 
       // -------------------------------------------

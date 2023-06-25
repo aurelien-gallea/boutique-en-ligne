@@ -13,7 +13,7 @@ class Delivery extends SearchByUser_id {
     private $_name;
     private $_firstname;
     private $_lastname;
-    private $_adress;
+    private $_address;
     private $_postalCode;
     private $_city;
     private $_country;
@@ -26,7 +26,7 @@ class Delivery extends SearchByUser_id {
         $this->_name;
         $this->_firstname;
         $this->_lastname;
-        $this->_adress;
+        $this->_address;
         $this->_postalCode;
         $this->_city;
         $this->_country;
@@ -69,12 +69,12 @@ class Delivery extends SearchByUser_id {
        return $this->_lastname = $newLastName; 
     }
 
-    // adress
-    public function getAdress() : string {
-        return $this->_adress;
+    // address
+    public function getAddress() : string {
+        return $this->_address;
     }
-    public function setAdress(string $newAdress) : string {
-       return $this->_adress = $newAdress; 
+    public function setAddress(string $newAddress) : string {
+       return $this->_address = $newAddress; 
     }
 
     // postal code
@@ -144,10 +144,10 @@ class Delivery extends SearchByUser_id {
     }
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
-    public function addNew($name, $firstname, $lastname, $adress, $postalCode, $city, $country, $phone, $user_id) {
+    public function addNew($name, $firstname, $lastname, $address, $postalCode, $city, $country, $phone, $user_id) {
         file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, firstname, lastname, adress, postalCode, city, country, phone, user_id) VALUES (?,?,?,?,?,?,?,?,?)");
-        $request->execute([$this->setName($name), $this->setFirstName($firstname), $this->setLastName($lastname), $this->setAdress($adress), $this->setPostalCode($postalCode), $this->setCity($city), $this->setCountry($country), $this->setPhone($phone), $this->setUser_id($user_id)]);
+        $request = $bdd->prepare("INSERT INTO ".$this::TABLE_NAME." (name, firstname, lastname, address, postalCode, city, country, phone, user_id) VALUES (?,?,?,?,?,?,?,?,?)");
+        $request->execute([$this->setName($name), $this->setFirstName($firstname), $this->setLastName($lastname), $this->setAddress($address), $this->setPostalCode($postalCode), $this->setCity($city), $this->setCountry($country), $this->setPhone($phone), $this->setUser_id($user_id)]);
         $lastId = $bdd->lastInsertId();
         return $this->setId($lastId);
         
@@ -188,11 +188,11 @@ class Delivery extends SearchByUser_id {
 
     }
 
-    // adress
-    public function updateAdress($adress,$id) {
+    // address
+    public function updateAddress($address,$id) {
         file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET adress = ?  WHERE id = ? ");
-        $request->execute([$this->setLastName($adress),$id]);
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET address = ?  WHERE id = ? ");
+        $request->execute([$this->setLastName($address),$id]);
         return $request;
 
     }

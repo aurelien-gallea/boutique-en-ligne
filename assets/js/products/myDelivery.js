@@ -41,6 +41,12 @@ deliveryNames.forEach((element) => {
   arrayDeliveryNames.push(element.value);
 });
 
+if (arrayDeliveryNames.length === 0 ) {
+  btnMyAddress.classList.add("hidden");
+} else {
+  btnMyAddress.classList.remove("hidden");
+}
+
 // remplir un tableau à plusieurs dimensions pour récuperer les adresses complètes déjà existantes
 
 for (let i = 0; i < deliveryNames.length; i++) {
@@ -257,13 +263,13 @@ fetch(`${keyPath}checkMyCart.php`)
       .addEventListener("click", () => {
         // on récupère toutes les valeurs saisies du formulaire et ont les envoient
 
-        const deliveryFullAdress = `${person.textContent}, ${adDelivery.textContent},
+        const deliveryFullAddress = `${person.textContent}, ${adDelivery.textContent},
       ${adPcAndCity.textContent}, ${adCountry.textContent}`;
         const carriersDetails = `${arrayCarriers[carriersCurrentIndex].name}, ${arrayCarriers[carriersCurrentIndex].description}`;
         const carriersPrice = Number(arrayCarriers[carriersCurrentIndex].price);
         const totalAmount = totalPrice + carriersPrice;
         const jsonOrderData = {
-          deliveryFullAddress: deliveryFullAdress,
+          deliveryFullAddress: deliveryFullAddress,
           carriersDetails: carriersDetails,
           carriers_price: carriersPrice,
           products_ids: stringProdIds,
