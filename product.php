@@ -15,7 +15,7 @@
 
 <div class="min-h-screen">
     <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
-        <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
+        <div id="main-container" class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
             <div id="grid_prod" class="flex gap-2 lg:max-w-screen-xl">
 
             </div>
