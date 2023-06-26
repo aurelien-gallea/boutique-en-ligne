@@ -119,4 +119,11 @@ class Carriers {
         return $request;
 
     }
+
+    public function updateCarrier($id, $name, $description, $price){
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ? , description = ? , price = ?   WHERE id = ? ");
+         $request->execute([$this->setName($name), $this->setDescription($description), $this->setPrice($price), $id]);
+        return $request;
+    }
 }

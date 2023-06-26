@@ -42,9 +42,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     tbody.appendChild(trtbody);
 
                     let thContentId = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" }, `${category.id}`);
-                    let thContentName = addElement('td', ["px-6", "py-4"], {}, `${category.name}`);
+                    let thContentName = addElement('td', ["px-6", "py-4"], {});
+                    let pathCat = addElement('a', [], {href:`./category.php?id=${category.id}`}, `${category.name}`);
                     trtbody.appendChild(thContentId);
                     trtbody.appendChild(thContentName);
+                    thContentName.appendChild(pathCat);
 
                     if(products.length !== 0){
                        products.map(product =>{
@@ -130,8 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                 },
                             })
                                 .then(function (response) {
-                                    console.log('envoie réussi');
-                                    console.log(category.id);
                                     backdropModal.classList.add('hidden');
                                     window.location.href = '../../php/Controller/deleteCategory.php';
                                 })

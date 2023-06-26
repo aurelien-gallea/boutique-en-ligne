@@ -398,7 +398,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         let categories = data.categories;
                         let prod_cat = data.products_categories[0];
 
-                        if(categories && categories.length > 1){
+                        if(categories && categories.length){
 
                             // Crée un conteneur categories
                             let catContainer = addElement('div', ["flex", "flex-col", "shadow-md", "bg-white", "rounded-lg", "px-8", "py-4", "space-y-3", "dark:bg-gray-800"], { id: "categories" });

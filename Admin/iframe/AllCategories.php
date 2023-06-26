@@ -1,6 +1,6 @@
 <?php
 
-  $title = "Transporeurs | Admin";
+  $title = "Collection | Admin";
   $home = "../";
   $order = "#";
   $products = "./allProducts.php";

@@ -122,4 +122,11 @@ class Prod_cat extends SearchByProduct_id {
         return $request;
 
     }
+
+    public function updateCategory($product_id, $category_id) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET category_id = ? WHERE product_id = ?");
+        $request->execute([$category_id, $product_id]);
+        return $request;
+    }
 }
