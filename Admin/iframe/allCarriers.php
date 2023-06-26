@@ -1,6 +1,18 @@
 <?php
+session_start();
 
-  $title = "Transporeurs | Admin";
+if (!isset($_SESSION["role"])) {
+  header("location: ../");
+  exit();
+}
+if (isset($_SESSION['role'])) {
+  if ($_SESSION["role"] !== "admin") {
+    header("location: ../");
+    exit();
+  }
+}
+
+  $title = "Transporteurs | Admin";
   $home = "../";
   $order = "#";
   $products = "./allProducts.php";
