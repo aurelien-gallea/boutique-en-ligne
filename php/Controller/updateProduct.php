@@ -1,4 +1,5 @@
-<?php
+<?php 
+session_start();
 
 use Classes\Products;
 use Classes\Images;
@@ -31,10 +32,10 @@ if(isset($_POST['valider'])){
         echo "La catégorie du produit n'a pas été choisi.";
     }else{
         $prod = new Products();
-        $newProductId = $prod->add($_POST['title'], $_POST['description']);
+        $newProductId = $prod->updateProduct($_POST['title'], $_POST['description'], $_SESSION['productID']);
     }
 
-    if($newProductId !== null && $_FILES['images'] !== null){
+    if($_SESSION['productID'] && $_FILES['images'] !== null){
         $images = $_FILES['images'];
 
         $count = count($images['name']);
@@ -51,18 +52,17 @@ if(isset($_POST['valider'])){
             
             if(move_uploaded_file($fichiertmp, $dest)){
                 $img = new Images();
-                $newImg = $img->add($image, $newProductId);
+                $newImg = $img->add($image, $_SESSION['productID']);
             };
         }
     }
-    
-    if($newProductId !== null && $_POST['price'] !== null){
+
+    if($_SESSION['productID'] && $_POST['price'] !== null){
         $price = new Price();
-        $price->add($_POST['price'], $newProductId);
+        $price->updatePrice($_POST['price'], $_SESSION['productID']);
     }
 
-    
-    if($newProductId !== null && $_POST['color'] !== null && $_POST['size'] !== null && $_POST['quantity'] !== null){
+    if($_SESSION['productID'] && $_POST['color'] !== null && $_POST['size'] !== null && $_POST['quantity'] !== null){
         $colors = $_POST['color'];
         $sizes =$_POST['size'];
         $quantities = $_POST['quantity'];
@@ -75,13 +75,13 @@ if(isset($_POST['valider'])){
             $quantity = $quantities[$i];
 
             $colorInstance = new Color();
-            $existingColor = $colorInstance->findByProductAndColor($newProductId, $color);
+            $existingColor = $colorInstance->findByProductAndColor($_SESSION['productID'], $color);
             
             if ($existingColor) {
                 $newColorId = $existingColor->getId();
             } else {
                 $newColor = new Color();
-                $newColorId = $newColor->add($color, $newProductId);
+                $newColorId = $newColor->add($color, $_SESSION['productID']);
             }
             
             $newSize = new Size();
@@ -91,25 +91,6 @@ if(isset($_POST['valider'])){
             $newQuantityId = $newQuantity->add($quantity, $newSizeId);
         }
     }
+
     
-    if($newProductId !== null && $_POST['selectCategories'] !== null){
-        $prod_cat = new Prod_cat();
-        $prod_cat->addNew($newProductId, $_POST['selectCategories']);
-    }
-
-    $url = $_SERVER['SCRIPT_FILENAME'];
-    $path = parse_url($url, PHP_URL_PATH);
-    $directory = explode('/', $path)[3];
-
-    $destination = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME']."/".$directory;
-
-    header('location: '.$destination.'/admin/iframe/allProducts.php');
-
-    // if ($newProductId !== null) {
-    //     // L'ID du nouvel élément est disponible
-    //     echo "Le produit a été créé avec succès. L'ID du produit est : " . $newProductId;
-    // } else {
-    //     echo "Une erreur s'est produite lors de la création du produit.";
-    // }
-
 }

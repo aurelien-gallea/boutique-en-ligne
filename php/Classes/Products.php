@@ -113,4 +113,11 @@ class Products {
 
     }
 
+    public function updateProduct($id, $name, $description){
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET name = ? , description = ? WHERE id = ?");
+        $request->execute([$id, $this->setName($name), $this->setDescription($description)]);
+        return $request;
+    }
+
 }

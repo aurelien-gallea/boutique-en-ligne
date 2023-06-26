@@ -77,6 +77,14 @@ class Prod_cat extends SearchByProduct_id {
         
     }
 
+    public function getAllCategoriesByProductId($product_id){
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE product_id = ? ");
+        $request->execute([$this->setCategory_id($product_id)]);
+        $response = $request->fetchAll(PDO::FETCH_CLASS);
+        return $response;
+    }
+
     public function getProductCountByCategories(){
         require('../DB/DBManager.php');
         $request = $bdd->prepare("SELECT pc.category_id, COUNT(p.id) AS product_count 

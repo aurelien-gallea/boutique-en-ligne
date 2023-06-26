@@ -14,8 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const stocks = data.stock;
             let Prod = document.getElementById('prodContainer');
             if (product !== false) {
-                let container = addElement('div', ["flex", "flex-col", "w-full", "h-full", "space-y-5"], {});
+                let container = addElement('div', ["flex", "flex-col", "w-full", "h-full", "space-y-5", "pb-2"], {});
                 Prod.appendChild(container);
+                document.getElementById('button').before(container);
 
                 let containerProd = addElement('div', ["flex", "flex-col", "shadow-md", "bg-white", "rounded-lg", "px-8", "py-4", "space-y-3", "dark:bg-gray-800", "dark:border"], {});
                 container.appendChild(containerProd);
@@ -133,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let imgProd = addElement('div', [], {});
                 let labelImg = addElement('label', ["block", "mb-2", "text-sm", "font-normal", "text-gray-900", "dark:text-white"], { for: "image" }, "Images");
-                let inputImg = addElement('input', ["block", "w-full", "text-sm", "text-gray-900", "border", "border-gray-300", "rounded-lg", "cursor-pointer", "bg-gray-50", "dark:text-gray-400", "focus:outline-none", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400"], { type: "file", id: "image", name: "image[]", multiple: "" });
+                let inputImg = addElement('input', ["block", "w-full", "text-sm", "text-gray-900", "border", "border-gray-300", "rounded-lg", "cursor-pointer", "bg-gray-50", "dark:text-gray-400", "focus:outline-none", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400"], { type:"file", id:"image", name: "images[]", multiple:"" });
                 containerImg.appendChild(imgProd);
                 imgProd.appendChild(labelImg);
                 imgProd.appendChild(inputImg);
@@ -189,16 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 optionsProd.appendChild(buttonAddOptions);
                 buttonAddOptions.appendChild(itemButton);
 
-                buttonAddOptions.addEventListener('click', () => {
-                    let colorChoice = inputColor.value;
-                    let sizeChoice = inputSize.value;
-                    let qtyChoice = inputQty.value;
-
-                    if(colorChoice && sizeChoice && qtyChoice){
-                        console.log(colorChoice, sizeChoice, qtyChoice);
-                    }
-                })
-
                 let containerOldOptions = addElement('div', ["flex-col", "w-full", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border", "overflow-x-auto"], {});
                 containerOptions.appendChild(containerOldOptions);
 
@@ -222,6 +213,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let tbody = addElement('tbody', [], {});
                 tableOptions.appendChild(tbody);
+
+                buttonAddOptions.addEventListener('click', () => {
+                    let colorChoice = inputColor.value;
+                    let sizeChoice = inputSize.value;
+                    let qtyChoice = inputQty.value;
+
+                    if (colorChoice && sizeChoice && qtyChoice) {
+                        console.log(colorChoice, sizeChoice, qtyChoice);
+                        containerOldOptions.classList.remove('hidden');
+
+                        let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
+                        tbody.appendChild(trtbody);
+
+                        let thColor = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" });
+                        trtbody.appendChild(thColor);
+                        let thInputColor = addElement('input', ["block", "w-full", "p-2", "text-gray-900", "border", "border-gray-300", "rounded-lg", "bg-gray-50", "sm:text-xs", "focus:ring-blue-500", "focus:border-blue-500", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"], { name: "color[]", value: `${colorChoice}` });
+                        thColor.appendChild(thInputColor);
+
+                        let thSize = addElement('td', ["px-6", "py-4"], {});
+                        trtbody.appendChild(thSize);
+                        let thInputSize = addElement('input', ["block", "w-full", "p-2", "text-gray-900", "border", "border-gray-300", "rounded-lg", "bg-gray-50", "sm:text-xs", "focus:ring-blue-500", "focus:border-blue-500", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"], { name: "size[]", value: `${sizeChoice}` });
+                        thSize.appendChild(thInputSize);
+
+                        let thQuantity = addElement('td', ["px-6", "py-4"], {});
+                        trtbody.appendChild(thQuantity);
+                        let thInputQuantity = addElement('input', ["block", "w-full", "p-2", "text-gray-900", "border", "border-gray-300", "rounded-lg", "bg-gray-50", "sm:text-xs", "focus:ring-blue-500", "focus:border-blue-500", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"], { name: "quantity[]", value: `${qtyChoice}` });
+                        thQuantity.appendChild(thInputQuantity);
+
+                        inputSize.value = "";
+                        inputQty.value = "";
+                    }
+                })
+
                 if (colors.length) {
                     stocks.map(stock => {
                         let color_id = "";
@@ -338,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             })
                         })
                     })
-                }else{
+                } else {
                     containerOldOptions.classList.add('hidden');
                 }
 
@@ -366,6 +390,45 @@ document.addEventListener("DOMContentLoaded", function () {
                     })
 
                 })
+
+                fetch('../../php/Json/CategoryByProduct.php')
+                    .then(response => response.json())
+                    .then(data => {
+
+                        let categories = data.categories;
+                        let prod_cat = data.products_categories[0];
+
+                        if(categories && categories.length > 1){
+
+                            // Crée un conteneur categories
+                            let catContainer = addElement('div', ["flex", "flex-col", "shadow-md", "bg-white", "rounded-lg", "px-8", "py-4", "space-y-3", "dark:bg-gray-800"], { id: "categories" });
+                            container.appendChild(catContainer);
+
+                            // Ajoute un titre au conteneur categories
+                            let titleCategories = addElement('h2', ["text-md", "font-medium", "dark:text-white"], {}, "Collection");
+                            catContainer.appendChild(titleCategories);
+
+                            // Création du label/select pour les catégories
+                            let labelCategories = addElement('label', ["block", "mb-2", "text-sm", "font-normal", "text-gray-900", "dark:text-white"], { for: "selectCategories" }, "Collection");
+                            let selectCategories = addElement('select', ["bg-gray-50", "border", "border-gray-300", "text-gray-900", "text-sm", "rounded-lg", "focus:ring-blue-500", "focus:border-blue-500", "block", "w-full", "p-2.5", "dark:bg-gray-700", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white", "dark:focus:ring-blue-500", "dark:focus:border-blue-500"], { name: "selectCategories", id: "selectCategories" });
+                            catContainer.appendChild(labelCategories);
+                            catContainer.appendChild(selectCategories);
+
+                            categories.map(category => {
+                                if(prod_cat.category_id == category.id){
+                                // Création des options pour le select
+                                    let options = addElement('option', [], { value: `${category.id}`, selected:"" }, `${category.name}`);
+                                    selectCategories.appendChild(options);
+                                }else{
+                                    let options = addElement('option', [], { value: `${category.id}` }, `${category.name}`);
+                                    selectCategories.appendChild(options);
+                                }
+                            })
+                        }                        
+                    });
+
+                // let buttonUpdate = addElement('button', ["text-white", "bg-blue-700", "mt-5", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "w-full", "sm:w-auto", "px-5", "py-2.5", "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {type:"submit", name:"valider"}, "Mise à jour")
+                // document.getElementById('prodContainer').appendChild(buttonUpdate);
 
             } else {
                 Prod.classList.add('items-center');
