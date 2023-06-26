@@ -24,7 +24,7 @@
                     <h1 class="text-center dark:text-white text-2xl pb-6">Processus de paiement</h1>
                     <div class="dark:text-white w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <p id="messageInfo" class="text-center"></p>
+                            <div id="messageInfo" class="flex justify-center gap-2 items-center"></div>
                         </div>
                     </div>
 
@@ -32,11 +32,12 @@
         </div>
     </div>
 </div>
-
-<script type="module" src="./assets/js/products/gz.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-<script type="module" src="./assets/js/modules/darkmode.js"></script>
-
 <?php
 require_once("./php/Components/footer.php");
 ?>
+<script type="module" src="./assets/js/products/gz.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script type="module" src="./assets/js/modules/darkmode.js"></script>
+<?= !empty($script) ? $script : ''; ?>
+</body>
+</html>

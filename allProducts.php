@@ -23,11 +23,12 @@
         </div>
     </div>
 </div>
-        
+ <?php
+    require_once("./php/Components/footer.php");
+?>       
 <script type="module" src="./assets/js/products/allproducts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 <script type="module" src="./assets/js/modules/darkmode.js"></script>
-
-<?php
-    require_once("./php/Components/footer.php");
-?>
+<?= !empty($script) ? $script : ''; ?>
+</body>
+</html>

@@ -20,9 +20,6 @@ if(isset($_SESSION['id']));
           document.documentElement.classList.remove('dark')
         }
     </script>
-    <title><?php echo $title ?></title>
+    <title><?= $title ?></title>
 </head>
 <body>
-    
-</body>
-</html>

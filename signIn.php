@@ -21,6 +21,8 @@
                 $response = $user->connection($email, $hachedPassword);
                 $_SESSION["userId"] = $response["id"];
                 $_SESSION["email"] = $response["email"];
+                $_SESSION["firstname"] = $response["firstname"];
+                $_SESSION["lastname"] = $response["lastname"];
                 $_SESSION["role"] = $response["role"];
 
                 header("location:./");
@@ -64,7 +66,7 @@
                                 </div>
                                 <?php
                                 if (isset($_GET['error']) && !empty($_GET['message'])) {
-                                    echo '<div><span class="">' . htmlspecialchars($_GET['message']) . '</span></div>';
+                                    echo '<div><span class="dark:text-white">' . htmlspecialchars($_GET['message']) . '</span></div>';
                                 }
                                 ?>
                                 <button type="submit" name="signIn" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Connexion</button>
@@ -80,9 +82,11 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-<script type="module" src="./assets/js/modules/darkmode.js"></script>
-
 <?php
 require_once("./php/Components/footer.php");
 ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script type="module" src="./assets/js/modules/darkmode.js"></script>
+<?= !empty($script) ? $script : ''; ?>
+</body>
+</html>
