@@ -22,7 +22,7 @@ require_once("./php/Components/header.php");
             </div>
         </div>
 
-        <div class="pt-8">
+        <div id="lastProduct" class="pt-8">
             
         </div>
     </div>
@@ -35,6 +35,7 @@ require_once("./php/Components/header.php");
 require_once("./php/Components/footer.php");
 
 ?>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 <script type="module" src="./assets/js/modules/darkmode.js"></script>
 <?= !empty($script) ? $script : ''; ?>

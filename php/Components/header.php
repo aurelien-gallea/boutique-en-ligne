@@ -50,7 +50,7 @@
             <input type="search" name="search" id="search" placeholder="chercher un produit ..." class="w-full rounded">
             <div class="absolute top-10" id="results"></div>
           </li>
-          <li>
+          <li class="max-md:pt-2">
             <a href="<?= $home ?>" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Accueil</a>
           </li>
           <?php if (!empty($_SESSION['role'])) {
