@@ -12,8 +12,6 @@ use Classes\Prod_cat;
 
 
 $url = $_SERVER['SCRIPT_FILENAME'];
-echo $url;
-
 $path = parse_url($url, PHP_URL_PATH);
 $directory = explode('/', $path)[3];
 $destination = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME']."/".$directory;
