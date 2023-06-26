@@ -77,6 +77,13 @@ class Products {
         return $response;        
     }
 
+    public function getSearchLike($value) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE `name` LIKE ?");
+        $request->execute(['%' .$value. '%']);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response;
+    }
     // settersSQL : INSERT INTO / UPDATE / DELETE ---------------------------
 
     public function add($name, $description) {

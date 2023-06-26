@@ -4,34 +4,37 @@
       <!-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="" /> -->
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">M.A.H.</span>
     </a>
-    <?php if(!empty($_SESSION["userId"])) {?>
+    <div>
+    </div>
     <div class="flex items-center md:order-2">
 
+      <?php if (!empty($_SESSION["userId"])) { ?>
       <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-      </button>
-      <!-- Dropdown menu -->
-      <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-600" id="user-dropdown">
-        <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900 dark:text-white"><?=$_SESSION["firstname"] . " " . $_SESSION["lastname"] ?></span>
-          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><?= $_SESSION["email"] ?></span>
+          <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+        </button>
+        <!-- Dropdown menu -->
+        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-600" id="user-dropdown">
+          <div class="px-4 py-3">
+            <span class="block text-sm text-gray-900 dark:text-white"><?= $_SESSION["firstname"] . " " . $_SESSION["lastname"] ?></span>
+            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><?= $_SESSION["email"] ?></span>
+          </div>
+          <ul class="py-2" aria-labelledby="user-menu-button">
+            <li>
+              <a href="<?= $cart ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Panier</a>
+            </li>
+            <li>
+              <a href="./resume.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Commande en cours</a>
+            </li>
+            <li>
+              <a href="./profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mes infos</a>
+            </li>
+            <li>
+              <a href="./logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Déconnexion</a>
+            </li>
+          </ul>
         </div>
-        <ul class="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <a href="<?= $cart ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Panier</a>
-          </li>
-          <li>
-            <a href="./resume.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Commande en cours</a>
-          </li>
-          <li>
-            <a href="./profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mes infos</a>
-          </li>
-          <li>
-            <a href="./logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Déconnexion</a>
-          </li>
-        </ul>
-      </div>
+      <?php } ?>
       <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -39,9 +42,12 @@
         </svg>
       </button>
     </div>
-    <?php } ?>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
       <ul class="flex flex-col min-[768px]:items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
+        <li class="relative ">
+          <input type="search" name="search" id="search" placeholder="chercher un produit ..." class="w-full rounded">
+          <div class="absolute top-10" id="results"></div>
+        </li>
         <li>
           <a href="<?= $home ?>" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Accueil</a>
         </li>
@@ -73,4 +79,4 @@
   </div>
 </nav>
 
-<?php $script = '<script src="./assets/js/products/search.js"></script>' ?>
+<?php $script = '<script type="module" src="./assets/js/products/search.js"></script>' ?>

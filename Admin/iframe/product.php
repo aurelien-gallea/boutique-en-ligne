@@ -1,5 +1,16 @@
 <?php
     session_start();
+
+if (!isset($_SESSION["role"])) {
+  header("location: ../");
+  exit();
+}
+if (isset($_SESSION['role'])) {
+  if ($_SESSION["role"] !== "admin") {
+    header("location: ../");
+    exit();
+  }
+}
     $_SESSION['productID'] = $_GET['id'];
 
     $title = "Transporeurs | Admin";
