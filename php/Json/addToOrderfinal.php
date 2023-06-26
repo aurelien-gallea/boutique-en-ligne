@@ -20,7 +20,7 @@ $myOrderfinal = new Orderfinal();
 $myCart = new Cart();
 $myOrderdetails = new Orderdetails();
 $result = $myOrderdetails->getByUserId($userId);
-
+var_dump($result);
 // si la comande existe existe alors on peut continuer le tunnel d'achat
 if ($result) {
 
@@ -29,11 +29,15 @@ if ($result) {
     $carriers_price       = $result['carriers_price'];
     $product_ids          = $result['product_ids'];
     $color_ids            = $result['color_ids'];
-    $size_ids             = $result['size_ids']; 
+    $size_ids             = $result['size_ids'];
+    $product_names        = $result['product_names'];
+    $color_names          = $result['color_names'];
+    $size_names           = $result['size_names'];
+    $price_values         = $result['price_values'];
     $quantity             = $result['quantity'];
     $total_amount         = $result['total_amount'];
 
-    $orderSuccess = $myOrderfinal->addNew($deliveryFullAddress, $carriersDetails, $carriers_price, $product_ids, $color_ids, $size_ids, $quantity, $total_amount, $payement_status, $userId);
+    $orderSuccess = $myOrderfinal->addNew($deliveryFullAddress, $carriersDetails, $carriers_price, $product_ids, $color_ids, $size_ids,$product_names,$color_names,$size_names,$price_values, $quantity, $total_amount, $payement_status, $userId);
     // si la table orderfinal est rempli alors on vide les tables cart et orderdetails qui contiennent cet id_user
     if ($orderSuccess) {
         $myCart->deleteRowByUserId($userId);

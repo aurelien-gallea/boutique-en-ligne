@@ -11,7 +11,11 @@ $carriersDetails      = $data['carriersDetails'];
 $carriers_price       = $data['carriers_price'];
 $product_ids          = $data['products_ids'];
 $color_ids            = $data['color_ids'];
-$size_ids             = $data['size_ids']; 
+$size_ids             = $data['size_ids'];
+$product_names        = $data['product_names'];
+$color_names          = $data['color_names'];
+$size_names           = $data['size_names'];
+$price_values         = $data['price_values'];
 $quantity             = $data['quantity']; 
 $total_amount         = $data['total_amount']; 
  
@@ -26,7 +30,7 @@ $myOrderdetails = new Orderdetails();
 $row = $myOrderdetails->alreadyAdded($userId);
 
 if ($row == 0) {
-    $myOrderdetails->addNew($deliveryFullAddress, $carriersDetails, $carriers_price,$product_ids,$color_ids,$size_ids,$quantity,$total_amount, $userId);
+    $myOrderdetails->addNew($deliveryFullAddress, $carriersDetails, $carriers_price,$product_ids,$color_ids,$size_ids,$product_names,$color_names,$size_names,$price_values,$quantity,$total_amount, $userId);
 } else {
     $myOrderdetails->updateDeliveryFullAddress($deliveryFullAddress, $userId);
     $myOrderdetails->updateCarriersDetails($carriersDetails, $userId);
@@ -34,6 +38,10 @@ if ($row == 0) {
     $myOrderdetails->updateProduct_ids($product_ids, $userId);
     $myOrderdetails->updateColor_ids($color_ids, $userId);
     $myOrderdetails->updateSize_ids($size_ids, $userId);
+    $myOrderdetails->updateProduct_names($product_names, $userId);
+    $myOrderdetails->updateColor_names($color_names,$userId);
+    $myOrderdetails->updateSize_names($size_names,$userId);
+    $myOrderdetails->updatePrice_values($price_values,$userId);
     $myOrderdetails->updateQuantity($quantity, $userId);
     $myOrderdetails->updateTotal_amount($total_amount, $userId);
 

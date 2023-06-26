@@ -36,7 +36,7 @@ searchBar.addEventListener("keyup", () => {
             }
           });
         } else {
-          alert("problème detecté merci de contacter un administrateur.");
+          alert("problème détecté merci de contacter un administrateur.");
         }
       })
       .catch(function (error) {
