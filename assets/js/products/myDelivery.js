@@ -227,7 +227,7 @@ for (let i = 0; i < carriersRadio.length; i++) {
 goBack.addEventListener("click", () => {
   window.history.back();
 });
-// on récupère le panier actuel
+// on récupère le panier actuel pour aider a remplir la table orderdetails
 fetch(`${keyPath}checkMyCart.php`)
   .then((response) => response.json())
   .then((values) => {
@@ -235,6 +235,11 @@ fetch(`${keyPath}checkMyCart.php`)
     let stringProdIds = "";
     let stringColorIds = "";
     let stringSizeIds = "";
+    let stringProdNames ="";
+    let stringColorNames = "";
+    let stringSizeNames ="";
+    let stringPriceValues ="";
+
     const cart = values.cart;
     let arrayPrices = [];
 
@@ -243,10 +248,18 @@ fetch(`${keyPath}checkMyCart.php`)
         stringProdIds += `${product.productId}`;
         stringColorIds += `${product.colorId}`;
         stringSizeIds += `${product.sizeId}`;
+        stringProdNames += `${product.productName}`;
+        stringColorNames += `${product.color}`;
+        stringSizeNames += `${product.size}`;
+        stringPriceValues += `${product.price}`;
       } else {
         stringProdIds += `${product.productId}, `;
         stringColorIds += `${product.colorId}, `;
         stringSizeIds += `${product.sizeId}, `;
+        stringProdNames += `${product.productName}, `;
+        stringColorNames += `${product.color}, `;
+        stringSizeNames += `${product.size}, `;
+        stringPriceValues += `${product.price}, `;
       }
       arrayPrices.push(product.price * product.quantity);
     });
@@ -258,6 +271,10 @@ fetch(`${keyPath}checkMyCart.php`)
     console.log(stringProdIds);
     console.log(stringColorIds);
     console.log(stringSizeIds);
+    console.log(stringProdNames);
+    console.log(stringColorNames);
+    console.log(stringSizeNames);
+    console.log(stringPriceValues);
     // le bouton étape suivante
     confirmAll
       .addEventListener("click", () => {
@@ -275,6 +292,10 @@ fetch(`${keyPath}checkMyCart.php`)
           products_ids: stringProdIds,
           color_ids: stringColorIds,
           size_ids: stringSizeIds,
+          product_names: stringProdNames,
+          color_names: stringColorNames,
+          size_names:stringSizeNames,
+          price_values: stringPriceValues,
           quantity: cart.length,
           total_amount: totalAmount.toFixed(2),
         };

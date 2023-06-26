@@ -17,11 +17,13 @@ spl_autoload_register(function($classes) {
     require_once('../' .$classes. '.php');
 });
 use Classes\Cart;
-
+use classes\Orderdetails;
 $myCart = new Cart();
+$myOrderdetails = new Orderdetails();
 
 $row = $myCart->productAlreadyAdded($productId, $colorId, $sizeId, $userId);
-
+$rowOrder = $myOrderdetails->alreadyAdded($userId);
+if ($rowOrder !== 0) $myOrderdetails->deleteRow($userId);
 if ($row !== 0) {
     $oldCart = $myCart->getQtyByRow($productId, $colorId, $sizeId, $userId);
     $oldQty = $oldCart['quantity'];

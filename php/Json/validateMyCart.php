@@ -7,10 +7,13 @@ spl_autoload_register(function($classes) {
     require_once('../' .$classes. '.php');
 });
 use Classes\Cart;
+use Classes\Orderdetails;
+
 // Récupérer les données envoyées depuis la requête
 $data = json_decode(file_get_contents('php://input'), true);
 
 $myCart = new Cart();
+$myOrderdetails = new Orderdetails();
 
     foreach ($data as $key => $element) {
         
@@ -22,7 +25,8 @@ $myCart = new Cart();
         $priceId = $element['price_id'];
         
         $cart = $myCart->getById($cartId); // <-- ici on récupère les valeurs de la bdd qu'on va comparer aux notres
-        
+        $rowOrder = $myOrderdetails->alreadyAdded($userId);
+        if ($rowOrder !== 0) $myOrderdetails->deleteRow($userId);
         // condition pour update
         if ($cart['id'] === $cartId && $cart['product_id'] === $productId) {
             
@@ -33,6 +37,8 @@ $myCart = new Cart();
 
                 if ($cart['quantity'] != $quantity) $myCart->updateQuantity($quantity, $cartId);
                 if ($cart['size_id'] != $sizeId) $myCart->updateSize_id($sizeId, $cartId);
+                
+                // si le panier est changé on détruit la ligne orderdetails
             }
             
         }
