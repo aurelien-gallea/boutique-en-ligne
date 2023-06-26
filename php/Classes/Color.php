@@ -121,7 +121,6 @@ class Color extends SearchByProduct_id { // Déclaration de la classe User qui h
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
-
     }
 
 

@@ -97,7 +97,6 @@ class Size { // Déclaration de la classe User qui hérite de la classe DBManage
         $request = $bdd->prepare("DELETE FROM ".$this::TABLE_NAME." WHERE id = ? ");
         $request->execute([$id]);
         return $request;
-
     }
 
 

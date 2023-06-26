@@ -2,7 +2,7 @@ import { addElement } from "../modules/addElement.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     
-    fetch('./php/Json/productCard.php')
+    fetch('./php/Json/product.php')
         .then(response => response.json())
         .then(data => {
             

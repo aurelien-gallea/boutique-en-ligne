@@ -83,6 +83,14 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         return $response; 
     }
 
+    public function getBySizeId($sizeId) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE size_id = ? ");
+        $request->execute([$sizeId]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
     //  inner join multiple
 
     // recuperer tout le stock par id de produit avec la valeur des couleurs
