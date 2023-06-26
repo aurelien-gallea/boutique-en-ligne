@@ -26,11 +26,12 @@
         </div>
     </div>
 </div>
-
+<?php
+require_once("./php/Components/footer.php");
+?>
 <script type="module" src="./assets/js/products/myCart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 <script type="module" src="./assets/js/modules/darkmode.js"></script>
 <?= !empty($script) ? $script : ''; ?>
-<?php
-require_once("./php/Components/footer.php");
-?>
+</body>
+</html>
