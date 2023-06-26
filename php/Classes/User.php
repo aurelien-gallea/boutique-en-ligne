@@ -134,7 +134,7 @@ class User {
         return $response;
     }
     public function deleteUser($userId) {
-        require ('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("DELETE FROM " . $this::TABLE_NAME . " WHERE id = ?");
         $request->execute([$userId]);
         return $request;
@@ -142,23 +142,23 @@ class User {
         
     // email
     public function updateEmail($email, $id) {
-        require ('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET email = ? WHERE id = ?");
         $request->execute([$this->setEmail($email), $id]);
         return $request;
     }
 
     // password
-    public function updatePassword($password, $id) {
-        require('../DB/DBManager.php');
-        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET password = ?  WHERE id = ? ");
-        $request->execute([$this->setPassword($password),$id]);
+    public function updatePassword($pass, $id) {
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET `password` = ?  WHERE id = ? ");
+        $request->execute([$this->setPassword($pass),$id]);
         return $request;
     }
 
     // firstname
     public function updateFirstname($firstname, $id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET firstname = ?  WHERE id = ? ");
          $request->execute([$this->setFirstname($firstname),$id]);
         return $request;
@@ -167,7 +167,7 @@ class User {
 
     // lastname
     public function updateLastname($lastname, $id) {
-        require('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET lastname = ?  WHERE id = ? ");
          $request->execute([$this->setLastname($lastname),$id]);
         return $request;
@@ -176,7 +176,7 @@ class User {
 
     // role
     public function updateUserRole($newRole, $id) {
-        require ('../DB/DBManager.php');
+        file_exists('../DB/DBManager.php') ? require('../DB/DBManager.php') : require('./php/DB/DBManager.php');
         $request = $bdd->prepare("UPDATE " . $this::TABLE_NAME . " SET role = ? WHERE id = ?");
         $request->execute([$this->setRole($newRole), $id]);
         return $request;
