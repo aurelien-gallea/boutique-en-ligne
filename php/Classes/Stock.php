@@ -83,7 +83,32 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
         return $response; 
     }
 
-    //  inner join multiple
+    public function getBySizeId($sizeId) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE size_id = ? ");
+        $request->execute([$sizeId]);
+        $response = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $response; 
+    }
+
+    public function findBySize($sizeId) {
+        require('../DB/DBManager.php');
+    
+        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE size_id = ?");
+        $request->execute([$sizeId]);
+        $response = $request->fetch(PDO::FETCH_ASSOC);
+    
+        if ($response) {
+            $stockInstance = new Stock();
+            $stockInstance->setId($response['id']);
+            $stockInstance->setSize_id($response['size_id']);
+            $stockInstance->setQuantity($response['quantity']);
+    
+            return $stockInstance;
+        } else {
+            return null;
+        }
+    }
 
     // recuperer tout le stock par id de produit avec la valeur des couleurs
     public function getAllInfosByProductId($productId) {
@@ -182,12 +207,12 @@ class Stock { // Déclaration de la classe User qui hérite de la classe DBManag
 
     // }
 
-    // // quantity
-    // public function updateQuantity($quantity, $id) {
-    //     require('../DB/DBManager.php');
-    //     $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET quantity = ?  WHERE id = ? ");
-    //      $request->execute([$this->setQuantity($quantity),$id]);
-    //     return $request;
+    // quantity
+    public function updateQuantity($id, $quantity) {
+        require('../DB/DBManager.php');
+        $request = $bdd->prepare("UPDATE ".$this::TABLE_NAME." SET quantity = ?  WHERE id = ? ");
+        $request->execute([$quantity, $id]);
+        return $request;
 
-    // }
+    }
 }

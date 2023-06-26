@@ -12,7 +12,7 @@ if (isset($_SESSION['role'])) {
   }
 }
 
-  $title = "Transporeurs | Admin";
+  $title = "Collection | Admin";
   $home = "../";
   $order = "#";
   $products = "./allProducts.php";

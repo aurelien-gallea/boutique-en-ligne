@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Créer les éléments th pour chaque contenu (Id, Nom) et les ajouter au trtbody
                         let thContentId = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" }, `${product.id}`);
                         let thContentName = addElement('td', ["px-6", "py-4"], {});
-                        let pathProduct = addElement('a', [], {href:`./product.php?name=${product.name}&id=${product.id}`}, `${product.name}`);
+                        let pathProduct = addElement('a', [], {href:`./product.php?id=${product.id}`}, `${product.name}`);
                         trtbody.appendChild(thContentId);
                         trtbody.appendChild(thContentName);
                         thContentName.appendChild(pathProduct);

@@ -53,8 +53,6 @@ if(isset($_POST['valider'])){
                 $img = new Images();
                 $newImg = $img->add($image, $newProductId);
             };
-            
-;
         }
     }
     

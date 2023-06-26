@@ -41,12 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     tbody.appendChild(trtbody);
 
                     let thContentId = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" }, `${carrier.id}`);
-                    let thContentName = addElement('td', ["px-6", "py-4"], {}, `${carrier.name}`);
+                    let thContentName = addElement('td', ["px-6", "py-4"], {});
+                    let pathCarrier = addElement('a', [], {href:`./carrier.php?id=${carrier.id}`}, `${carrier.name}`);
                     let thContentDescription = addElement('td', ["px-6", "py-4"], {}, `${carrier.description}`);
                     let thContentPrice = addElement('td', ["px-6", "py-4"], {}, `${carrier.price} €`)
                     let thContentDelete = addElement('td', ["px-6", "py-4"], {});
                     trtbody.appendChild(thContentId);
                     trtbody.appendChild(thContentName);
+                    thContentName.appendChild(pathCarrier);
                     trtbody.appendChild(thContentDescription);
                     trtbody.appendChild(thContentPrice);
                     trtbody.appendChild(thContentDelete);
