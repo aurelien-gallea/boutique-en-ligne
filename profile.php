@@ -1,4 +1,17 @@
 <?php
+session_start();
+if (!isset($_SESSION['userId'])) {
+    header('location:./signIn.php');
+    exit();
+}
+$userId = $_SESSION['userId'];
+
+$title = "Résumé de la commande";
+$home = "./";
+$admin = "./admin/";
+$products = "./allproducts.php";
+$cart = "./mycart.php";
+
 require_once("./php/Components/head.php");
 require_once("./php/Components/header.php");
 
@@ -34,7 +47,12 @@ require_once("./php/Components/header.php");
 
 
 </form>
-
 <?php
 require_once("./php/Components/footer.php");
 ?>
+<script type="module" src="./assets/js/products/myCurrentOrder.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script type="module" src="./assets/js/modules/darkmode.js"></script>
+<?= !empty($script) ? $script : ''; ?>
+</body>
+</html>

@@ -23,6 +23,3 @@ if(isset($_SESSION['id']));
     <title><?= $title ?></title>
 </head>
 <body>
-    
-</body>
-</html>
