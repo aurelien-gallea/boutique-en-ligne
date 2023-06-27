@@ -4,11 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('../../php/Json/AllCategories.php')
         .then(response => response.json())
         .then(data => {
-            // console.log(data);
+            
             let categories = data.categories;
             let products = data.product_count
-            // console.log(categories);
-            console.log(products);
             
             if (categories && categories.length) {
 
@@ -37,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 thead.after(tbody);
 
                 categories.map(category => {
-                    
+
                     let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
                     tbody.appendChild(trtbody);
 
@@ -50,12 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if(products.length !== 0){
                        products.map(product =>{
-                            console.log(product);
                             if(category.id == product.category_id){
                                 let thContentNbProduct = addElement('td', ["px-6", "py-4"], {}, `${product.product_count}`);
-                                trtbody.appendChild(thContentNbProduct);
-                            }else{
-                                let thContentNbProduct = addElement('td', ["px-6", "py-4"], {}, ``);
                                 trtbody.appendChild(thContentNbProduct);
                             }
                         }) 
