@@ -26,7 +26,7 @@ if (isset($_SESSION['role'])) {
 
 ?>
 
-  <main class="sm:pl-64 pt-[64px] min-h-screen bg-gray-100 dark:bg-gray-700">
+  <main class="sm:pl-64 pt-[64px] min-h-screen bg-[#FFF9F5]">
     
   </main>
 

@@ -25,7 +25,7 @@ if (isset($_SESSION['role'])) {
   require_once("../../php/Components/headerAdmin.php");
 
 ?>
-  <main class="w-full sm:pl-64 pt-[64px] min-h-screen bg-gray-100 dark:bg-gray-700" id="main">
+  <main class="w-full sm:pl-64 pt-[64px] min-h-screen bg-[#FFF9F5]" id="main">
     <div id="catContainer" class="flex flex-col p-4 justify-start items-end w-full overflow-x-auto">
       <a id="addCat" href="./addCategory.php" class="text-white w-auto mb-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
