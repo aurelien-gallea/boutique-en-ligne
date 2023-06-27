@@ -17,7 +17,7 @@ require_once("../../php/Components/headerAdmin.php");
 
 ?>
 
-<main class="sm:pl-64 pt-[64px] min-h-screen bg-[#FFF9F5]">
+<main class="sm:pl-64 pt-[64px] min-h-screen bg-[#FFF9F5] dark:bg-gray-700">
     <div class="flex pt-4 justify-center w-full pb-5">
         <form class="flex flex-col w-11/12 md:w-5/12 h-full space-y-5" action="../../php/Controller/updateCarrier.php" method="POST">
             <div class="flex flex-col shadow-md bg-white rounded-lg px-8 py-4 space-y-3 dark:bg-gray-800 dark:border">
