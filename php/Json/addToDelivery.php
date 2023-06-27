@@ -24,7 +24,7 @@ use Classes\Delivery;
 $myDelivery = new Delivery();
 
 // condition pour la mise à jour où l'ajout si le nom de l'adresse existe déjà
-$row = $myDelivery->avalaibleName($nameAddress);
+$row = $myDelivery->avalaibleName($nameAddress, $userId);
 
 if ($row == 0) {
     $myDelivery->addNew($nameAddress, $firstname, $lastname, $address, $postalCode, $city, $country, $phone, $userId);

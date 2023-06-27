@@ -37,7 +37,7 @@ setTimeout(() => {
                     if (delay < 0) {
                       clearInterval(remaining);
 
-                      window.location.href = "./"; // <--- a modifier plus tard vers "commande passé";
+                      window.location.href = "./myorders.php"; 
                     }
                   }, 1000);            
           } else {
