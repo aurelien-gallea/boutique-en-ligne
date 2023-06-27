@@ -27,7 +27,7 @@ require_once("../../php/Components/head.php");
 require_once("../../php/Components/headerAdmin.php");
 ?>
 
-<main class="w-full sm:pl-64 pt-[64px] min-h-screen bg-[#FFF9F5]" id="main">
+<main class="w-full sm:pl-64 pt-[64px] min-h-screen bg-[#FFF9F5] dark:bg-gray-700" id="main">
   <div class="flex flex-col items-center p-4 w-full overflow-x-auto">
     <form id="prodContainer" class="flex flex-col w-11/12 md:w-10/12 lg:w-10/12 xl:w-8/12 h-full space-y-5" method="POST" action="../../php/Controller/updateProduct.php" enctype="multipart/form-data">
 
