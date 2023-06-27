@@ -4,19 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('../../php/Json/AllCategories.php')
         .then(response => response.json())
         .then(data => {
-            
+            console.log(data);
             let categories = data.categories;
             let products = data.product_count
             
             if (categories && categories.length) {
 
-                let ContainerTable = addElement('div', ["flex", "flex-col", "w-full", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border"], {});
+                let ContainerTable = addElement('div', ["flex", "flex-col", "w-full", "shadow-md", "bg-[#AD785D]/30", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border"], {});
                 document.getElementById('catContainer').appendChild(ContainerTable);
 
                 let tableCat = addElement('table', ["w-full", "text-sm", "text-left", "text-gray-500", "dark:text-gray-400"], {});
                 ContainerTable.appendChild(tableCat);
 
-                let thead = addElement('thead', ["text-xs", "text-gray-700", "uppercase", "bg-gray-50", "dark:bg-gray-700", "dark:text-gray-400"], {});
+                let thead = addElement('thead', ["text-xs", "text-gray-700", "uppercase", "bg-[#AD785D]/30", "dark:bg-gray-700", "dark:text-gray-400"], {});
                 tableCat.appendChild(thead);
 
                 let trthead = addElement('tr', [], {});
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 categories.map(category => {
 
-                    let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
+                    let trtbody = addElement('tr', ["bg-[#FFF9F5]", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
                     tbody.appendChild(trtbody);
 
                     let thContentId = addElement('th', ["px-6", "py-4", "font-normal", "text-gray-900", "whitespace-nowrap", "dark:text-white"], { scope: "row" }, `${category.id}`);
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     trtbody.appendChild(thContentId);
                     trtbody.appendChild(thContentName);
                     thContentName.appendChild(pathCat);
-
+                    
                     if(products.length !== 0){
                        products.map(product =>{
                             if(category.id == product.category_id){

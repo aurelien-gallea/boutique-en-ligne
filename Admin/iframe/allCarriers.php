@@ -26,12 +26,12 @@ if (isset($_SESSION['role'])) {
 
 ?>
 
-  <main class="w-full sm:pl-64 pt-[64px] min-h-screen bg-[#FFF9F5]" id="main">
-    <div id="carrierContainer" class="flex flex-col p-4 justify-start items-end w-full overflow-x-auto">
-      <a id="addCarrier" href="./addCarrier.php" class="text-white w-auto mb-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <main class="w-full sm:pl-64 pt-[64px] min-h-screen bg-[#FFF9F5] dark:bg-gray-700" id="main">
+    <div id="carrierContainer" class="flex flex-col p-4 justify-start items-end w-full">
+      <a id="addCarrier" href="./addCarrier.php" class=" text-center w-[180px] md:max-w-[250px] xl:max-w-[200px] text-[#AD785D] bg-white border border-[#AD785D] focus:outline-none hover:bg-[#AD785D] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm  py-2.5 mr-2 mb-2 dark:bg-[#FFF9F5]/30 dark:text-[#AD785D] dark:hover:text-white dark:border-[#AD785D] dark:hover:bg-[#AD785D] dark:focus:ring-gray-700">
+        <!-- <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path>
-        </svg>
+        </svg> -->
         Ajouter un Transporteur
       </a>
     </div>
