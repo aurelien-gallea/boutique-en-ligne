@@ -19,8 +19,8 @@
 <div class="min-h-screen dark:text-white bg-[#AD785D]/30">
     <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
         <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
-            <h1 class="text-center">Mon Panier</h1>
-            <div class="text-center text-xl">Id utilisateur = <?php echo isset($_SESSION['userId']) ? $_SESSION['userId'] : null ?></div>
+            <h1 class="text-center text-3xl my-5">Mon Panier</h1>
+            
             <form id="confirmCart" action="" method="POST">
 
             </form>
