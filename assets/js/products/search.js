@@ -28,7 +28,7 @@ searchBar.addEventListener("keyup", () => {
 
               const link = addElement(
                 "a",
-                ["block", "bg-white", "p-4", "border"],
+                ["block", "bg-white", "p-4", "dark:bg-gray-800", "dark:text-white", "border-b", "border-white"],
                 { href: `./product.php?name=${nameProduct}&id=${idProduct}` },
                 `${nameProduct}`
               );

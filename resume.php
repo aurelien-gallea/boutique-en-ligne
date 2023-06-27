@@ -16,7 +16,7 @@ $cart = "./mycart.php";
 require_once("./php/Components/head.php");
 require_once("./php/Components/header.php");
 ?>
-<div class="min-h-screen">
+<div class="min-h-screen bg-[#AD785D]/30">
     <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
         <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
             <section id="" class="bg-gray-50 dark:bg-gray-900 min-h-screen">

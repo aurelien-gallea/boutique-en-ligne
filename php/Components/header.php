@@ -1,10 +1,9 @@
 <header>
-
-  <nav class="bg-white border-gray-200 dark:bg-gray-800">
+  <nav class=" border-gray-200 bg-[#FFF9F5] dark:bg-gray-800">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="<?= $home ?>" class="flex items-center">
         <!-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="" /> -->
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">M.A.H.</span>
+        <span class="self-center text-2xl font-semibold whitespace-nowrap text-[#AD785D]">M. A. H.</span>
       </a>
       <div>
         </div>
@@ -45,30 +44,30 @@
         </button>
       </div>
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
-        <ul class="flex flex-col min-[768px]:items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
-          <li class="relative ">
-            <input type="search" name="search" id="search" placeholder="chercher un produit ..." class="w-full rounded">
-            <div class="absolute top-10 z-50" id="results"></div>
+        <ul class="flex flex-col min-[768px]:items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-[#FFF9F5] md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
+          <li class="relative flex justify-end">
+            <input type="search" name="search" id="search" placeholder="chercher un produit ..." class="w-full md:w-2/3 lg:w-full rounded">
+            <div class="absolute top-10 left-0 z-50 w-full dark:bg-gray-800" id="results"></div>
           </li>
           <li class="max-md:pt-2">
-            <a href="<?= $home ?>" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Accueil</a>
+            <a href="<?= $home ?>" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-[#AD785D] md:p-0 md:dark:text-[#AD785D]" aria-current="page">Accueil</a>
           </li>
           <?php if (!empty($_SESSION['role'])) {
             if ($_SESSION['role'] === "admin") { ?>
             <li>
-              <a href="<?= $admin ?>" target="_blank" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
+              <a href="<?= $admin ?>" target="_blank" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
             </li>
             <?php }
         } ?>
         <li>
-          <a href="<?= $products ?>" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Tous les produits</a>
+          <a href="<?= $products ?>" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Tous les produits</a>
         </li>
         <?php if (empty($_SESSION['userId'])) { ?>
           <li>
-            <a href="./signIn.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Connexion</a>
+            <a href="./signIn.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Connexion</a>
           </li>
           <?php } ?>
-          <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+          <button id="theme-toggle" type="button" class="text-[#AD785D] dark:text-[#AD785D] hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
             </svg>

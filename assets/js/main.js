@@ -14,20 +14,20 @@ document.addEventListener("DOMContentLoaded", function () {
             if (products.length) {
                 let count = 0;
                 products.map(product => {
-                    if(count >= 5){
+                    if(count >= 10){
                         return;
                     }
                     let productImg = images.filter(image => image.product_id === product.id);
                     // console.log(productImg);
                     if (productImg.length == 1) {
-                        let card = addElement('div', ["flex", "flex-col"], {});
+                        let card = addElement('a', ["flex", "flex-col", "rounded-md", "shadow"], {href:`./product.php?name=${product.name}&id=${product.id}`});
                         document.getElementById('lastProduct').appendChild(card);
-                        let img = addElement('img', ['max-w-none', 'w-[150px]', 'h-[250px]'], { src: `./public/img/product/${productImg[0].path}` });
+                        let img = addElement('img', ['max-w-none', 'w-[150px]', 'h-[250px]', "rounded-md"], { src: `./public/img/product/${productImg[0].path}` });
                         card.appendChild(img);
                     } else {
-                        let card = addElement('div', ["flex", "flex-col"], {});
+                        let card = addElement('a', ["flex", "flex-col", "rounded-md", "shadow"], {href:`./product.php?name=${product.name}&id=${product.id}`});
                         document.getElementById('lastProduct').appendChild(card);
-                        let img = addElement('img', ['max-w-none', 'w-[150px]', 'h-[250px]'], { src: `./public/img/product/${productImg[0].path}` });
+                        let img = addElement('img', ['max-w-none', 'w-[150px]', 'h-[250px]', "rounded-md"], { src: `./public/img/product/${productImg[0].path}` });
                         card.appendChild(img);
 
                         card.addEventListener('mouseover', () => {
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     count++;
                 })
 
-                let btnAllProducts = addElement('button', ["w-1/3", "text-white", "bg-blue-700", "hover:bg-blue-800", "focus:outline-none", "focus:ring-4", "focus:ring-blue-300", "font-medium", "rounded-full", "text-sm", "px-5", "py-2.5", "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {type:"button"}, "Voir plus");
+                let btnAllProducts = addElement('button', ["w-1/2", "md:w-1/3", "xl:max-w-[300px]", "text-[#AD785D]", "bg-white", "border", "border-[#AD785D]", "focus:outline-none", "hover:bg-[#AD785D]", "hover:text-white", "focus:ring-4", "focus:ring-gray-200", "font-medium", "rounded-full", "text-sm", "px-5", "py-2.5", "mr-2", "mb-2", "dark:bg-[#FFF9F5]/30", "dark:text-[#AD785D]", "dark:hover:text-white", "dark:border-[#AD785D]", "dark:hover:bg-[#AD785D]", "dark:focus:ring-gray-700"], {type:"button"}, "Voir plus");
                 document.getElementById('lastProduct').after(btnAllProducts);
 
                 btnAllProducts.addEventListener('click', () => {
@@ -52,11 +52,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         return;
                     }
                     
-                    let title = addElement('h2', ["text-start"], {}, `${category.name}`);
-                    btnAllProducts.after(title);
+                    let titlePlace = addElement('div', ["flex", "w-full", "max-w-screen-lg", "px-2", "mt-4"],{});
+                    btnAllProducts.after(titlePlace)
+                    let title = addElement('h2', ["text-2xl", "xl:text-4xl", "text-[#AD785D]", "font-bold", "text-start"], {}, `Nos ${category.name}s...`);
+                    titlePlace.appendChild(title);
 
-                    let containerCat = addElement('div', ["flex", "overflow-x-auto", "overflow-y-hidden", "gap-6", "w-full", "pt-4", "scroll-smooth", "mb-2"], {id:`category-${category.name}`});
-                    title.after(containerCat);
+                    let containerCat = addElement('div', ["flex", "overflow-x-auto", "overflow-y-hidden", "max-w-screen-lg", "bg-[#AD785D]/30", "dark:bg-gray-700", "rounded-md", "gap-6", "w-full",  "px-4", "py-4", "scroll-smooth", "my-2"], {id:`category-${category.name}`});
+                    titlePlace.after(containerCat);
 
                     let productCat = products_categories.filter(item => item.category_id === category.id);
                     products.map(product => {
@@ -66,17 +68,18 @@ document.addEventListener("DOMContentLoaded", function () {
                         if(ProdCat.length){
                             
                             let productImg = images.filter(image => image.product_id === ProdCat[0].product_id);
+
                             if (productImg.length == 1) {
                                 
-                                let card = addElement('div', ["flex", "flex-col"], {});
+                                let card = addElement('a', ["flex", "flex-col", "rounded-md", "shadow"], {href:`./product.php?name=${product.name}&id=${product.id}`});
                                 containerCat.appendChild(card);
-                                let img = addElement('img', ['max-w-none', 'w-[150px]', 'h-[250px]'], { src: `./public/img/product/${productImg[0].path}` });
+                                let img = addElement('img', ['max-w-none', 'w-[150px]', 'h-[250px]', "rounded-md"], { src: `./public/img/product/${productImg[0].path}` });
                                 card.appendChild(img);
                             } else {
 
-                                let card = addElement('div', ["flex", "flex-col"], {});
+                                let card = addElement('a', ["flex", "flex-col", "rounded-md", "shadow"], {href:`./product.php?name=${product.name}&id=${product.id}`});
                                 containerCat.appendChild(card);
-                                let img = addElement('img', ['max-w-none', 'w-[150px]', 'h-[250px]'], { src: `./public/img/product/${productImg[0].path}` });
+                                let img = addElement('img', ['max-w-none', 'w-[150px]', 'h-[250px]', "rounded-md"], { src: `./public/img/product/${productImg[0].path}` });
                                 card.appendChild(img);
         
                                 card.addEventListener('mouseover', () => {
@@ -88,7 +91,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             }
                         }
                     })
-                    let btnCategories = addElement('button', ["w-1/3", "text-white", "bg-blue-700", "hover:bg-blue-800", "focus:outline-none", "focus:ring-4", "focus:ring-blue-300", "font-medium", "rounded-full", "text-sm", "px-5", "py-2.5", "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {type:"button"}, "Voir plus");
+            
+                    let btnCategories = addElement('button', ["w-1/2", "md:w-1/3", "xl:max-w-[300px]", "text-[#AD785D]", "bg-white", "border", "border-[#AD785D]", "focus:outline-none", "hover:bg-[#AD785D]", "hover:text-white", "focus:ring-4", "focus:ring-gray-200", "font-medium", "rounded-full", "text-sm", "px-5", "py-2.5", "mr-2", "mb-2", "dark:bg-[#FFF9F5]/30", "dark:text-[#AD785D]", "dark:hover:text-white", "dark:border-[#AD785D]", "dark:hover:bg-[#AD785D]", "dark:focus:ring-gray-700"], {type:"button"}, "Voir plus");
                     containerCat.after(btnCategories);
 
                     btnCategories.addEventListener('click', () => {

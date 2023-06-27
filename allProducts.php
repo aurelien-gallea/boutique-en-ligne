@@ -12,7 +12,7 @@
     require_once("./php/Components/header.php");
 ?>
 
-<div class="min-h-screen">
+<div class="min-h-screen bg-[#AD785D]/30">
     <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
         <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
             <div class="flex justify-center lg:max-w-screen-xl">
