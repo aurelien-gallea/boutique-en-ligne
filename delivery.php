@@ -71,11 +71,11 @@
 
 <div class="min-h-screen bg-[#AD785D]/30">
     <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
-        <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
+        <div class="min-h-screen shadow-md lg:min-w-[1024px] bg-[#AD785D]/30 dark:bg-gray-700">
             <h1 class="text-center">Mon adresse de livraison</h1>
-            <section id="myChoice" class="bg-gray-50 dark:bg-gray-900">
+            <section id="myChoice" class="bg-transparent ">
                 <div class="flex flex-col items-center px-6 py-8 mx-auto ">
-                    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="w-full bg-[#FFF9F5] rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h2 class="text-2xl text-center font-bold leading-tight tracking-tight text-gray-900  dark:text-white">
                                 Où doit-on vous livrer ?
@@ -91,9 +91,9 @@
                 </div>
             </section>
             <!-- bloc adresses existantes -->
-            <section id="myAddress" class="bg-gray-50 dark:bg-gray-900 hidden">
+            <section id="myAddress" class="bg-transparent  hidden">
                 <div class="flex flex-col items-center px-6 py-8 mx-auto  ">
-                    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="w-full bg-[#FFF9F5] rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h3 class="text-xl font-bold leading-tight tracking-tight text-gray-900  dark:text-white">
                                 Sélectionnez votre adresse de livraison
@@ -125,7 +125,7 @@
             </section>
 
             <!-- bloc nouvelle adresse -->
-            <section id="newAddress" class="bg-gray-50 dark:bg-gray-900 hidden">
+            <section id="newAddress" class="bg-transparent  hidden">
                 <div class="flex flex-col items-center px-6 py-8 mx-auto ">
 
                     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -191,7 +191,7 @@
             </section>
 
             <!-- bloc adresse selectionné -->
-            <section id="nextAddress" class="bg-gray-50 dark:bg-gray-900 hidden">
+            <section id="nextAddress" class="bg-transparent  hidden">
                 <div class="flex flex-col items-center px-6 py-8 mx-auto ">
 
                     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -211,7 +211,7 @@
             </section>
 
             <!-- bloc livreurs -->
-            <section id="carriers" class="bg-gray-50 dark:bg-gray-900 hidden">
+            <section id="carriers" class="bg-transparent  hidden">
                 <div class="flex flex-col items-center px-6 py-8 mx-auto ">
 
                     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center py-3 bg-gray-50 dark:bg-gray-900">
+                <div class="flex gap-3 justify-center pt-3 bg-transparent ">
                     <button type="button" id="goBack" class="hidden border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Retour au panier</button>
                     <button type="button" id="confirmAll" class="hidden border rounded-full px-3 py-2 md:px-4 md:py-3 leading-tight tracking-tight text-gray-900  dark:text-white">Étape suivante</button>
                 </div>

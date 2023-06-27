@@ -17,11 +17,11 @@
 ?>
 
 <div class="min-h-screen dark:text-white bg-[#AD785D]/30">
-    <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800">
-        <div class="min-h-screen shadow-md bg-gray-50 lg:min-w-[1024px] dark:bg-gray-700">
+    <div class="flex flex-col lg:items-center min-h-screen w-full dark:bg-gray-800 ">
+        <div class="min-h-screen shadow-md bg-[#AD785D]/30 lg:min-w-[1024px] dark:bg-gray-700">
             <h1 class="text-center text-3xl my-5">Mon Panier</h1>
             
-            <form id="confirmCart" action="" method="POST">
+            <form id="confirmCart" class="bg-[#FFF9F5] dark:bg-gray-800" action="" method="POST">
 
             </form>
         </div>

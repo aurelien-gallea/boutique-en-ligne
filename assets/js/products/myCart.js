@@ -16,7 +16,7 @@ fetch(`${keyPath}checkMyCart.php`)
         const item = data.cart[key];
 
         let totalPrice = item.price * item.quantity;
-        const dad = addElement("div", ["flex", "gap-3", "items-center", "my-2", "border", "p-2", "dark:text-white"], {});
+        const dad = addElement("div", ["flex", "gap-3", "items-center", "my-2", "border", "p-2", "dark:text-white", "dark:border-gray-700"], {});
         const child0 = addElement("img", ["object-cover", "h-full", "w-6"], {
           src: `Public/img/product/${item.imagePath}`,
         });
