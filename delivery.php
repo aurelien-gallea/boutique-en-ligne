@@ -52,7 +52,7 @@
             $country    = htmlspecialchars($_POST['country']);
             $phone      = htmlspecialchars($_POST['phone']);
 
-            if ($myDelivery->avalaibleName($nameAddress) === 0) {
+            if ($myDelivery->avalaibleName($nameAddress, $userId) === 0) {
                 $myDelivery->addNew($nameAddress, $firstname, $lastname, $address, $postalCode, $city, $country, $phone, $userId);
             }
         }
