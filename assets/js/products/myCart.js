@@ -53,7 +53,7 @@ fetch(`${keyPath}checkMyCart.php`)
         const child6 = addElement("div", [], {}, `${totalPrice.toFixed(2)} €`);
         const child7 = addElement(
           "button",
-          ["btnDelete", "py-2", "px-5",  "text-white", "bg-blue-700", "hover:bg-blue-800", "focus:outline-none", "focus:ring-4", "focus:ring-blue-300", "font-medium", "rounded-full","px-2",  "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"],
+          ["btnDelete", "text-center", "w-[180px]", "md:max-w-[250px]", "xl:max-w-[200px]", "text-[#AD785D]", "bg-white", "border", "border-[#AD785D]", "focus:outline-none", "hover:bg-[#AD785D]", "hover:text-white", "focus:ring-4", "focus:ring-gray-200", "font-medium", "rounded-full", "text-sm",  "py-2.5", "mr-2", "mb-2", "dark:bg-[#FFF9F5]/30", "dark:text-[#AD785D]", "dark:hover:text-white", "dark:border-[#AD785D]", "dark:hover:bg-[#AD785D]", "dark:focus:ring-gray-700"],
           {
             // type: "button",
             // name: item.id,
@@ -144,7 +144,7 @@ fetch(`${keyPath}checkMyCart.php`)
       );
       const child9 = addElement(
         "button",
-        ["py-2", "px-5",  "text-white", "bg-blue-700", "hover:bg-blue-800", "focus:outline-none", "focus:ring-4", "focus:ring-blue-300", "font-medium", "rounded-full","px-2",  "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"],
+        ["text-center", "w-[180px]", "md:max-w-[250px]", "xl:max-w-[200px]", "text-[#AD785D]", "bg-white", "border", "border-[#AD785D]", "focus:outline-none", "hover:bg-[#AD785D]", "hover:text-white", "focus:ring-4", "focus:ring-gray-200", "font-medium", "rounded-full", "text-sm",  "py-2.5", "mr-2", "mb-2", "dark:bg-[#FFF9F5]/30", "dark:text-[#AD785D]", "dark:hover:text-white", "dark:border-[#AD785D]", "dark:hover:bg-[#AD785D]", "dark:focus:ring-gray-700"],
         {  },
         "Valider mon panier"
       );
