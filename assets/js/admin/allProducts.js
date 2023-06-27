@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (products && products.length) {
 
                     // Créer un élément div avec des classes et des attributs spécifiques et l'ajouter au conteneur prodContainer
-                    let ContainerTable = addElement('div', ["flex", "flex-col", "w-full", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border", "overflow-x-auto"], {});
+                    let ContainerTable = addElement('div', ["flex", "flex-col", "w-full", "shadow-md", "bg-[#AD785D]/30", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border", "overflow-x-auto"], {});
                     document.getElementById('prodContainer').appendChild(ContainerTable);
 
                     // Créer un élément table avec des classes et des attributs spécifiques et l'ajouter au ContainerTable
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ContainerTable.appendChild(tableProd);
 
                     // Créer un élément thead avec des classes et des attributs spécifiques et l'ajouter au tableProd
-                    let thead = addElement('thead', ["text-xs", "text-gray-700", "uppercase", "bg-gray-50", "dark:bg-gray-700", "dark:text-gray-400"], {});
+                    let thead = addElement('thead', ["text-xs", "text-gray-700", "uppercase", "bg-[#AD785D]/30", "dark:bg-gray-700", "dark:text-gray-400"], {});
                     tableProd.appendChild(thead);
 
                     // Créer un élément tr pour l'en-tête de la table et l'ajouter au thead
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     products.map(product => {
 
                         // Créer un élément tr pour chaque ligne du corps de la table et l'ajouter au tbody
-                        let trtbody = addElement('tr', ["bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
+                        let trtbody = addElement('tr', ["bg-[#FFF9F5]", "border-b", "dark:bg-gray-800", "dark:border-gray-700"], {});
                         tbody.appendChild(trtbody);
 
                         // Créer les éléments th pour chaque contenu (Id, Nom) et les ajouter au trtbody

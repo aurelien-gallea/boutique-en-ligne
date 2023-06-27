@@ -70,11 +70,13 @@ class Prod_cat extends SearchByProduct_id {
     
     public function getAllProductsByCategory_id($_category_id) {
         require('../DB/DBManager.php');
-        $request = $bdd->prepare("SELECT * FROM ".$this::TABLE_NAME." WHERE category_id = ? ");
-        $request->execute([$this->setCategory_id($_category_id)]);
+        $request = $bdd->prepare("SELECT p.* 
+                                 FROM products p
+                                 JOIN products_categories pc ON p.id = pc.product_id
+                                 WHERE pc.category_id = ? ");
+        $request->execute([$_category_id]);
         $response = $request->fetchAll(PDO::FETCH_CLASS);
-        return json_encode($response);
-        
+        return $response;
     }
 
     public function getAllCategoriesByProductId($product_id){

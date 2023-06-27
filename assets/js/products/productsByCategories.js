@@ -1,16 +1,14 @@
 import { addElement } from "../modules/addElement.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-
     const grid = document.getElementById('grid_prod');
-    fetch('./php/json/allproducts.php')
+    fetch('./php/json/productsByCategories.php')
         .then(response => response.json())
         .then(data => {
-
-            let products = data.products;
+            console.log(data);
+            let products = data.products_categories;
             let images = data.images;
             let prices = data.price;
-
             if (products.length) {
                 products.map(product => {
 
@@ -48,21 +46,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                     }
+
+
+
                 })
             }else{
+
                 document.getElementById('grid_prod').classList.add('hidden');
                 // Créer un élément div avec des classes et des attributs spécifiques 
-                let Container = addElement('div', ["flex", "w-full", "justify-center", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border", "overflow-x-auto"], {});
-                document.getElementById('grid_prod').before(Container);
+                // let Container = addElement('div', ["flex", "w-full", "justify-center", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border", "overflow-x-auto"], {});
+                // document.getElementById('grid_prod').before(Container);
 
-                let content = addElement('div', ["flex", "flex-col", "shadow-md", "items-center", "p-4", "bg-white", "rounded-lg", "space-y-3", "dark:bg-gray-700", "dark:border"], {});
-                Container.appendChild(content);
+                let content = addElement('div', ["flex", "flex-col", "shadow-md", "items-center", "p-4", "bg-white", "rounded-lg", "space-y-3", "dark:bg-gray-800", "dark:border", "mt-4"], {});
+                document.getElementById('grid_prod').before(content);
 
-                let title = addElement('h5', ["dark:text-white", "text-center"], {}, "Oops on est vraiment mal... Revenez plus tard !");
+                let title = addElement('h5', ["dark:text-white", "text-center"], {}, "Les produits de cette catégorie se font une beauté");
                 content.appendChild(title);
 
-                let btnReturnHome = addElement('a', ["text-white", "w-auto", "mb-2", "bg-blue-700", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "px-3", "py-2", "inline-flex", "items-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {href:"./"}, "Retour à l'accueil");
-                content.appendChild(btnReturnHome);
+                let btnReturnProd = addElement('a', ["text-white", "w-auto", "mb-2", "bg-blue-700", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "px-3", "py-2", "inline-flex", "items-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {href:"./allproducts.php"}, "Retour sur tous les produits");
+                content.appendChild(btnReturnProd);
             }
         })
 

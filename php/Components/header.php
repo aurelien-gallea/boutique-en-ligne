@@ -46,7 +46,7 @@
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
         <ul class="flex flex-col min-[768px]:items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-[#FFF9F5] md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
           <li class="relative flex justify-end">
-            <input type="search" name="search" id="search" placeholder="chercher un produit ..." class="w-full md:w-2/3 lg:w-full rounded">
+            <input type="search" name="search" id="search" placeholder="Rechercher un produit ..." class="w-full md:w-2/3 lg:w-full rounded">
             <div class="absolute top-10 left-0 z-50 w-full dark:bg-gray-800" id="results"></div>
           </li>
           <li class="max-md:pt-2">
@@ -55,16 +55,25 @@
           <?php if (!empty($_SESSION['role'])) {
             if ($_SESSION['role'] === "admin") { ?>
             <li>
-              <a href="<?= $admin ?>" target="_blank" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
+              <a href="<?= $admin ?>" target="_blank" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
             </li>
             <?php }
         } ?>
         <li>
-          <a href="<?= $products ?>" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Tous les produits</a>
+        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#AD785D] md:p-0 md:w-auto dark:text-white md:dark:hover:text-[#AD785D] dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Nos produits<svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+        <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-800 border dark:border-gray-700 dark:divide-gray-600">
+          <div class="py-1">
+            <a href="<?= $products ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Tous les produits</a>
+          </div>
+                <ul id="catDropdown" class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                  
+                </ul>
+            </div>
+            <!-- <a href="<?= $products ?>" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Tous les produits</a> -->
         </li>
         <?php if (empty($_SESSION['userId'])) { ?>
           <li>
-            <a href="./signIn.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Connexion</a>
+            <a href="./signIn.php" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#AD785D] md:p-0 dark:text-white md:dark:hover:text-[#AD785D] dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Connexion</a>
           </li>
           <?php } ?>
           <button id="theme-toggle" type="button" class="text-[#AD785D] dark:text-[#AD785D] hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -81,4 +90,5 @@
   </nav>
 </header>
   
-  <?php $script = '<script type="module" src="./assets/js/products/search.js"></script>' ?>
+  <?php $script = '<script type="module" src="./assets/js/products/search.js"></script><br>
+                  <script type="module" src="./assets/js/products/allcategories.js"></script>' ?>

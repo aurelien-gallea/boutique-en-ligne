@@ -1,6 +1,6 @@
-<footer>
+<footer class="bg-[#AD785D]/30 dark:bg-gray-700">
 
-    <div class=" flex flex-col items-center mx-auto w-full dark:bg-gray-800">
+    <div class=" flex flex-col items-center mx-auto w-full dark:bg-gray-700">
         <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4 max-w-screen-xl">
             <div>
                 <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Company</h2>
@@ -68,7 +68,7 @@
                 </ul>
             </div>
         </div>
-        <div class="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
+        <div class="px-4 py-6 bg-transparent dark:bg-gray-700 md:flex md:items-center md:justify-between">
             <span class="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://flowbite.com/">M.A.H ™</a>. All Rights Reserved.
             </span>
             <div class="flex mt-4 space-x-6 sm:justify-center md:mt-0">
