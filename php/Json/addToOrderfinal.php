@@ -8,10 +8,10 @@ $data = json_decode(file_get_contents('php://input'), true);
  
 $payement_status      = $data['payement_status'];
  
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
-;
+require_once('../Classes/Orderdetails.php');
+require_once('../Classes/orderfinal.php');
+require_once('../Classes/Cart.php');
+
 use Classes\Orderfinal;
 use Classes\Cart;
 use Classes\Orderdetails;

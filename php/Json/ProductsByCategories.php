@@ -2,9 +2,9 @@
 
     session_start();
 
-    spl_autoload_register(function($classes) {
-        require_once('../' .$classes. '.php');
-    });
+    require_once('../Classes/Images.php');
+    require_once('../Classes/Prod_cat.php');
+    require_once('../Classes/Price.php');
     
     use Classes\Images;
     use Classes\Prod_cat;

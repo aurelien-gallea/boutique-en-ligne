@@ -1,9 +1,7 @@
 <?php
     session_start();
 
-    spl_autoload_register(function ($classes) {
-        require_once('./php/' . $classes . '.php');
-    });
+    require_once('./php/Classes/User.php');
 
     use Classes\User;
 
@@ -37,7 +35,7 @@
     $title = "Connexion";
     $home = "./";
     $admin = "./admin/";
-    $products = "./allproducts.php";
+    $products = "./allProducts.php";
     $cart = "./mycart.php";
 
     require_once("./php/Components/head.php");

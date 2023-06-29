@@ -15,10 +15,8 @@ $city           = $data['city'];
 $country        = $data['country'];
 $phone          = $data['phone'];
 
+require_once('../Classes/Delivery.php');
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
 use Classes\Delivery;
 
 $myDelivery = new Delivery();

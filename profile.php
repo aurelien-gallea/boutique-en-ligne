@@ -11,7 +11,7 @@ $userId = $_SESSION['userId'];
 $title = "Mes Infos";
 $home = "./";
 $admin = "./admin/";
-$products = "./allproducts.php";
+$products = "./allProducts.php";
 $cart = "./mycart.php";
 
 require_once("./php/Components/head.php");

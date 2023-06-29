@@ -3,9 +3,7 @@ $role = "admin"; // faire une condition de vérification
 
 $role !== "admin" ? header("location:index.php") : '';
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+require_once('../Classes/Stock.php');
 
 use Classes\Stock;
 

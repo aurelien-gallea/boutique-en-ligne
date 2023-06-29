@@ -21,24 +21,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 gridProd.appendChild(gridImg);
                 gridProd.appendChild(containerProd);
 
-                let containerFirstImg = addElement('div', ["flex", "w-full", "items-center", "justify-center"], {});
+                let containerFirstImg = addElement('div', ["flex", "w-full", "justify-center"], {});
                 gridImg.appendChild(containerFirstImg);
                 if(images.length > 1){
 
                     if(images.length % 2 == 0){
 
-                        let containerAllImg = addElement('div', ["grid", `grid-cols-${images.length}`, "gap-4"], {});
+                        let containerAllImg = addElement('div', ["grid", `grid-cols-${images.length}`, "gap-2"], {});
                         gridImg.appendChild(containerAllImg);
 
-                        let firstImg = addElement('img', ["max-h-52", "max-w-full", "rounded-lg", "shadow-md"], {src:`./public/img/product/${images[0].path}`, alt:`${product.name}`});
+                        let firstImg = addElement('img', ["max-h-[300px]", "max-w-full", "rounded-lg", "shadow-md"], {src:`./public/img/product/${images[0].path}`, alt:`${product.name}`});
                         containerFirstImg.appendChild(firstImg);
 
                         images.forEach(image => {
                         
-                            let divImgs = addElement('div', ["flex", "w-full", "items-center", "justify-center"], {});
+                            let divImgs = addElement('div', ["flex", "w-full", "justify-center"], {});
                             containerAllImg.appendChild(divImgs);
 
-                            let imgs = addElement('img', ["max-h-[70px]", "max-w-full", "min-[425px]:max-h-24", "sm:max-h-[150px]", "md:max-h-44", "lg:max-h-[246px]", "xl:max-h-80", "rounded-lg"], {src:`./public/img/product/${image.path}`, alt:`${product.name}`});
+                            let imgs = addElement('img', ["max-h-[100px]", "max-w-full", "min-[425px]:max-h-24", "sm:max-h-[150px]", "md:max-h-44", "lg:max-h-[246px]", "xl:max-h-80", "rounded-lg"], {src:`./public/img/product/${image.path}`, alt:`${product.name}`});
                             divImgs.appendChild(imgs);
 
                         })
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         let containerAllImg = addElement('div', ["grid", `grid-cols-${images.length-1}`, "gap-2"], {});
                         gridImg.appendChild(containerAllImg);
 
-                        let firstImg = addElement('img', ["max-h-[450px]", "max-w-full", "rounded-lg", "shadow-md"], {src:`./public/img/product/${images[0].path}`, alt:`${product.name}`});
+                        let firstImg = addElement('img', ["max-h-[300px]", "max-w-full", "rounded-lg", "shadow-md"], {src:`./public/img/product/${images[0].path}`, alt:`${product.name}`});
                         containerFirstImg.appendChild(firstImg);
 
                         images.forEach(image => {
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     
                     if(stash.product_id == product.id){
 
-                        let firstImg = addElement('img', ["max-h-[450px]", "max-w-full", "rounded-lg", "shadow-md"], {src:`./public/img/product/${stash.path}`, alt:`${product.name}`});
+                        let firstImg = addElement('img', ["max-h-[300px]", "max-w-full", "rounded-lg", "shadow-md"], {src:`./public/img/product/${stash.path}`, alt:`${product.name}`});
                         containerFirstImg.appendChild(firstImg);
 
                     }
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let priceProd = addElement('h5', ["text-md", "min-[425px]:text-xl", "font-normal", "dark:text-white"], {}, `${price[0].price} €`);
                 containerProd.appendChild(priceProd);
 
-                let containerColor = addElement('div', ["grid", "w-full", "gap-6", `grid-cols-${colors.length}`, 'pt-6']);
+                let containerColor = addElement('div', ["grid", "w-full", "gap-2", "grid-cols-2", 'pt-6']);
                 containerProd.appendChild(containerColor);
 
                 let sizeAndQty = addElement('div', ["flex", "pt-6", "w-full", "gap-6"], {});
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let containerBtn = addElement('div', ["flex", "items-center", "justify-center", "pt-6"], {});
                 containerProd.appendChild(containerBtn);
 
-                let btnAddToCart = addElement('button', ["w-1/3", "text-white", "bg-blue-700", "hover:bg-blue-800", "focus:outline-none", "focus:ring-4", "focus:ring-blue-300", "font-medium", "rounded-full", "text-sm", "px-5", "py-2.5", "text-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {type:"submit", disabled:""}, "Ajouter au panier");
+                let btnAddToCart = addElement('button', ["text-center", "w-[180px]", "md:max-w-[250px]", "xl:max-w-[200px]", "text-[#AD785D]", "bg-white", "border", "border-[#AD785D]", "focus:outline-none", "hover:bg-[#AD785D]", "hover:text-white", "focus:ring-4", "focus:ring-gray-200", "font-medium", "rounded-full", "text-sm", "py-2.5", "mr-2", "mb-2", "dark:bg-[#FFF9F5]/30", "dark:text-[#AD785D]", "dark:hover:text-white", "dark:border-[#AD785D]", "dark:hover:bg-[#AD785D]", "dark:focus:ring-gray-700"], {type:"submit", disabled:""}, "Ajouter au panier");
                 containerBtn.appendChild(btnAddToCart);
 
                 let sizeChoice = "";
@@ -225,7 +225,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         })
                     }
                 })
-                
+
+                let containerDesc = addElement('div', ["flex", "flex-wrap", "w-full", "mt-4"], {});
+                containerProd.appendChild(containerDesc);
+
+                let pDesc = addElement('p', [], {}, `${product.description}`);
+                containerDesc.appendChild(pDesc);
+
+
+                console.log(product.description);
             }else{
 
                 gridProd.classList.add('flex-col', 'items-center');
@@ -233,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let noProd = addElement('div', ["flex", "w-full", "items-center", "justify-center"], {}, `oops ce produit n'existe pas...`);
                 gridProd.appendChild(noProd);
 
-                let btnProd = addElement('a', ["text-white", "w-auto", "mb-2", "bg-blue-700", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "px-3", "py-2", "inline-flex", "items-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {href:"../templates/products.php"}, `Retour aux produits`);
+                let btnProd = addElement('a', ["text-white", "w-auto", "mb-2", "bg-blue-700", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "px-3", "py-2", "inline-flex", "items-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {href:"./allProducts.php"}, `Retour aux produits`);
                 gridProd.appendChild(btnProd);
             }
  

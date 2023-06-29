@@ -1,10 +1,8 @@
 <?php
 
-use Classes\Carriers;
+require_once('../Classes/Carriers.php');
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+use Classes\Carriers;
 
 $url = $_SERVER['SCRIPT_FILENAME'];
 $path = parse_url($url, PHP_URL_PATH);

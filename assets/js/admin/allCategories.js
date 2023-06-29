@@ -1,7 +1,7 @@
 import { addElement } from "../modules/addElement.js";
 document.addEventListener("DOMContentLoaded", function () {
 
-    fetch('../../php/Json/AllCategories.php')
+    fetch('../../php/Json/allCategories.php')
         .then(response => response.json())
         .then(data => {
             console.log(data);

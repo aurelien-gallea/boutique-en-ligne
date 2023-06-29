@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-require('php/DB/DBManager.php');
-require('php/DB/DBTables.php');
+require_once('./php/DB/DBTables.php');
 
 $title = "Accueil";
 $home = "./";
 $admin = "./admin/";
-$products = "./allproducts.php";
+$products = "./allProducts.php";
 $cart = "./mycart.php";
 
 require_once("./php/Components/head.php");

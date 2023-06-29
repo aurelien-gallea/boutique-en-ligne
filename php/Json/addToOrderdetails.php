@@ -19,9 +19,8 @@ $price_values         = $data['price_values'];
 $quantity             = $data['quantity']; 
 $total_amount         = $data['total_amount']; 
  
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+require_once('../Classes/Orderdetails.php');
+
 use Classes\Orderdetails;
 
 $myOrderdetails = new Orderdetails();

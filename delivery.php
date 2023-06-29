@@ -7,9 +7,10 @@
 
     $userId = $_SESSION['userId'];
 
-    spl_autoload_register(function ($classes) {
-        require_once('./php/' . $classes . '.php');
-    });
+    require_once('./php/Classes/Cart.php');
+    require_once('./php/Classes/User.php');
+    require_once('./php/Classes/Delivery.php');
+    require_once('./php/Classes/Carriers.php');
 
     use Classes\Cart;
 
@@ -61,7 +62,7 @@
     $title = "Livraison";
     $home = "./";
     $admin = "./admin/";
-    $products = "./allproducts.php";
+    $products = "./allProducts.php";
     $cart = "./mycart.php";
 
     require_once("./php/Components/head.php");

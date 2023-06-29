@@ -4,9 +4,8 @@ $data = json_decode(file_get_contents('php://input'), true);
 $product_id = $data['product_id'];
 // echo json_encode($product_id);
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+require_once('../Classes/Products.php');
+require_once('../Classes/Prod_cat.php');
 
 use Classes\Products;
 use Classes\Prod_cat;
@@ -22,10 +21,10 @@ $myProd_cat = new Prod_cat();
 
 $deleteRowProd_cat = $myProd_cat->deleteProduct_id($product_id);
 $deleteProd = $myProd->deleteRow($product_id);
-header('location: '.$destination.'/admin/iframe/allProducts.php');
 
 $response = array('success' => true);
 echo json_encode($response);
+header('location: '.$destination.'/admin/iframe/allProducts.php');
 
 
 
