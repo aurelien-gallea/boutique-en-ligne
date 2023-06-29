@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let title = addElement('h5', ["dark:text-white", "text-center"], {}, "Les produits de cette catégorie se font une beauté");
                 content.appendChild(title);
 
-                let btnReturnProd = addElement('a', ["text-white", "w-auto", "mb-2", "bg-blue-700", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "px-3", "py-2", "inline-flex", "items-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {href:"./allproducts.php"}, "Retour sur tous les produits");
+                let btnReturnProd = addElement('a', ["text-white", "w-auto", "mb-2", "bg-blue-700", "hover:bg-blue-800", "focus:ring-4", "focus:outline-none", "focus:ring-blue-300", "font-medium", "rounded-lg", "text-sm", "px-3", "py-2", "inline-flex", "items-center", "dark:bg-blue-600", "dark:hover:bg-blue-700", "dark:focus:ring-blue-800"], {href:"./allProducts.php"}, "Retour sur tous les produits");
                 content.appendChild(btnReturnProd);
             }
         })

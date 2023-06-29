@@ -2,9 +2,8 @@
 session_start();
 $userId = $_SESSION['userId'];
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+require_once('../Classes/Cart.php');
+require_once('../Classes/Size.php');
 
 use Classes\Cart;
 use Classes\Size;

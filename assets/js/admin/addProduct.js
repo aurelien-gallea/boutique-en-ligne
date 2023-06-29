@@ -35,7 +35,7 @@ btnOption.addEventListener('click', () => {
 })
 
 
-fetch('../../php/Json/AllCategories.php')
+fetch('../../php/Json/allCategories.php')
     .then(response => response.json())
     .then(data => {
        

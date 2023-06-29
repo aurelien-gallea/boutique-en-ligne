@@ -15,10 +15,8 @@ $quantity = $data['quantity'];
 $price = $data['price'];
 $priceId = $data['price_id'];
 
+require_once('../Classes/Cart.php');
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
 use Classes\Cart;
 
 $myCart = new Cart();

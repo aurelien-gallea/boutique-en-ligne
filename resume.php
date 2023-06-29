@@ -10,7 +10,7 @@ $userId = $_SESSION['userId'];
 $title = "Résumé de la commande";
 $home = "./";
 $admin = "./admin/";
-$products = "./allproducts.php";
+$products = "./allProducts.php";
 $cart = "./mycart.php";
 
 require_once("./php/Components/head.php");

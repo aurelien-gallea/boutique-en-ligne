@@ -3,7 +3,7 @@ import { addElement } from "../modules/addElement.js";
 document.addEventListener("DOMContentLoaded", function () {
 
     const grid = document.getElementById('grid_prod');
-    fetch('./php/json/allproducts.php')
+    fetch('./php/Json/allProducts.php')
         .then(response => response.json())
         .then(data => {
 

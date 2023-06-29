@@ -3,9 +3,7 @@
 $data = json_decode(file_get_contents('php://input'), true);
 $carrier_id = $data['carrier_id'];
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+require_once('../Classes/Carriers.php');
 
 use Classes\Carriers;
 

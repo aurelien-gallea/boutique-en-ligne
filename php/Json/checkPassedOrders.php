@@ -2,9 +2,7 @@
 session_start();
 $userId = $_SESSION['userId'];
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+require_once('../Classes/Orderfinal.php');
 
 use Classes\Orderfinal;
 

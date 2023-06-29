@@ -3,9 +3,7 @@
 $data = json_decode(file_get_contents('php://input'), true);
 $color_id = $data['color_id'];
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+require_once('../Classes/Color.php');
 
 use Classes\Color;
 

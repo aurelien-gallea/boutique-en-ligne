@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-
 $userId = $_SESSION["userId"]; // <----- a changer imperativement avec le $_session 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+
+require_once('../Classes/Cart.php');
+require_once('../Classes/Orderdetails.php');
+
 use Classes\Cart;
 use Classes\Orderdetails;
 

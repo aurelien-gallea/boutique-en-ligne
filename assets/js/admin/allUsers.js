@@ -141,7 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 })
 
-            }else{
+            }else {
+                ContainerTable.classList.add('hidden');
                 // Créer un élément div avec des classes et des attributs spécifiques 
                 let Container = addElement('div', ["flex", "w-full", "justify-center", "shadow-md", "bg-white", "rounded-lg", "p-4", "space-y-3", "dark:bg-gray-800", "dark:border", "overflow-x-auto"], {});
                 document.getElementById('userContainer').appendChild(Container);

@@ -5,9 +5,9 @@ $home = "./";
 $admin = "./admin/";
 $products = "./allproducts.php";
 $cart = "./mycart.php";
-spl_autoload_register(function ($classes) {
-    require_once('./php/' . $classes . '.php');
-});
+
+require_once('./php/Classes/User.php');
+require_once('./php/Classes/Verify.php');
 
 use Classes\User;
 use Classes\Verify;

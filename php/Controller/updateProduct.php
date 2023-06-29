@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+require_once('../Classes/Products.php');
+require_once('../Classes/Images.php');
+require_once('../Classes/Price.php');
+require_once('../Classes/Color.php');
+require_once('../Classes/Size.php');
+require_once('../Classes/Stock.php');
+require_once('../Classes/Prod_cat.php');
+
 use Classes\Products;
 use Classes\Images;
 use Classes\Price;
@@ -8,10 +16,6 @@ use Classes\Color;
 use Classes\Size;
 use Classes\Stock;
 use Classes\Prod_cat;
-
-spl_autoload_register(function ($classes) {
-    require_once('../' . $classes . '.php');
-});
 
 $url = $_SERVER['SCRIPT_FILENAME'];
 $path = parse_url($url, PHP_URL_PATH);

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('lastProduct').after(btnAllProducts);
 
                 btnAllProducts.addEventListener('click', () => {
-                    window.location.href = './allproducts.php';
+                    window.location.href = './allProducts.php';
                 })
                 let catCount = 0;
                 categories.map(category => {

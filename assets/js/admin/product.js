@@ -246,6 +246,30 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 })
 
+                sizes.map(size => {
+                    colors.map(color => {
+                        if (size.colorId == color.id) {
+                            if (size.size.length == 0) {
+                                fetch('../../php/Controller/deleteColor.php', {
+                                    method: "POST",
+                                    body: JSON.stringify({
+                                        color_id: color.id,
+                                    }),
+                                    headers: {
+                                        'Content-Type': "application/json",
+                                    },
+                                })
+                                    .then(function (response) {
+                                        console.log('supression réussi');
+                                        window.location.reload();
+                                    })
+                                    .catch((error) => { console.log(error) })
+                            }
+                        }
+                    })
+
+                })
+
                 if (colors.length) {
                     stocks.map(stock => {
                         let color_id = "";
@@ -367,31 +391,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                sizes.map(size => {
-                    colors.map(color => {
-                        if (size.colorId == color.id) {
-                            if (size.size.length == 0) {
-                                fetch('../../php/Controller/deleteColor.php', {
-                                    method: "POST",
-                                    body: JSON.stringify({
-                                        color_id: color.id,
-                                    }),
-                                    headers: {
-                                        'Content-Type': "application/json",
-                                    },
-                                })
-                                    .then(function (response) {
-                                        console.log('supression réussi');
-                                        window.location.reload();
-                                    })
-                                    .catch((error) => { console.log(error) })
-                            }
-                        }
-                    })
+                
 
-                })
-
-                fetch('../../php/Json/CategoryByProduct.php')
+                fetch('../../php/Json/categoryByProduct.php')
                     .then(response => response.json())
                     .then(data => {
 

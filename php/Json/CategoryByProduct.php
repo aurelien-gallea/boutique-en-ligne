@@ -1,12 +1,11 @@
 <?php
     session_start();
 
+    require_once('../Classes/Categories.php');
+    require_once('../Classes/Prod_cat.php');
+
     use Classes\Categories;
     use Classes\Prod_cat;
-
-    spl_autoload_register(function($classes) {
-        require_once('../' .$classes. '.php');
-    });
 
     $prodCat = new Prod_cat();
     $cat = new Categories();

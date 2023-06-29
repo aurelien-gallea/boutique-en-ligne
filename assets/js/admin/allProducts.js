@@ -5,7 +5,7 @@ import { addElement } from "../modules/addElement.js";
 document.addEventListener("DOMContentLoaded", function () {
 
     // Récupérer les produits à partir du fichier JSON
-    fetch('../../php/Json/AllProducts.php')
+    fetch('../../php/Json/allProducts.php')
         .then(response => response.json())
         .then(data => {
 

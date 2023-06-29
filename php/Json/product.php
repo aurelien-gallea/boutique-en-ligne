@@ -1,9 +1,12 @@
 <?php
 session_start();
 
-spl_autoload_register(function($classes) {
-    require_once('../' .$classes. '.php');
-});
+require_once('../Classes/Products.php');
+require_once('../Classes/Images.php');
+require_once('../Classes/Color.php');
+require_once('../Classes/Size.php');
+require_once('../Classes/Price.php');
+require_once('../Classes/Stock.php');
 
 use Classes\Products;
 use Classes\Images;
